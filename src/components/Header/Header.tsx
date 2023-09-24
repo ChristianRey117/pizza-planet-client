@@ -6,7 +6,7 @@ import { FaBeer } from "react-icons/fa";
 const Header = () => {
   return (
     <div className="row">
-      <div className="col-12">
+      <div className="col-md-12">
         <Navbar bg="dark" data-bs-theme="dark">
           <Container>
             <Nav className="me-auto"></Nav>

@@ -5,11 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/Login";
 import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  return <Header></Header>;
+  return <Home />;
 }
 
 export default App;

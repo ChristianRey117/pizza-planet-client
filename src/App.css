@@ -1,0 +1,32 @@
+.image-home {
+  background-repeat: no-repeat;
+  background-image: url("https://www.laespanolaaceites.com/wp-content/uploads/2019/06/pizza-con-chorizo-jamon-y-queso-1080x671.jpg");
+  background-size: cover;
+  height: 400px;
+}
+.div-start-home {
+  text-align: right;
+  width: 30%;
+  float: right;
+  position: relative;
+  right: 10%;
+  top: 25%;
+}
+.text-start-home {
+  text-align: left;
+}
+
+.oferts-home {
+  margin-top: 5%;
+}
+
+.text-offets-home {
+  text-align: center;
+}
+
+.menu-background {
+  background-repeat: no-repeat;
+  background-image: url("https://image.shutterstock.com/image-vector/italian-pizza-ingredients-top-view-260nw-1035724825.jpg");
+  background-size: cover;
+  height: 600px;
+}
