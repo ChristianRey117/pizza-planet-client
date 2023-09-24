@@ -4,15 +4,12 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/Login";
+import Header from "./components/Header/Header";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  return (
-    <div className="container">
-      <Login></Login>
-    </div>
-  );
+  return <Header></Header>;
 }
 
 export default App;
