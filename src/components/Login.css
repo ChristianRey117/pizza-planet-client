@@ -1,0 +1,84 @@
+.FondoIzquierda {
+  background-image: url(../assets/images/img1.jpg);
+
+  background-size: cover;
+
+  filter: blur(0px) contrast(100%);
+  filter: opacity(90%);
+  float: left;
+  height: auto;
+  width: 360px;
+  left: auto;
+  right: auto;
+}
+
+.FondoDerecha {
+  background-image: url(../assets/images/img2.jpg);
+
+  background-size: cover;
+
+  filter: blur(0px) contrast(110%);
+
+  height: 650px;
+  width: 780px;
+  left: auto;
+  right: auto;
+}
+
+.FondoIzquierdaR {
+  background-image: url(../assets/images/img3.jpg);
+
+  background-size: cover;
+
+  filter: blur(0px) contrast(100%);
+  filter: opacity(90%);
+  float: left;
+  height: auto;
+  width: 360px;
+  left: auto;
+  right: auto;
+}
+
+.FondoDerechaR {
+  background-image: url(../assets/images/img4.jpg);
+
+  background-size: cover;
+
+  filter: blur(0px) contrast(100%);
+  filter: opacity(90%);
+  float: auto;
+  height: 650px;
+  width: 700px;
+  left: auto;
+  right: auto;
+}
+
+.Mailc {
+  text-align: left;
+}
+
+.btn-click {
+  color: #090909;
+  --bs-btn-color: #000;
+  --bs-btn-bg: #f1c50e;
+  --bs-btn-border-color: #f1c50e;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #ffca2c;
+  --bs-btn-hover-border-color: #ffc720;
+  --bs-btn-focus-shadow-rgb: 217, 164, 6;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #f1c50e;
+  --bs-btn-active-border-color: #f1c50e;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #f1c50e;
+  --bs-btn-disabled-border-color: #f1c50e;
+}
+
+.FormCenter {
+  padding-top: 120px;
+}
+
+.FormCenterR {
+  padding-top: 30px;
+}

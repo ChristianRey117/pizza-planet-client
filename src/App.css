@@ -29,4 +29,7 @@
   background-image: url("https://image.shutterstock.com/image-vector/italian-pizza-ingredients-top-view-260nw-1035724825.jpg");
   background-size: cover;
   height: 600px;
+.button-session {
+  color: #090909 !important;
+  background-color: #f1c50e !important;
 }
