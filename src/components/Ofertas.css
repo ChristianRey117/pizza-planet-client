@@ -1,0 +1,13 @@
+.centro {
+  margin-top: 0%;
+  margin-left: 10%;
+}
+
+body,
+.bg {
+  background-image: url("../public/Fon.jpg");
+  height: auto;
+  background-position: auto;
+  background-repeat: repeat;
+  background-size: cover;
+}
