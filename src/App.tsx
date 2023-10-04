@@ -4,13 +4,15 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/Login";
+import MenuCompra from "./components/MenuCompra/MenuCompra";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <div className="container">
-      <Login></Login>
+      {/* <Login></Login> */}
+      <MenuCompra></MenuCompra>
     </div>
   );
 }
