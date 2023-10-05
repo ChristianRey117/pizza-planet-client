@@ -1,25 +1,25 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import categoryImg01 from "../assets/images/promo1.1.png";
-import categoryImg02 from "../assets/images/promo2.1.png";
-import categoryImg03 from "../assets/images/promo3.1.png";
+import imageSuc1 from "../assets/images/PizzaPlaneta1.jpg";
+import imageSuc2 from "../assets/images/PizzaPlaneta2.jpg";
+import imageSuc3 from "../assets/images/PizzaPlaneta3.jpg";
 import "../styles/category.css";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 
 const sucursalesData =[{
-    nameSuc: "Luna",
-    imgUrl: categoryImg01,
+    nameSuc: "Jupiter",
+    imgUrl: imageSuc1,
     address:'Francisco Montejo 190'
 },
 {
-    nameSuc: "Jupiter",
-    imgUrl: categoryImg01,
+    nameSuc: "Luna",
+    imgUrl: imageSuc2,
     address:'City Center 100'
 },
 {
     nameSuc: "Marte",
-    imgUrl: categoryImg01,
+    imgUrl: imageSuc3,
     address:'Chuburna Norte 902'
 }]
 
@@ -46,7 +46,7 @@ const Sucursales = () => {
                  
                   <Row>
                     <Col lg="12">
-                      <div className="category__img">
+                      <div className="category__img" style={{textAlign:'center'}}>
                         <img
                           src={item.imgUrl}
                           alt="category__item"
@@ -56,7 +56,7 @@ const Sucursales = () => {
                     </Col>
                     <Col lg="12" style={{marginTop:'10px'}}>
                       <div className="align-items-center" style={{textAlign:'center'}}>
-                        <h4>{item.display}</h4>
+                        <h3>{item.nameSuc}</h3>
                         <h5>{item.address}</h5>
                       </div>
                     </Col>
