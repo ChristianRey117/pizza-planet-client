@@ -40,7 +40,7 @@ const Checkout = () => {
         <Container>
           <Row>
             <Col lg='8' md='6'>
-              <h6 className='mb-4'>Shipping Address</h6>
+              <h6 className='mb-4'>Dirección de envio</h6>
               <form
                 action=''
                 className='checkout__form'
@@ -50,7 +50,7 @@ const Checkout = () => {
                   <input
                     required
                     type='text'
-                    placeholder='Name'
+                    placeholder='Nombre(s)'
                     onChange={(e) => setEnteredName(e.target.value)}
                   />
                 </div>
@@ -58,7 +58,7 @@ const Checkout = () => {
                   <input
                     required
                     type='email'
-                    placeholder='Email'
+                    placeholder='Correo Electronico'
                     onChange={(e) => setEnteredEmail(e.target.value)}
                   />
                 </div>
@@ -66,7 +66,7 @@ const Checkout = () => {
                   <input
                     required
                     type='number'
-                    placeholder='Phone number'
+                    placeholder='Numero Telefonico'
                     onChange={(e) => setEnteredNumber(e.target.value)}
                   />
                 </div>
@@ -74,35 +74,21 @@ const Checkout = () => {
                   <input
                     required
                     type='text'
-                    placeholder='Street Address'
+                    placeholder='Calle'
                     onChange={(e) => setEnteredAddress(e.target.value)}
                   />
                 </div>
-                <div className='form__group'>
-                  <input
-                    required
-                    type='text'
-                    placeholder='City'
-                    onChange={(e) => setEnteredCity(e.target.value)}
-                  />
-                </div>
+                
                 <div className='form__group'>
                   <input
                     required
                     type='number'
-                    placeholder='Postal code'
+                    placeholder='Codigo Postal'
                     onChange={(e) => setEnteredPostalCode(e.target.value)}
                   />
                 </div>
-                <div className='form__group'>
-                  <input
-                    required
-                    type='text'
-                    placeholder='Country'
-                    onChange={(e) => setEnteredCountry(e.target.value)}
-                  />
-                </div>
-                <button className='addToCart__btn'>Pay for your order</button>
+             
+                <button className='addToCart__btn'>Pagar por su orden</button>
               </form>
             </Col>
             <Col lg='4' md='6'>
@@ -111,7 +97,7 @@ const Checkout = () => {
                   Subtotal:<span>${cartTotalAmount}</span>
                 </h6>
                 <h6 className='d-flex align-items-center justify-content-between mb-3'>
-                  Shipping fee:<span>${shippingCost}</span>
+                  Envio:<span>${shippingCost}</span>
                 </h6>
                 <div className='checkout__total'>
                   <h5 className='d-flex align-items-center justify-content-between'>
