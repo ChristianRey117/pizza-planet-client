@@ -14,13 +14,13 @@ const categoryData = [
   {
     display: "Combo Astronauta",
     imgUrl: categoryImg02,
-    describe:'Pizza Mediana + Papas Fritas'
+    describe:'Pizza Individual + Refresco de 1.25L'
 
   },
   {
     display: "Promoción Galactica",
     imgUrl: categoryImg03,
-    describe:'Pizza Mediana + Papas Fritas'
+    describe:'2 Pizzas grandes'
 
   },
 ];
