@@ -75,7 +75,7 @@ const products = [
   {
     id: "05",
     title: "Pizza Jamón y Queso",
-    price: 24.0,
+    price: 170.0,
     image01: product_05_image_01,
     image02: product_05_image_02,
     image03: product_05_image_03,
@@ -85,8 +85,8 @@ const products = [
   },
   {
     id: "06",
-    title: "Royal Cheese Burger",
-    price: 24.0,
+    title: "Pizza Salami",
+    price: 130.0,
     image01: product_01_image_01,
     image02: product_01_image_02,
     image03: product_01_image_03,
@@ -97,7 +97,7 @@ const products = [
 
   {
     id: "07",
-    title: "Seafood Pizza",
+    title: "Pizza Marisco",
     price: 115.0,
     image01: product_02_image_02,
     image02: product_02_image_01,
@@ -109,7 +109,7 @@ const products = [
 
   {
     id: "08",
-    title: "Thin Cheese Pizza",
+    title: "Pizza fina de Queso",
     price: 110.0,
     image01: product_03_image_02,
     image02: product_03_image_01,
@@ -121,7 +121,7 @@ const products = [
 
   {
     id: "09",
-    title: "Pizza With Mushroom",
+    title: "Pizza Con Champiñones",
     price: 110.0,
     image01: product_04_image_02,
     image02: product_04_image_01,
@@ -133,8 +133,8 @@ const products = [
 
   {
     id: "10",
-    title: "Classic Hamburger",
-    price: 24.0,
+    title: "Pizza pimentada",
+    price: 124.0,
     image01: product_05_image_02,
     image02: product_05_image_01,
     image03: product_05_image_03,
@@ -145,7 +145,7 @@ const products = [
 
   {
     id: "11",
-    title: "Crunchy Bread ",
+    title: "Banderilla Sencilla",
     price: 35.0,
     image01: product_06_image_01,
     image02: product_06_image_02,
@@ -157,7 +157,7 @@ const products = [
 
   {
     id: "12",
-    title: "Delicious Bread ",
+    title: "Banderilla Con Queso",
     price: 35.0,
     image01: product_06_image_02,
     image02: product_06_image_01,
@@ -169,7 +169,7 @@ const products = [
 
   {
     id: "13",
-    title: "Loaf Bread ",
+    title: "Banderilla Con Cajeta",
     price: 35.0,
     image01: product_06_image_03,
     image02: product_06_image_02,
