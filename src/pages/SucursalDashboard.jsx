@@ -5,18 +5,21 @@ import CommonSection from "../components/UI/common-section/CommonSection";
 import { Container, Row, Col, Card, CardBody, Button, CardText, CardTitle, CardSubtitle } from "reactstrap";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import { Link } from "react-router-dom";
+import imageSuc1 from "../assets/images/PizzaPlaneta1.jpg";
+import imageSuc2 from "../assets/images/PizzaPlaneta2.jpg";
+import imageSuc3 from "../assets/images/PizzaPlaneta3.jpg";
 
 const cardPaneles = [{
     name:'Luna',
     describe:'Con 20 empleados de turno matutino y despertino',
-    image:'',
+    image:imageSuc1,
     path:'/sucursales-dashboard',
     buttonText:'Ir a Sucursal'
 },
 {
     name:'Jupiter',
     describe:'En este panel usted puede agregar, editar y eliminar sucursales',
-    image:'',
+    image: imageSuc2,
     path:'/sucursales-dashboard',
     buttonText:'Ir a Sucursal'
 },
@@ -24,7 +27,7 @@ const cardPaneles = [{
 {
     name:'Marte',
     describe:'En este panel usted puede agregar, editar y eliminar sucursales',
-    image:'',
+    image: imageSuc3,
     path:'/sucursales-dashboard',
     buttonText:'Ir a Sucursal'
 },
@@ -100,7 +103,8 @@ navigate(path,{replace:true})
                             <Col lg='6'>
                                 <img
                                     alt="Sample"
-                                    src="https://picsum.photos/300/200"
+                                    src={item.image}
+                                    // src="https://picsum.photos/300/200"
                                     style={{width:'250px'}}
                                 />
                             </Col>

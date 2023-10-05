@@ -36,7 +36,7 @@ const Category = () => {
                
                 <Row>
                   <Col lg="12">
-                    <div className="category__img">
+                    <div className="category__img" style={{textAlign:'center'}}>
                       <img
                         src={item.imgUrl}
                         alt="category__item"

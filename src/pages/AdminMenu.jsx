@@ -15,42 +15,42 @@ const cardPaneles = [{
     buttonText:'Ir a Sucursal'
 },
 {
-    title:'Sucursales',
-    describe:'En este panel usted puede agregar, editar y eliminar sucursales',
+    title:'Ofertas',
+    describe:'En este panel usted puede agregar, editar y eliminar ofertas',
     image:'',
     path:'/sucursales-dashboard',
-    buttonText:'Ir a Sucursal'
+    buttonText:'Ir a Ofertas'
 },
 
 {
-    title:'Sucursales',
-    describe:'En este panel usted puede agregar, editar y eliminar sucursales',
+    title:'Proveedores',
+    describe:'En este panel usted puede agregar, editar y eliminar proveedores',
     image:'',
     path:'/sucursales-dashboard',
-    buttonText:'Ir a Sucursal'
+    buttonText:'Ir a Proveedores'
 },
 
 {
-    title:'Sucursales',
-    describe:'En este panel usted puede agregar, editar y eliminar sucursales',
+    title:'Productos',
+    describe:'En este panel usted puede agregar, editar y eliminar productos',
     image:'',
     path:'/sucursales-dashboard',
-    buttonText:'Ir a Sucursal'
+    buttonText:'Ir a Productos'
 },
 
 {
-    title:'Sucursales',
-    describe:'En este panel usted puede agregar, editar y eliminar sucursales',
+    title:'Inventario',
+    describe:'En este panel usted puede checar los productos que estan en su inventario',
     image:'',
     path:'/sucursales-dashboard',
-    buttonText:'Ir a Sucursal'
+    buttonText:'Ir a Inventario'
 },
 {
-    title:'Sucursales',
-    describe:'En este panel usted puede agregar, editar y eliminar sucursales',
+    title:'Compras',
+    describe:'En este panel usted puede checar las compras realizados por los diferentes usuarios',
     image:'',
     path:'/sucursales-dashboard',
-    buttonText:'Ir a Sucursal'
+    buttonText:'Ir a Compras'
 }
 
 ]
