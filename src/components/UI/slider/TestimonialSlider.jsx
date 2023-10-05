@@ -30,7 +30,7 @@ const TestimonialSlider = () => {
         </p>
         <div className="slider__content d-flex align-items-center gap-3">
           <img src={ava01} alt="avatar" className=" rounded" />
-          <h6>John Doe</h6>
+          <h6>John Watts - ANDROMEDA</h6>
         </div>
       </div>
       <div>
@@ -44,7 +44,7 @@ const TestimonialSlider = () => {
         </p>
         <div className="slider__content d-flex align-items-center gap-3">
           <img src={ava02} alt="avatar" className="rounded" />
-          <h6>Steven Crock</h6>
+          <h6>Steven Crock - ENTERPRISE</h6>
         </div>
       </div>
       <div>
@@ -58,7 +58,7 @@ const TestimonialSlider = () => {
         </p>
         <div className="slider__content d-flex align-items-center gap-3">
           <img src={ava03} alt="avatar" className=" rounded" />
-          <h6>Missi Lou</h6>
+          <h6>Victoria Dream - NASA</h6>
         </div>
       </div>
     </Slider>
