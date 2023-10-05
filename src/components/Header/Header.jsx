@@ -21,7 +21,7 @@ const nav__links = [
   },
   {
     display: "Sucursales",
-    path: "/contact",
+    path: "/sucursales",
   },
   {
     display: "Contacto",
@@ -57,7 +57,7 @@ const Header = () => {
           <Link to="/home">
             <div className="logo">
               <img src={logo} alt="logo" />
-              <h5>Foodie</h5>
+              <h5>Pizza Planeta</h5>
             </div>
           </Link>
 

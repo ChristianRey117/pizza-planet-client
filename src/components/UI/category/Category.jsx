@@ -7,16 +7,21 @@ import "../../../styles/category.css";
 
 const categoryData = [
   {
-    display: "Fastfood",
+    display: "Combo Alienigena",
     imgUrl: categoryImg01,
+    describe:'Pizza Mediana + Papas Fritas'
   },
   {
-    display: "Pizza",
+    display: "Combo Astronauta",
     imgUrl: categoryImg02,
+    describe:'Pizza Mediana + Papas Fritas'
+
   },
   {
-    display: "Asian food",
+    display: "Promoción Galactica",
     imgUrl: categoryImg03,
+    describe:'Pizza Mediana + Papas Fritas'
+
   },
 ];
 
@@ -28,19 +33,21 @@ const Category = () => {
           return (
             <Col lg="4" md="4" sm="6" xs="6" className="mb-4">
               <div className="category__item d-flex align-items-center gap-3">
+               
                 <Row>
                   <Col lg="12">
                     <div className="category__img">
                       <img
                         src={item.imgUrl}
                         alt="category__item"
-                        style={{ width: "200px" }}
+                        
                       />
                     </div>
                   </Col>
-                  <Col lg="12">
-                    <div className="align-items-center">
-                      <h6>{item.display}</h6>
+                  <Col lg="12" style={{marginTop:'10px'}}>
+                    <div className="align-items-center" style={{textAlign:'center'}}>
+                      <h4>{item.display}</h4>
+                      <h5>{item.describe}</h5>
                     </div>
                   </Col>
                 </Row>

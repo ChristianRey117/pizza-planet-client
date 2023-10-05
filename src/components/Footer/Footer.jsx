@@ -20,7 +20,7 @@ const Footer = () => {
             </div>
           </Col>
           <Col lg="3" md="4" sm="6">
-            <h5 className="footer__title">Delivery Time</h5>
+            <h5 className="footer__title">Horario de Entrega</h5>
             <ListGroup className="delivery__time-list">
               <ListGroupItem className="delivery__time-item border-0 ps-0">
                 <span>Lunes - Sabado</span>

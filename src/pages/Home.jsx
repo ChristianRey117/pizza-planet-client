@@ -82,12 +82,17 @@ const Home = () => {
         </Container>
       </section>
       <section className="pt-0">
+      <Row style={{marginBottom:'35px'}}>
+                  <Col style={{textAlign:'center'}}>
+                  <h1>PROMOCIONES</h1>
+                  </Col>
+      </Row>
         <Category />
       </section>
 
       <section>
         <Container>
-          <Row>
+          <Row >
             {featureData.map((item, index) => {
               return (
                 <Col lg="4" md="6" sm="6" key={index} className="mt-5">
