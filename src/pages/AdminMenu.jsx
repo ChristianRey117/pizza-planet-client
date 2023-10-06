@@ -28,7 +28,7 @@ const cardPaneles = [
     title: "Ofertas",
     describe: "En este panel usted puede agregar, editar y eliminar ofertas",
     image: "",
-    path: "/sucursales-dashboard",
+    path: "/ofertas-dashboard",
     buttonText: "Ir a Ofertas",
   },
 

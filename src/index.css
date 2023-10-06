@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=RocknRoll+One&display=swap");
 
 :root {
-  --primary-color: #36426d;
+  --primary-color: #000000;
   --secondary-color: #faca01;
-  --third-color: #fde4e4;
+  --third-color: #AE2516;
 }
 
 * {
@@ -24,6 +24,7 @@ h4,
 h5,
 h6 {
   font-family: "RocknRoll One", sans-serif !important;
+  color: var(--primary-color) !important;
 }
 
 a {
@@ -35,7 +36,7 @@ h1,
 h2 {
   font-size: 2.1rem;
   font-weight: 600;
-  color: #212245;
+  color: #000000;
 }
 
 section {
