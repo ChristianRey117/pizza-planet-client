@@ -66,7 +66,7 @@ const cardPaneles = [
     title: "Compras",
     describe: "En este panel usted puede ver las compras de los usuarios",
     image: imageSuc6,
-    path: "/sucursales-dashboard",
+    path: "/compras-dashboard",
     buttonText: "Ir a Compras",
   },
 ];
