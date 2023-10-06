@@ -12,63 +12,65 @@ import {
   CardSubtitle,
   ListGroup,
   ListGroupItem,
+  Input,
 } from "reactstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import imageSuc1 from "../../assets/images/PizzaPlaneta1.jpg";
-import imageSuc2 from "../../assets/images/PizzaPlaneta2.jpg";
-import imageSuc3 from "../../assets/images/PizzaPlaneta3.jpg";
+import imageSuc1 from "../../assets/images/product_01.1.jpg";
+import imageSuc2 from "../../assets/images/product_01.3.jpg";
+import imageSuc3 from "../../assets/images/product_04.jpg";
+import imageSuc4 from "../../assets/images/product_08.jpg";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 
+
 const productosCompras = [
   {
-    name: "Inventario Actual",
-    sucursal: "Luna",
-    ammountQueso: "10kg",
-    ammountSalsa: "20L",
-    ammountHarina: "50kg",
-    ammountChampiñones: "10kg",
-    ammountPineapple: "10kg",
-    ammountChiles: "5kg",
-    path: "/inventario-form",
-    buttonText: "Ir a Sucursal",
+    userName: "Juanito",
+    productName: "Pizza Galactica",
+    fecha: "05/09/2023",
+    price: 220,
+    imageProduct: imageSuc1
   },
   {
-    name: "Inventario Actual",
-
-    sucursal: "Jupiter",
-    ammountQueso: "15kg",
-    ammountSalsa: "22L",
-    ammountHarina: "34kg",
-    ammountChampiñones: "65kg",
-    ammountPineapple: "12kg",
-    ammountChiles: "3kg",
-    path: "/inventario-form",
-    buttonText: "Ir a Sucursal",
+    userName: "Juanito",
+    productName: "Pizza Galactica",
+    fecha: "05/09/2023",
+    price: 220,
+    imageProduct: imageSuc2
   },
 
   {
-    name: "Inventario Actual",
+    userName: "Juanito",
+    productName: "Pizza Galactica",
+    fecha: "05/09/2023",
+    price: 220,
+    imageProduct: imageSuc3
 
-    sucursal: "Marte",
-    ammountQueso: "40kg",
-    ammountSalsa: "10L",
-    ammountHarina: "20kg",
-    ammountChampiñones: "15kg",
-    ammountPineapple: "13kg",
-    ammountChiles: "51kg",
-    path: "/inventario-form",
-    buttonText: "Ir a Sucursal",
   },
+  {
+    userName: "Juanito",
+    productName: "Pizza Galactica",
+    fecha: "05/09/2023",
+    price: 220,
+    imageProduct: imageSuc4
+
+  },
+  {
+    userName: "Juanito",
+    productName: "Pizza Galactica",
+    fecha: "05/09/2023",
+    price: 220,
+    imageProduct: imageSuc1
+
+  }
 ];
 
 const ComprasDashboard = () => {
+
+  const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
 
-  const goTo = () => {
-    navigate("/inventario-form", { replace: true });
-  };
 
   const goToAdminDashboard = () => {
     navigate("/admin-menu", { replace: true });
@@ -96,10 +98,8 @@ const ComprasDashboard = () => {
                 Regresar
               </Button>
             </Col>
-            <Col lg="1">
-              <Button size="lg" color="success" onClick={goTo}>
-                Filtro
-              </Button>
+            <Col lg="2">
+              <Input size ='lg' type="date" placeholder="Filtro"></Input>
             </Col>
           </Row>
         </Container>
@@ -126,56 +126,30 @@ const ComprasDashboard = () => {
                     <CardBody>
                       <Row>
                         <Col lg="6">
-                          <ListGroup>
-                            <ListGroupItem>
-                              Sucursal: {item.sucursal}
-                            </ListGroupItem>
-                            <ListGroupItem>
-                              Queso disponible: {item.ammountQueso}
-                            </ListGroupItem>
-                            <ListGroupItem>
-                              Salsa disponible: {item.ammountSalsa},
-                            </ListGroupItem>
-                            <ListGroupItem>
-                              Champiñones disponible: {item.ammountChampiñones},
-                            </ListGroupItem>
-                            <ListGroupItem>
-                              Piña disponible: {item.ammountPineapple}
-                            </ListGroupItem>
-                            <ListGroupItem>
-                              Chiles disponibles: {item.ammountChiles}
-                            </ListGroupItem>
-                          </ListGroup>
+                          <img src={item.imageProduct} alt=""  style={{width:'180px'}}/>
                         </Col>
 
                         <Col lg="6">
-                          <CardTitle tag="h5">{item.name}</CardTitle>
+                          <CardTitle tag="h5">Compra</CardTitle>
 
-                          <CardText>{item.describe}</CardText>
-                          <div style={{ position: "absolute", bottom: "15px" }}>
-                            <Row>
-                              <Col lg="6">
-                                <Button color="warning" onClick={goTo}>
-                                  <Link
-                                    to={item.path}
-                                    style={{ color: "white" }}
-                                  >
-                                    Editar
-                                  </Link>
-                                </Button>
-                              </Col>
-                              <Col lg="6">
-                                <Button color="danger" onClick={goTo}>
-                                  <Link
-                                    to={item.path}
-                                    style={{ color: "white" }}
-                                  >
-                                    Eliminar
-                                  </Link>
-                                </Button>
-                              </Col>
-                            </Row>
-                          </div>
+                          <CardText>
+                          <ListGroup>
+                            <ListGroupItem>
+                              Cliente: {item.userName}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              Producto Comprado: {item.productName}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                            Fecha: {item.fecha},
+                            </ListGroupItem>
+                            <ListGroupItem>
+                               Precio: {item.price},
+                            </ListGroupItem>
+                            
+                          </ListGroup>
+                          </CardText>
+                      
                         </Col>
                       </Row>
                     </CardBody>

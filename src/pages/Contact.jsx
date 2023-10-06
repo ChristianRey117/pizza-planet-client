@@ -5,8 +5,8 @@ import { Container, Row, Col } from "reactstrap";
 
 const Contact = () => {
   return (
-    <Helmet title="Contacto">
-      <CommonSection title="Contacto" />
+    <Helmet title="Acerca de nosotros">
+      <CommonSection title="Acerca de nosotros" />
       <section>
         <Container>
           <Row>
