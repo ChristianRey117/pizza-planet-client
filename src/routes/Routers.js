@@ -13,6 +13,8 @@ import AdminMenu from "../pages/AdminMenu";
 import SucursalDashboard from "../pages/Sucursal/SucursalDashboard";
 import InventarioDashboard from "../pages/Inventario/InventarioDashboard";
 import InventarioForm from "../pages/Inventario/InventarioForm";
+import ComprasDashboard from "../pages/Compras/ComprasDashboard";
+import ComprasForm from "../pages/Compras/ComprasForm";
 import SucursalForm from "../pages/Sucursal/SucursalForm";
 import OfertasDashboard from "../pages/Ofertas/OfertasDashboard";
 import OfertasForm from "../pages/Ofertas/OfertasForm";
@@ -37,6 +39,7 @@ const Routers = () => {
       <Route path="/admin-menu" element={<AdminMenu />} />
       <Route path="/sucursales-dashboard" element={<SucursalDashboard />} />
       <Route path="/inventario-dashboard" element={<InventarioDashboard />} />
+      <Route path="/compras-dashboard" element={<ComprasDashboard />} />
       <Route path="/inventario-form" element={<InventarioForm />} />
       <Route path="/sucursal-form" element={<SucursalForm />} />
       <Route path="/ofertas-dashboard" element={<OfertasDashboard />} />

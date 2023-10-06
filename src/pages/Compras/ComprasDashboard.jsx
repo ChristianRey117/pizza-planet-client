@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import Helmet from "../../components/Helmet/Helmet";
-import CommonSection from "../../components/UI/common-section/CommonSection";
 import {
   Container,
   Row,
@@ -12,74 +10,64 @@ import {
   CardText,
   CardTitle,
   CardSubtitle,
+  ListGroup,
+  ListGroupItem,
 } from "reactstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import imageSuc1 from "../../assets/images/product_01.png";
-import imageSuc2 from "../../assets/images/product_09.png";
-import imageSuc3 from "../../assets/images/product_4.1.png";
+import imageSuc1 from "../../assets/images/PizzaPlaneta1.jpg";
+import imageSuc2 from "../../assets/images/PizzaPlaneta2.jpg";
+import imageSuc3 from "../../assets/images/PizzaPlaneta3.jpg";
+import Helmet from "../../components/Helmet/Helmet";
+import CommonSection from "../../components/UI/common-section/CommonSection";
 
-import products from "../../assets/fake-data/products";
-
-const cardProducts = [
+const productosCompras = [
   {
-    name: "Salsa Bufalo",
-    image: imageSuc1,
-    price: "MXN 150.00",
-    describe: "Salsa picante",
-    path: "/product-form",
-    id_ofert: 1,
+    name: "Inventario Actual",
+    sucursal: "Luna",
+    ammountQueso: "10kg",
+    ammountSalsa: "20L",
+    ammountHarina: "50kg",
+    ammountChampiñones: "10kg",
+    ammountPineapple: "10kg",
+    ammountChiles: "5kg",
+    path: "/inventario-form",
+    buttonText: "Ir a Sucursal",
   },
   {
-    name: "Salsa ",
-    image: imageSuc2,
-    price: "MXN 160.00",
-    describe: "Salsa picante",
-    path: "/product-form",
-    id_ofert: 1,
-  },
+    name: "Inventario Actual",
 
-  {
-    name: "Cheese",
-    image: imageSuc3,
-    price: "MXN 140.00",
-    describe: "Queso extra",
-    path: "/product-form",
-    id_ofert: 1,
-  },
-
-  {
-    name: "Salsa Tomate",
-    image: imageSuc1,
-    price: " MXN 140.00",
-    describe: "Salsa de tomate",
-    path: "/product-form",
-    id_ofert: 1,
+    sucursal: "Jupiter",
+    ammountQueso: "15kg",
+    ammountSalsa: "22L",
+    ammountHarina: "34kg",
+    ammountChampiñones: "65kg",
+    ammountPineapple: "12kg",
+    ammountChiles: "3kg",
+    path: "/inventario-form",
+    buttonText: "Ir a Sucursal",
   },
 
   {
-    name: "Salsa Bufalo",
-    image: imageSuc1,
-    price: "MXN 150.00",
-    describe: "Salsa picante",
-    path: "/product-form",
-    id_ofert: 1,
-  },
-  {
-    name: "Salsa Bufalo",
-    image: imageSuc1,
-    price: "MXN 170.00",
-    describe: "Salsa picante",
-    path: "/product-form",
-    id_ofert: 1,
+    name: "Inventario Actual",
+
+    sucursal: "Marte",
+    ammountQueso: "40kg",
+    ammountSalsa: "10L",
+    ammountHarina: "20kg",
+    ammountChampiñones: "15kg",
+    ammountPineapple: "13kg",
+    ammountChiles: "51kg",
+    path: "/inventario-form",
+    buttonText: "Ir a Sucursal",
   },
 ];
 
-const ProductDashboard = () => {
+const ComprasDashboard = () => {
   const navigate = useNavigate();
 
-  const agregarProducto = () => {
-    navigate("/product-form", { replace: true });
+  const goTo = () => {
+    navigate("/inventario-form", { replace: true });
   };
 
   const goToAdminDashboard = () => {
@@ -87,13 +75,13 @@ const ProductDashboard = () => {
   };
 
   return (
-    <Helmet title="Productos">
-      <CommonSection title="Productos Adimistrador" />
+    <Helmet title="Inventario">
+      <CommonSection title="Compras Admistrador" />
 
       <section>
         <Row>
           <Col lg="12" style={{ textAlign: "center" }}>
-            <h1>Productos Dashboard</h1>
+            <h1>Compras Dashboard</h1>
           </Col>
         </Row>
       </section>
@@ -109,8 +97,8 @@ const ProductDashboard = () => {
               </Button>
             </Col>
             <Col lg="1">
-              <Button size="lg" color="success" onClick={agregarProducto}>
-                Agregar
+              <Button size="lg" color="success" onClick={goTo}>
+                Filtro
               </Button>
             </Col>
           </Row>
@@ -120,7 +108,7 @@ const ProductDashboard = () => {
       <section>
         <Container>
           <Row>
-            {cardProducts.map((item, index) => {
+            {productosCompras.map((item, index) => {
               return (
                 <Col
                   lg="4"
@@ -138,24 +126,36 @@ const ProductDashboard = () => {
                     <CardBody>
                       <Row>
                         <Col lg="6">
-                          <img
-                            alt="product"
-                            src={item.image}
-                            style={{ width: "180px" }}
-                          />
+                          <ListGroup>
+                            <ListGroupItem>
+                              Sucursal: {item.sucursal}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              Queso disponible: {item.ammountQueso}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              Salsa disponible: {item.ammountSalsa},
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              Champiñones disponible: {item.ammountChampiñones},
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              Piña disponible: {item.ammountPineapple}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              Chiles disponibles: {item.ammountChiles}
+                            </ListGroupItem>
+                          </ListGroup>
                         </Col>
 
                         <Col lg="6">
                           <CardTitle tag="h5">{item.name}</CardTitle>
 
-                          <CardText>
-                            {item.describe}
-                            <p>{item.price}</p>
-                          </CardText>
+                          <CardText>{item.describe}</CardText>
                           <div style={{ position: "absolute", bottom: "15px" }}>
                             <Row>
                               <Col lg="6">
-                                <Button color="warning">
+                                <Button color="warning" onClick={goTo}>
                                   <Link
                                     to={item.path}
                                     style={{ color: "white" }}
@@ -165,7 +165,7 @@ const ProductDashboard = () => {
                                 </Button>
                               </Col>
                               <Col lg="6">
-                                <Button color="danger">
+                                <Button color="danger" onClick={goTo}>
                                   <Link
                                     to={item.path}
                                     style={{ color: "white" }}
@@ -190,4 +190,4 @@ const ProductDashboard = () => {
   );
 };
 
-export default ProductDashboard;
+export default ComprasDashboard;
