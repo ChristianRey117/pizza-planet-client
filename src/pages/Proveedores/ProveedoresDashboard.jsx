@@ -15,37 +15,38 @@ import {
 } from "reactstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import imageSuc1 from "../../assets/images/PizzaPlaneta1.jpg";
-import imageSuc2 from "../../assets/images/PizzaPlaneta2.jpg";
-import imageSuc3 from "../../assets/images/PizzaPlaneta3.jpg";
+import imageSuc1 from "../../assets/images/provedor_01.jpg";
+import imageSuc2 from "../../assets/images/provedor_02.jpg";
+import imageSuc3 from "../../assets/images/provedor_03.jpg";
+import imageSuc4 from "../../assets/images/provedor_04.jpg";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 
 const productosInventario = [
   {
-    name: "El abuelo",
+    name: "Bola Roja",
     productProveedor: "Harina",
-    imageProveedor: imageSuc1,
+    imageProveedor: imageSuc3,
     path: "/proveedor-form",
   },
   {
-    name: "Chesse",
+    name: "Santos Lugo",
     productProveedor: "Queso",
-    imageProveedor: imageSuc2,
+    imageProveedor: imageSuc1,
     path: "/proveedor-form",
   },
 
   {
-    name: "Tia Rosa",
+    name: "Global Food",
     productProveedor: "Piña",
-    imageProveedor: imageSuc3,
+    imageProveedor: imageSuc4,
     path: "/proveedor-form",
   },
 
   {
     name: "Costeña",
     productProveedor: "Salsa",
-    imageProveedor: imageSuc3,
+    imageProveedor: imageSuc2,
     path: "/proveedor-form",
   },
 ];

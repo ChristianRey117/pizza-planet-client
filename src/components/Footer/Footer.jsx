@@ -34,7 +34,7 @@ const Footer = () => {
             </ListGroup>
           </Col>
           <Col lg="3" md="4" sm="6">
-            <h5 className="footer__title">Contacto</h5>
+            <h5 className="footer__title">Contácto</h5>
             <ListGroup className="delivery__time-list">
               <ListGroupItem className="delivery__time-item border-0 ps-0">
                 <span>Direccion: 973000 Centro Merida Yuc</span>
