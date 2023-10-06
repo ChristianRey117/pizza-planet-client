@@ -10,9 +10,10 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Sucursales from "../pages/Sucursales";
 import AdminMenu from "../pages/AdminMenu";
-import SucursalDashboard from "../pages/SucursalDashboard";
+import SucursalDashboard from "../pages/Sucursal/SucursalDashboard";
 import InventarioDashboard from "../pages/Inventario/InventarioDashboard";
 import InventarioForm from "../pages/Inventario/InventarioForm";
+import SucursalForm from "../pages/Sucursal/SucursalForm";
 
 const Routers = () => {
   return (
@@ -31,6 +32,7 @@ const Routers = () => {
       <Route path="/sucursales-dashboard" element={<SucursalDashboard />} />
       <Route path="/inventario-dashboard" element={<InventarioDashboard />} />
       <Route path="/inventario-form" element={<InventarioForm />} />
+      <Route path="/sucursal-form" element={<SucursalForm />} />
     </Routes>
   );
 };
