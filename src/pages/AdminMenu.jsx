@@ -15,19 +15,25 @@ import {
 } from "reactstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import imageSuc1 from "../assets/images/sucursales.jpg";
+import imageSuc2 from "../assets/images/ofertas.jpg";
+import imageSuc3 from "../assets/images/provedores.jpg";
+import imageSuc4 from "../assets/images/productos.jpg";
+import imageSuc5 from "../assets/images/inventario.jpg";
+import imageSuc6 from "../assets/images/compras.jpg";
 
 const cardPaneles = [
   {
     title: "Sucursales",
     describe: "En este panel usted puede agregar, editar y eliminar sucursales",
-    image: "",
+    image: imageSuc1,
     path: "/sucursales-dashboard",
     buttonText: "Ir a Sucursal",
   },
   {
     title: "Ofertas",
     describe: "En este panel usted puede agregar, editar y eliminar ofertas",
-    image: "",
+    image: imageSuc2,
     path: "/ofertas-dashboard",
     buttonText: "Ir a Ofertas",
   },
@@ -36,7 +42,7 @@ const cardPaneles = [
     title: "Proveedores",
     describe:
       "En este panel usted puede agregar, editar y eliminar proveedores",
-    image: "",
+    image: imageSuc3,
     path: "/proveedores-dashboard",
     buttonText: "Ir a Proveedores",
   },
@@ -44,24 +50,22 @@ const cardPaneles = [
   {
     title: "Productos",
     describe: "En este panel usted puede agregar, editar y eliminar productos",
-    image: "",
+    image: imageSuc4,
     path: "/product-dashboard",
     buttonText: "Ir a Productos",
   },
 
   {
     title: "Inventario",
-    describe:
-      "En este panel usted puede checar los productos que estan en su inventario",
-    image: "",
+    describe: "En este panel usted puede ver los productos de su inventario",
+    image: imageSuc5,
     path: "/inventario-dashboard",
     buttonText: "Ir a Inventario",
   },
   {
     title: "Compras",
-    describe:
-      "En este panel usted puede checar las compras realizados por los diferentes usuarios",
-    image: "",
+    describe: "En este panel usted puede ver las compras de los usuarios",
+    image: imageSuc6,
     path: "/sucursales-dashboard",
     buttonText: "Ir a Compras",
   },
@@ -99,7 +103,7 @@ const AdminMenu = () => {
                     width: "18rem",
                   }}
                 >
-                  <img alt="Sample" src="https://picsum.photos/300/200" />
+                  <img alt="Sample" src={item.image} />
                   <CardBody>
                     <CardTitle tag="h5">{item.title}</CardTitle>
 
