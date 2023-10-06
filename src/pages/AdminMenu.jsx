@@ -37,7 +37,7 @@ const cardPaneles = [
     describe:
       "En este panel usted puede agregar, editar y eliminar proveedores",
     image: "",
-    path: "/sucursales-dashboard",
+    path: "/proveedores-dashboard",
     buttonText: "Ir a Proveedores",
   },
 

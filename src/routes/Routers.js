@@ -18,6 +18,8 @@ import OfertasDashboard from "../pages/Ofertas/OfertasDashboard";
 import OfertasForm from "../pages/Ofertas/OfertasForm";
 import ProductDashboard from "../pages/Products/ProductDashboard";
 import ProductForm from "../pages/Products/ProductForm";
+import ProveedoresDashboard from "../pages/Proveedores/ProveedoresDashboard";
+import ProveedorForm from "../pages/Proveedores/ProveedoresForm";
 
 const Routers = () => {
   return (
@@ -41,6 +43,8 @@ const Routers = () => {
       <Route path="/ofertas-form" element={<OfertasForm />} />
       <Route path="/product-dashboard" element={<ProductDashboard />} />
       <Route path="/product-form" element={<ProductForm />} />
+      <Route path="/proveedores-dashboard" element={<ProveedoresDashboard />} />
+      <Route path="/proveedores-form" element={<ProveedorForm />} />
     </Routes>
   );
 };
