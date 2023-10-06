@@ -14,7 +14,6 @@ import SucursalDashboard from "../pages/Sucursal/SucursalDashboard";
 import InventarioDashboard from "../pages/Inventario/InventarioDashboard";
 import InventarioForm from "../pages/Inventario/InventarioForm";
 import ComprasDashboard from "../pages/Compras/ComprasDashboard";
-import ComprasForm from "../pages/Compras/ComprasForm";
 import SucursalForm from "../pages/Sucursal/SucursalForm";
 import OfertasDashboard from "../pages/Ofertas/OfertasDashboard";
 import OfertasForm from "../pages/Ofertas/OfertasForm";

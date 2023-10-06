@@ -24,7 +24,7 @@ const nav__links = [
     path: "/sucursales",
   },
   {
-    display: "Contacto",
+    display: "Acerca de nosotros",
     path: "/contact",
   },
 ];
