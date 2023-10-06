@@ -45,7 +45,7 @@ const cardPaneles = [
     title: "Productos",
     describe: "En este panel usted puede agregar, editar y eliminar productos",
     image: "",
-    path: "/sucursales-dashboard",
+    path: "/product-dashboard",
     buttonText: "Ir a Productos",
   },
 
