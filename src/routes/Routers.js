@@ -14,6 +14,8 @@ import SucursalDashboard from "../pages/Sucursal/SucursalDashboard";
 import InventarioDashboard from "../pages/Inventario/InventarioDashboard";
 import InventarioForm from "../pages/Inventario/InventarioForm";
 import SucursalForm from "../pages/Sucursal/SucursalForm";
+import OfertasDashboard from "../pages/Ofertas/OfertasDashboard";
+import OfertasForm from "../pages/Ofertas/OfertasForm";
 
 const Routers = () => {
   return (
@@ -33,6 +35,8 @@ const Routers = () => {
       <Route path="/inventario-dashboard" element={<InventarioDashboard />} />
       <Route path="/inventario-form" element={<InventarioForm />} />
       <Route path="/sucursal-form" element={<SucursalForm />} />
+      <Route path="/ofertas-dashboard" element={<OfertasDashboard />} />
+      <Route path="/ofertas-form" element={<OfertasForm />} />
     </Routes>
   );
 };
