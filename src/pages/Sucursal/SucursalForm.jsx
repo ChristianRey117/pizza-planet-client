@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import {
@@ -21,6 +21,21 @@ const SucursalForm = () => {
     navigate("/sucursales-dashboard", { replace: true });
   };
 
+  // DATA TO SEND
+  const [dataSucursal, setData] = useState({branch_name:'',branch_direction:'',work_personnel:0, supplier: ''});
+
+  const handleChangeSucursal = (e) =>{
+    const nameInput = e.target.name;
+    const value = e.target.value;
+    setData({...dataSucursal, [nameInput]: value})
+  }
+
+  const handleSubmitSucursal = (e)=>{
+    e.preventDefault();
+    console.log(dataSucursal);
+  }
+  //END SEND DATA
+
   return (
     <Helmet title="Inventario Formulario">
       <CommonSection title="Inventario Formulario" />
@@ -42,30 +57,36 @@ const SucursalForm = () => {
               <h3>Rellena el formulario</h3>
             </Col>
             <Col lg="12">
-              <Form>
+              <Form method="post" onSubmit={handleSubmitSucursal}>
                 <FormGroup>
-                  <Label for="sucursalName">Sucursal</Label>
+                  <Label for="branch_name">Sucursal</Label>
                   <Input
-                    id="sucursalName"
-                    name="sucursalName"
+                    id="branch_name"
+                    name="branch_name"
                     placeholder="Ingresa el nombre de la sucursal"
                     type="tel"
+                    onChange={handleChangeSucursal}
                   />
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="sucursalAddress">Dirección</Label>
+                  <Label for="branch_direction">Dirección</Label>
                   <Input
-                    id="sucursalAddress"
-                    name="sucursalAddress"
+                    id="branch_direction"
+                    name="branch_direction"
                     placeholder="Ingresa la dirección"
                     type="text"
+                    onChange={handleChangeSucursal}
+
                   />
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="sucursalProveedores">Proveedores</Label>
-                  <Input id="sucursalProveedores" name="select" type="select">
+                  <Label for="supplier">Proveedores</Label>
+                  <Input id="supplier" name="supplier" type="select" 
+                    onChange={handleChangeSucursal}
+
+                  >
                     <option>El abuelo</option>
                     <option>Tia Rosa</option>
                     <option>Costeña</option>
@@ -73,14 +94,16 @@ const SucursalForm = () => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="sucursalesWorkers">
+                  <Label for="work_personnel">
                     Trabajadores disponibles
                   </Label>
                   <Input
-                    id="sucursalesWorkers: "
-                    name="sucursalesWorkers"
+                    id="work_personnel: "
+                    name="work_personnel"
                     placeholder="Ingresa el numero de trabajadores"
                     type="tel"
+                    onChange={handleChangeSucursal}
+
                   />
                 </FormGroup>
 
