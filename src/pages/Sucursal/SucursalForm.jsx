@@ -13,6 +13,9 @@ import {
   Button,
 } from "reactstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const baseURL = "http://localhost:5000/sucursales/add";
 
 const SucursalForm = () => {
   const navigate = useNavigate();
@@ -22,18 +25,43 @@ const SucursalForm = () => {
   };
 
   // DATA TO SEND
-  const [dataSucursal, setData] = useState({branch_name:'',branch_direction:'',work_personnel:0, supplier: ''});
 
-  const handleChangeSucursal = (e) =>{
-    const nameInput = e.target.name;
-    const value = e.target.value;
-    setData({...dataSucursal, [nameInput]: value})
-  }
+  const [dataSucursal, setData] = useState({
+    data: new FormData(),
+  });
 
-  const handleSubmitSucursal = (e)=>{
+  const handleChangeSucursal = (e) => {
+    let nameInput = e.target.name;
+    let value;
+    if (nameInput == "branch_image") {
+      nameInput = "file";
+      value = e.target.files[0];
+      // const formData = new FormData();
+      // formData.append("file", value);
+      // value = formData;
+      dataSucursal.data.set("image", value);
+    } else {
+      value = e.target.value;
+      // const formData = new FormData();
+      // formData.append(nameInput, value);
+      // value = formData;
+      if (nameInput == "id_supplier") {
+        value = Number(value);
+        console.log("id_supplier", value);
+      }
+
+      dataSucursal.data.set(nameInput, value);
+    }
+    setData(dataSucursal);
+  };
+
+  const handleSubmitSucursal = (e) => {
     e.preventDefault();
     console.log(dataSucursal);
-  }
+    axios.post(baseURL, dataSucursal.data).then((response) => {
+      console.log("Response----->", response);
+    });
+  };
   //END SEND DATA
 
   return (
@@ -77,33 +105,42 @@ const SucursalForm = () => {
                     placeholder="Ingresa la dirección"
                     type="text"
                     onChange={handleChangeSucursal}
-
                   />
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="supplier">Proveedores</Label>
-                  <Input id="supplier" name="supplier" type="select" 
+                  <Label for="id_supplier">Proveedores</Label>
+                  <Input
+                    id="id_supplier"
+                    name="id_supplier"
+                    type="select"
                     onChange={handleChangeSucursal}
-
                   >
-                    <option>El abuelo</option>
-                    <option>Tia Rosa</option>
-                    <option>Costeña</option>
+                    <option value="1">El abuelo</option>
+                    <option value="2">Tia Rosa</option>
+                    <option value="3">Costeña</option>
                   </Input>
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="work_personnel">
-                    Trabajadores disponibles
-                  </Label>
+                  <Label for="work_personnel">Trabajadores disponibles</Label>
                   <Input
                     id="work_personnel: "
                     name="work_personnel"
                     placeholder="Ingresa el numero de trabajadores"
                     type="tel"
                     onChange={handleChangeSucursal}
+                  />
+                </FormGroup>
 
+                <FormGroup>
+                  <Label for="branch_image">Imagen proveedores</Label>
+                  <Input
+                    id="branch_image: "
+                    name="branch_image"
+                    placeholder="Selecciona la imagen del proveedor"
+                    type="file"
+                    onChange={handleChangeSucursal}
                   />
                 </FormGroup>
 
