@@ -9,6 +9,7 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 
 const baseURL = "http://localhost:5000/sucursales";
+const baseUrlImage = "http://localhost:5000/images";
 
 const sucursalesData = [
   {
@@ -63,7 +64,10 @@ const Sucursales = () => {
                           className="category__img"
                           style={{ textAlign: "center" }}
                         >
-                          <img src={item.imgUrl} alt="category__item" />
+                          <img
+                            src={baseUrlImage + "/" + item.image}
+                            alt="category__item"
+                          />
                         </div>
                       </Col>
                       <Col lg="12" style={{ marginTop: "10px" }}>
