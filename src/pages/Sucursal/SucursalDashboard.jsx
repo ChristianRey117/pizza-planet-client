@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import {
@@ -18,6 +18,9 @@ import { Link } from "react-router-dom";
 import imageSuc1 from "../../assets/images/PizzaPlaneta1.jpg";
 import imageSuc2 from "../../assets/images/PizzaPlaneta2.jpg";
 import imageSuc3 from "../../assets/images/PizzaPlaneta3.jpg";
+
+const baseURL = "http://localhost:5000/sucursales";
+const baseUrlImage = "http://localhost:5000/images";
 
 const cardPaneles = [
   {
@@ -54,6 +57,17 @@ const SucursalDashboard = () => {
   const goToAdminDashboard = () => {
     navigate("/admin-menu", { replace: true });
   };
+
+  const [post, setPost] = React.useState([{}]);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setPost(response.data);
+    });
+  }, []);
+
+  if (!post) return null;
+
   return (
     <Helmet title="Sucursal">
       <CommonSection title="Sucursal Adimistrador" />
@@ -88,7 +102,7 @@ const SucursalDashboard = () => {
       <section>
         <Container>
           <Row>
-            {cardPaneles.map((item, index) => {
+            {post.map((item, index) => {
               return (
                 <Col
                   lg="4"
@@ -108,16 +122,16 @@ const SucursalDashboard = () => {
                         <Col lg="6">
                           <img
                             alt="Sample"
-                            src={item.image}
+                            src={baseUrlImage + "/" + item.image}
                             // src="https://picsum.photos/300/200"
                             style={{ width: "180px" }}
                           />
                         </Col>
 
                         <Col lg="6">
-                          <CardTitle tag="h5">{item.name}</CardTitle>
+                          <CardTitle tag="h5">{item.branch_name}</CardTitle>
 
-                          <CardText>{item.describe}</CardText>
+                          <CardText>{item.branch_direction}</CardText>
                           <div style={{ position: "absolute", bottom: "15px" }}>
                             <Row>
                               <Col lg="6">
