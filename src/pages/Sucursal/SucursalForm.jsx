@@ -11,9 +11,11 @@ import {
   Input,
   FormText,
   Button,
+  Modal,
 } from "reactstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
+import ModalComponent from "../../components/Modal/modal";
 
 const baseURL = "http://localhost:5000/sucursales/add";
 
@@ -60,10 +62,22 @@ const SucursalForm = () => {
     console.log(dataSucursal);
     axios.post(baseURL, dataSucursal.data).then((response) => {
       console.log("Response----->", response);
+      setShow(true);
     });
   };
   //END SEND DATA
 
+  //MODAL
+  const [show, setShow] = useState(false);
+  const optionsModal = {
+    title: "Operacion Exitosa",
+    message: "La sucursal fue agregada exitosamente",
+    redirectTo: () => {
+      navigate("/sucursales-dashboard", { replace: true });
+    },
+  };
+  const handleClose = () => setShow(false);
+  //END MODAL
   return (
     <Helmet title="Inventario Formulario">
       <CommonSection title="Inventario Formulario" />
@@ -149,6 +163,13 @@ const SucursalForm = () => {
             </Col>
           </Row>
         </Container>
+      </section>
+      <section>
+        <ModalComponent
+          show={show}
+          handleClose={handleClose}
+          optionsModal={optionsModal}
+        ></ModalComponent>
       </section>
     </Helmet>
   );
