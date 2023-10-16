@@ -13,11 +13,12 @@ import {
   Button,
   Modal,
 } from "reactstrap";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
 
 const baseURL = "http://localhost:5000/sucursales/add";
+const baseId = "http://localhost:5000/sucursales";
 
 const SucursalForm = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const SucursalForm = () => {
   const goToInventarioDashboard = () => {
     navigate("/sucursales-dashboard", { replace: true });
   };
+ 
 
   // DATA TO SEND
 
@@ -60,16 +62,25 @@ const SucursalForm = () => {
   const handleSubmitSucursal = (e) => {
     e.preventDefault();
     console.log(dataSucursal);
-    axios.post(baseURL, dataSucursal.data).then((response) => {
-      console.log("Response----->", response);
-      setShow(true);
-    });
+    if(id){
+      axios.put(baseId + '/update/' + id, dataSucursal.data).then((response) =>{
+        console.log(response);
+        optionsModal = {...optionsModal, message:'Sucursal Editada'}
+        setShow(true);
+      })
+    }else{
+      axios.post(baseURL, dataSucursal.data).then((response) => {
+        console.log("Response----->", response);
+        setShow(true);
+      });
+    }
+    
   };
   //END SEND DATA
 
   //MODAL
   const [show, setShow] = useState(false);
-  const optionsModal = {
+  let optionsModal = {
     title: "Operacion Exitosa",
     message: "La sucursal fue agregada exitosamente",
     redirectTo: () => {
@@ -78,9 +89,25 @@ const SucursalForm = () => {
   };
   const handleClose = () => setShow(false);
   //END MODAL
+
+  const {id} = useParams();
+  React.useEffect(() => {
+    if(id){
+      axios.get(baseId + '/' + id).then(response=>{
+        setDataForm(response.data[0]);
+        console.log(dataForm);
+
+      })
+    }
+    dataSucursal.data.set('id_supplier', '1');
+    setData(dataSucursal);
+  }, []);
+  const [dataForm, setDataForm] = React.useState([{}]);
+
+
   return (
     <Helmet title="Inventario Formulario">
-      <CommonSection title="Inventario Formulario" />
+      <CommonSection title="Inventario Formulario "  />
       <section style={{ padding: "30px 0px" }}>
         <Container>
           <Row>
@@ -107,6 +134,7 @@ const SucursalForm = () => {
                     name="branch_name"
                     placeholder="Ingresa el nombre de la sucursal"
                     type="tel"
+                    defaultValue={id ? dataForm?.branch_name : null}
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
@@ -118,6 +146,7 @@ const SucursalForm = () => {
                     name="branch_direction"
                     placeholder="Ingresa la dirección"
                     type="text"
+                    defaultValue={id ? dataForm?.branch_direction : null}
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
@@ -143,6 +172,7 @@ const SucursalForm = () => {
                     name="work_personnel"
                     placeholder="Ingresa el numero de trabajadores"
                     type="tel"
+                    defaultValue={id ? dataForm?.work_personnel : null}
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>

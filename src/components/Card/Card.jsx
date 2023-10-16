@@ -49,6 +49,10 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
     }
   }
 
+  const editSucursal = ()=>{
+    navigate('/sucursal-form/' + id_branch , {replace: true});
+  }
+
 
   return (
     <Col
@@ -81,7 +85,7 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
               <div style={{ position: "absolute", bottom: "15px" }}>
                 <Row>
                   <Col lg="6">
-                    <Button color="warning">
+                    <Button color="warning" onClick={editSucursal}>
                       <Link style={{ color: "white" }}>Editar</Link>
                     </Button>
                   </Col>
