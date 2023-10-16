@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import imageSuc1 from "../../assets/images/PizzaPlaneta1.jpg";
 import imageSuc2 from "../../assets/images/PizzaPlaneta2.jpg";
 import imageSuc3 from "../../assets/images/PizzaPlaneta3.jpg";
+import CardComponent from "../../components/Card/Card";
 
 const baseURL = "http://localhost:5000/sucursales";
 const baseUrlImage = "http://localhost:5000/images";
@@ -103,65 +104,70 @@ const SucursalDashboard = () => {
         <Container>
           <Row>
             {post.map((item, index) => {
-              return (
-                <Col
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  key={index}
-                  className="mt-2 mb-5"
-                  style={{ width: "36rem", marginLeft: "35px" }}
-                >
-                  <Card
-                    style={{
-                      width: "34rem",
-                    }}
-                  >
-                    <CardBody>
-                      <Row>
-                        <Col lg="6">
-                          <img
-                            alt="Sample"
-                            src={baseUrlImage + "/" + item.image}
-                            // src="https://picsum.photos/300/200"
-                            style={{ width: "180px" }}
-                          />
-                        </Col>
+              // return (
+              //   <Col
+              //     lg="4"
+              //     md="6"
+              //     sm="6"
+              //     key={index}
+              //     className="mt-2 mb-5"
+              //     style={{ width: "36rem", marginLeft: "35px" }}
+              //   >
+              //     <Card
+              //       style={{
+              //         width: "34rem",
+              //       }}
+              //     >
+              //       <CardBody>
+              //         <Row>
+              //           <Col lg="6">
+              //             <img
+              //               alt="Sample"
+              //               src={baseUrlImage + "/" + item.image}
+              //               // src="https://picsum.photos/300/200"
+              //               style={{ width: "180px" }}
+              //             />
+              //           </Col>
 
-                        <Col lg="6">
-                          <CardTitle tag="h5">{item.branch_name}</CardTitle>
+              //           <Col lg="6">
+              //             <CardTitle tag="h5">{item.branch_name}</CardTitle>
 
-                          <CardText>{item.branch_direction}</CardText>
-                          <div style={{ position: "absolute", bottom: "15px" }}>
-                            <Row>
-                              <Col lg="6">
-                                <Button color="warning">
-                                  <Link
-                                    to={item.path}
-                                    style={{ color: "white" }}
-                                  >
-                                    Editar
-                                  </Link>
-                                </Button>
-                              </Col>
-                              <Col lg="6">
-                                <Button color="danger">
-                                  <Link
-                                    to={item.path}
-                                    style={{ color: "white" }}
-                                  >
-                                    Eliminar
-                                  </Link>
-                                </Button>
-                              </Col>
-                            </Row>
-                          </div>
-                        </Col>
-                      </Row>
-                    </CardBody>
-                  </Card>
-                </Col>
-              );
+              //             <CardText>{item.branch_direction}</CardText>
+              //             <div style={{ position: "absolute", bottom: "15px" }}>
+              //               <Row>
+              //                 <Col lg="6">
+              //                   <Button color="warning">
+              //                     <Link
+              //                       to={item.path}
+              //                       style={{ color: "white" }}
+              //                     >
+              //                       Editar
+              //                     </Link>
+              //                   </Button>
+              //                 </Col>
+              //                 <Col lg="6">
+              //                   <Button
+              //                     color="danger"
+              //                     onClick={deleteSucursal(item)}
+              //                   >
+              //                     Eliminar
+              //                   </Button>
+              //                 </Col>
+              //               </Row>
+              //             </div>
+              //           </Col>
+              //         </Row>
+              //       </CardBody>
+              //     </Card>
+              //   </Col>
+              // );
+
+              <CardComponent
+                branch_name={item.branch_name}
+                branch_direction={item.branch_direction}
+                id_branch={item.id_branch}
+                image={item.image}
+              ></CardComponent>;
             })}
           </Row>
         </Container>
