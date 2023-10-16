@@ -162,12 +162,12 @@ const SucursalDashboard = () => {
               //   </Col>
               // );
 
-              <CardComponent
+              return (<CardComponent
                 branch_name={item.branch_name}
                 branch_direction={item.branch_direction}
                 id_branch={item.id_branch}
                 image={item.image}
-              ></CardComponent>;
+              ></CardComponent>);
             })}
           </Row>
         </Container>

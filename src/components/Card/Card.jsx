@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -13,14 +15,40 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import ModalComponent from "../../components/Modal/modal";
+
 
 const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
-  const baseURL = "http://localhost:5000";
-  const baseUrlImage = "http://localhost:5000/images";
+  const navigate = useNavigate();
 
-  const deleteSucursal = (id) => {
-    console.log(id);
-  };
+  const baseURL = "http://localhost:5000/sucursales";
+  const baseUrlImage = "http://localhost:5000/images";
+  const dispatch = useDispatch();
+
+  const deleteSucursal = () => askDelete();
+
+  const _delete = (id)=>{
+    axios.delete(baseURL + '/delete/' + id).then((response) => {
+      console.log(response);
+    });
+  }
+
+  const askDelete = ()=>{
+    setShow(true);
+  }
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+
+  const optionsModal = {
+    title:"¿Esta seguro de eleminar la sucursal?",
+    message:"No se podra recuperar la informacion",
+    redirectTo: ()=>{
+      _delete(id_branch);
+      setShow(false);
+      window.location.reload(false);
+    }
+  }
+
 
   return (
     <Col
@@ -58,7 +86,7 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
                     </Button>
                   </Col>
                   <Col lg="6">
-                    <Button color="danger" onClick={deleteSucursal(id_branch)}>
+                    <Button color="danger" onClick={deleteSucursal}>
                       Eliminar
                     </Button>
                   </Col>
@@ -68,6 +96,10 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
           </Row>
         </CardBody>
       </Card>
+
+      <section>
+        <ModalComponent show={show} handleClose={handleClose} optionsModal={optionsModal}></ModalComponent>
+      </section>
     </Col>
   );
 };
