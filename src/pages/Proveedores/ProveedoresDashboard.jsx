@@ -21,8 +21,12 @@ import imageSuc3 from "../../assets/images/provedor_03.jpg";
 import imageSuc4 from "../../assets/images/provedor_04.jpg";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
+import axios from "axios";
+import CardProveedores from "../../components/Card/CardProveedores/CardProveedores";
 
-const productosInventario = [
+const baseURL = "http://localhost:5000/proveedores";
+const baseUrlImage = "http://localhost:5000/images";
+const dataProveedores = [
   {
     name: "Bola Roja",
     productProveedor: "Harina",
@@ -62,6 +66,13 @@ const ProveedoresDashboard = () => {
     navigate("/admin-menu", { replace: true });
   };
 
+  const [dataProveedores, setDataProveedores] = React.useState([{}]);
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setDataProveedores(response.data);
+    });
+  }, []);
+
   return (
     <Helmet title="Proveedores">
       <CommonSection title="Proveedores Admistrador" />
@@ -96,64 +107,14 @@ const ProveedoresDashboard = () => {
       <section>
         <Container>
           <Row>
-            {productosInventario.map((item, index) => {
+            {dataProveedores.map((item, index) => {
               return (
-                <Col
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  key={index}
-                  className="mt-2 mb-5"
-                  style={{ width: "36rem", marginLeft: "45px" }}
-                >
-                  <Card
-                    style={{
-                      width: "34rem",
-                    }}
-                  >
-                    <CardBody>
-                      <Row>
-                        <Col lg="6">
-                          <img
-                            src={item.imageProveedor}
-                            alt=""
-                            style={{ width: "180px" }}
-                          />
-                        </Col>
-
-                        <Col lg="6">
-                          <CardTitle tag="h5">Proveedor: {item.name}</CardTitle>
-
-                          <CardText>Producto: {item.productProveedor}</CardText>
-                          <div style={{ position: "absolute", bottom: "15px" }}>
-                            <Row>
-                              <Col lg="6">
-                                <Button color="warning" onClick={goTo}>
-                                  <Link
-                                    to={item.path}
-                                    style={{ color: "white" }}
-                                  >
-                                    Editar
-                                  </Link>
-                                </Button>
-                              </Col>
-                              <Col lg="6">
-                                <Button color="danger" onClick={goTo}>
-                                  <Link
-                                    to={item.path}
-                                    style={{ color: "white" }}
-                                  >
-                                    Eliminar
-                                  </Link>
-                                </Button>
-                              </Col>
-                            </Row>
-                          </div>
-                        </Col>
-                      </Row>
-                    </CardBody>
-                  </Card>
-                </Col>
+                <CardProveedores
+                  id_supplier={item.id_supplier}
+                  supplier_name={item.supplier_name}
+                  supplier_product={item.supplier_product}
+                  image={item.image}
+                ></CardProveedores>
               );
             })}
           </Row>
