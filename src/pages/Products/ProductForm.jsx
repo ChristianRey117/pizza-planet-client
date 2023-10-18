@@ -1,116 +1,223 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
-import { Row, Container, Col, Card, CardBody, Button, Form, FormGroup, FormText, Label, Input  } from "reactstrap";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {
+  Row,
+  Container,
+  Col,
+  Card,
+  CardBody,
+  Button,
+  Form,
+  FormGroup,
+  FormText,
+  Label,
+  Input,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import imageSuc1 from "../../assets/images/PizzaPlaneta1.jpg";
-import products from '../../assets/fake-data/products';
+import products from "../../assets/fake-data/products";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import ModalComponent from "../../components/Modal/modal";
 
 const cardProducts = [
-    {
-        id:'',
-        name:'S',
-        image:imageSuc1,
-        price:'MXN 5.00',
-        path:'',
-        path3:'/product-dashboard',
-        id_ofert:1,
+  {
+    id: "",
+    name: "S",
+    image: imageSuc1,
+    price: "MXN 5.00",
+    path: "",
+    path3: "/product-dashboard",
+    id_ofert: 1,
+  },
+];
+
+const baseURL = "http://localhost:5000/productos/add";
+const baseId = "http://localhost:5000/productos";
+
+const ProductForm = () => {
+  const navigate = useNavigate();
+  const inventarioP = () => {
+    navigate("/product-dashboard", { replace: true });
+  };
+  const goTo = (path) => {
+    navigate(path, { replace: true });
+  };
+
+  // DATA TO SEND
+
+  const [dataProducts, setData] = useState({
+    data: new FormData(),
+  });
+
+  const handleChangeProduct = (e) => {
+    let nameInput = e.target.name;
+    let value;
+    if (nameInput == "image") {
+      nameInput = "file";
+      value = e.target.files[0];
+      dataProducts.data.set("image", value);
+    } else {
+      value = e.target.value;
+      if (nameInput == "id_ofert" || nameInput == "id_type_category") {
+        value = Number(value);
+        console.log(nameInput, value);
+      }
+
+      dataProducts.data.set(nameInput, value);
+    }
+    setData(dataProducts);
+  };
+
+  const handleSubmitProduct = (e) => {
+    e.preventDefault();
+    console.log(dataProducts);
+    if (id) {
+      axios
+        .put(baseId + "/update/" + id, dataProducts.data)
+        .then((response) => {
+          console.log(response);
+          optionsModal = { ...optionsModal, message: "Sucursal Editada" };
+          setShow(true);
+        });
+    } else {
+      axios.post(baseURL, dataProducts.data).then((response) => {
+        console.log("Response----->", response);
+        setShow(true);
+      });
+    }
+  };
+  //END SEND DATA
+
+  //MODAL
+  const [show, setShow] = useState(false);
+  let optionsModal = {
+    title: "Operacion Exitosa",
+    message: "El producto fue agregado exitosamente",
+    redirectTo: () => {
+      navigate("/product-dashboard", { replace: true });
     },
-   
+  };
+  const handleClose = () => setShow(false);
+  //END MODAL
 
-]
+  const { id } = useParams();
+  React.useEffect(() => {
+    if (id) {
+      axios.get(baseId + "/" + id).then((response) => {
+        setDataForm(response.data[0]);
+        console.log(dataForm);
+      });
+    }
+    //dataProducts.data.set("id_supplier", "1");
+    setData(dataProducts);
+  }, []);
+  const [dataForm, setDataForm] = React.useState([{}]);
 
-
-const ProductForm = ()=>{
-const navigate = useNavigate();
-const inventarioP =()=>{
-    navigate('/product-dashboard',{replace:true})
-   }
-
-
-
-const goTo = (path)=>{
-navigate(path,{replace:true})
-}
-
-    return (<Helmet title="Producto Formulario">
-    <CommonSection title="Producto Formulario" />
-    <section style={{ padding: "30px 0px" }}>
-      <Container>
-        <Row>
-          <Col lg="12">
-            <Button color="secondary" onClick={inventarioP}>
-              Regresar
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-    <section style={{ padding: "30px" }}>
-      <Container>
-        <Row>
-          <Col lg="12" style={{ paddingBottom: "15px" }}>
-            <h3>Rellena el formulario</h3>
-          </Col>
-          <Col lg="12">
-            <Form>
+  return (
+    <Helmet title="Producto Formulario">
+      <CommonSection title="Producto Formulario" />
+      <section style={{ padding: "30px 0px" }}>
+        <Container>
+          <Row>
+            <Col lg="12">
+              <Button color="secondary" onClick={inventarioP}>
+                Regresar
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      <section style={{ padding: "30px" }}>
+        <Container>
+          <Row>
+            <Col lg="12" style={{ paddingBottom: "15px" }}>
+              <h3>Rellena el formulario</h3>
+            </Col>
+            <Col lg="12">
+              <Form method="post" onSubmit={handleSubmitProduct}>
                 <FormGroup>
-                    <Label for="productName">Nombre</Label>
-                    <Input
-                    id="productName"
-                    name="name"
-                    placeholder="Ingresa el queso disponible"
+                  <Label for="productName">Nombre del producto</Label>
+                  <Input
+                    id="product_name"
+                    name="product_name"
+                    placeholder="Ingresa el nombre del producto"
                     type="text"
-                    />
-              </FormGroup>
-              <FormGroup>
-                    <Label for="productImage">
-                    Imagen
-                    </Label>
-                    <Input
-                    id="productImage"
-                    name="image"
-                    type="file"
-                    />
-                    <FormText>
-                    Selecciona la imagen del producto.
-                    </FormText>
+                    onChange={handleChangeProduct}
+                    defaultValue={id ? dataForm?.product_name : null}
+                  />
                 </FormGroup>
-              <FormGroup>
-                    <Label for="productPrice">Precio</Label>
-                    <Input
-                    id="productPrice"
-                    name="price"
+
+                <FormGroup>
+                  <Label for="product_price">Precio</Label>
+                  <Input
+                    id="product_price"
+                    name="product_price"
                     placeholder="0.00"
                     type="tel"
-                    />
-              </FormGroup>
-              <FormGroup>
-                    <Label for="productDes">Descripcion</Label>
-                    <Input
-                    id="productDes"
-                    name="description"
-                    placeholder="Ingresa descripcion del producto"
-                    type="text"
-                    />
-              </FormGroup>
-              <FormGroup>
-                <Label for="productSelect">Tipo Oferta</Label>
-                <Input id="productSelect" name="select" type="select">
-                  <option>Ninguna</option>
-                  <option>Oferta 1</option>
-                  <option>Oferta 2</option>
-                </Input>
-              </FormGroup>
-              <Button color="success">Agregar</Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-  </Helmet>)
-}
+                    onChange={handleChangeProduct}
+                    defaultValue={id ? dataForm?.product_price : null}
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="ofert">Tipo Oferta</Label>
+                  <Input
+                    id="id_ofert"
+                    name="id_ofert"
+                    type="select"
+                    onChange={handleChangeProduct}
+                    defaultValue={id ? dataForm?.id_ofert : 1}
+                  >
+                    <option value={"1"}>Descuento 10 por ciento</option>
+                    <option value={"2"}>Descuento 20 por ciento</option>
+                    <option value={"3"}>Descuento 30 por ciento</option>
+                  </Input>
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="category">Tipo de Categoria</Label>
+                  <Input
+                    id="id_type_category"
+                    name="id_type_category"
+                    type="select"
+                    onChange={handleChangeProduct}
+                    defaultValue={id ? dataForm?.id_type_category : 1}
+                  >
+                    <option value={"1"}>Pizza</option>
+                    <option value={"2"}>Complementos</option>
+                    <option value={"3"}>Extras</option>
+                  </Input>
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="image">Imagen</Label>
+                  <Input
+                    id="image"
+                    name="image"
+                    type="file"
+                    onChange={handleChangeProduct}
+                  />
+                  <FormText>Selecciona la imagen del producto.</FormText>
+                </FormGroup>
+                <Button color="success">Agregar</Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section>
+        <ModalComponent
+          show={show}
+          handleClose={handleClose}
+          optionsModal={optionsModal}
+        ></ModalComponent>
+      </section>
+    </Helmet>
+  );
+};
 
 export default ProductForm;
