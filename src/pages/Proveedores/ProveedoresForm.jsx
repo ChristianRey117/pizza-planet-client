@@ -63,6 +63,13 @@ const ProveedorForm = () => {
     }
   };
 
+  const initDataWithId = (data) => {
+    for (const property in data) {
+      dataProveedores.data.set(property, data[property]);
+    }
+    setData(dataProveedores);
+  };
+
   //END DATA SEND
 
   //MODAL
@@ -83,7 +90,7 @@ const ProveedorForm = () => {
     if (id) {
       axios.get(baseId + "/" + id).then((response) => {
         setDataForm(response.data[0]);
-        console.log(dataForm);
+        initDataWithId(response.data[0]);
       });
     }
     dataProveedores.data.set("id_supplier", "1");

@@ -89,6 +89,13 @@ const ProductForm = () => {
       });
     }
   };
+
+  const initDataWithId = (data) => {
+    for (const property in data) {
+      dataProducts.data.set(property, data[property]);
+    }
+    setData(dataProducts);
+  };
   //END SEND DATA
 
   //MODAL
@@ -108,7 +115,7 @@ const ProductForm = () => {
     if (id) {
       axios.get(baseId + "/" + id).then((response) => {
         setDataForm(response.data[0]);
-        console.log(dataForm);
+        initDataWithId(response.data[0]);
       });
     }
     //dataProducts.data.set("id_supplier", "1");
