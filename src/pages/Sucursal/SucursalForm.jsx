@@ -19,6 +19,7 @@ import ModalComponent from "../../components/Modal/modal";
 
 const baseURL = "http://localhost:5000/sucursales/add";
 const baseId = "http://localhost:5000/sucursales";
+const baseProveedores = "http://localhost:5000/proveedores";
 
 const SucursalForm = () => {
   const navigate = useNavigate();
@@ -107,10 +108,17 @@ const SucursalForm = () => {
         initDataWithId(response.data[0]);
       });
     }
+
+    axios.get(baseProveedores).then(response=>{
+      setProveedores(response.data);
+    });
+    console.log('PROVEEDORES--->',proveedores);
+
     dataSucursal.data.set("id_supplier", "1");
     setData(dataSucursal);
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
+  const [proveedores, setProveedores] = React.useState([{}]);
 
   return (
     <Helmet title="Inventario Formulario">
@@ -157,7 +165,6 @@ const SucursalForm = () => {
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
-
                 <FormGroup>
                   <Label for="id_supplier">Proveedores</Label>
                   <Input
@@ -166,11 +173,13 @@ const SucursalForm = () => {
                     type="select"
                     onChange={handleChangeSucursal}
                   >
-                    <option value="1">El abuelo</option>
-                    <option value="2">Tia Rosa</option>
-                    <option value="3">Costeña</option>
+
+                    {proveedores.map((item,index)=>{
+                      return(<option value={item.id_supplier}>{item.supplier_name}</option>)
+                    })}
                   </Input>
                 </FormGroup>
+
 
                 <FormGroup>
                   <Label for="work_personnel">Trabajadores disponibles</Label>
@@ -195,9 +204,24 @@ const SucursalForm = () => {
                   />
                 </FormGroup>
 
-                <Button color="success">Agregar</Button>
+                <Button style={{display: `${id ? "none" : ""}` }} color="success">Agregar</Button>
+                <Row>
+                  <Col xs={12}>
+                <Button style={{display: `${!id ? "none" : ""}` }} color="warning">Editar</Button>
+
+                  </Col>
+                  
+                </Row>
+                
               </Form>
+
             </Col>
+          </Row>
+          <Row>
+          <Col xs={12} style={{paddingTop:'10px'}}>
+                <Button style={{display: `${!id ? "none" : ""}` }} color="danger" onClick={goToInventarioDashboard}>Cancelar</Button>
+
+                  </Col>
           </Row>
         </Container>
       </section>
