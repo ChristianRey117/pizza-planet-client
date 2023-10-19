@@ -26,7 +26,6 @@ const SucursalForm = () => {
   const goToInventarioDashboard = () => {
     navigate("/sucursales-dashboard", { replace: true });
   };
- 
 
   // DATA TO SEND
 
@@ -62,19 +61,27 @@ const SucursalForm = () => {
   const handleSubmitSucursal = (e) => {
     e.preventDefault();
     console.log(dataSucursal);
-    if(id){
-      axios.put(baseId + '/update/' + id, dataSucursal.data).then((response) =>{
-        console.log(response);
-        optionsModal = {...optionsModal, message:'Sucursal Editada'}
-        setShow(true);
-      })
-    }else{
+    if (id) {
+      axios
+        .put(baseId + "/update/" + id, dataSucursal.data)
+        .then((response) => {
+          console.log(response);
+          optionsModal = { ...optionsModal, message: "Sucursal Editada" };
+          setShow(true);
+        });
+    } else {
       axios.post(baseURL, dataSucursal.data).then((response) => {
         console.log("Response----->", response);
         setShow(true);
       });
     }
-    
+  };
+
+  const initDataWithId = (data) => {
+    for (const property in data) {
+      dataSucursal.data.set(property, data[property]);
+    }
+    setData(dataSucursal);
   };
   //END SEND DATA
 
@@ -90,24 +97,24 @@ const SucursalForm = () => {
   const handleClose = () => setShow(false);
   //END MODAL
 
-  const {id} = useParams();
+  const { id } = useParams();
   React.useEffect(() => {
-    if(id){
-      axios.get(baseId + '/' + id).then(response=>{
-        setDataForm(response.data[0]);
-        console.log(dataForm);
+    if (id) {
+      axios.get(baseId + "/" + id).then((response) => {
 
-      })
+        setDataForm(response.data[0]);
+
+        initDataWithId(response.data[0]);
+      });
     }
-    dataSucursal.data.set('id_supplier', '1');
+    dataSucursal.data.set("id_supplier", "1");
     setData(dataSucursal);
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
 
-
   return (
     <Helmet title="Inventario Formulario">
-      <CommonSection title="Inventario Formulario "  />
+      <CommonSection title="Inventario Formulario " />
       <section style={{ padding: "30px 0px" }}>
         <Container>
           <Row>
