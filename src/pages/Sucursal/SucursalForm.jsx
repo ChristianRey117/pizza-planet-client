@@ -102,19 +102,18 @@ const SucursalForm = () => {
   React.useEffect(() => {
     if (id) {
       axios.get(baseId + "/" + id).then((response) => {
-
         setDataForm(response.data[0]);
 
         initDataWithId(response.data[0]);
       });
     }
 
-    axios.get(baseProveedores).then(response=>{
+    axios.get(baseProveedores).then((response) => {
       setProveedores(response.data);
     });
-    console.log('PROVEEDORES--->',proveedores);
+    console.log("PROVEEDORES--->", proveedores);
 
-    dataSucursal.data.set("id_supplier", "1");
+    dataSucursal.data.set("id_supplier", proveedores[0].id_supplier);
     setData(dataSucursal);
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
@@ -173,13 +172,15 @@ const SucursalForm = () => {
                     type="select"
                     onChange={handleChangeSucursal}
                   >
-
-                    {proveedores.map((item,index)=>{
-                      return(<option value={item.id_supplier}>{item.supplier_name}</option>)
+                    {proveedores.map((item, index) => {
+                      return (
+                        <option value={item.id_supplier}>
+                          {item.supplier_name}
+                        </option>
+                      );
                     })}
                   </Input>
                 </FormGroup>
-
 
                 <FormGroup>
                   <Label for="work_personnel">Trabajadores disponibles</Label>
@@ -204,24 +205,35 @@ const SucursalForm = () => {
                   />
                 </FormGroup>
 
-                <Button style={{display: `${id ? "none" : ""}` }} color="success">Agregar</Button>
+                <Button
+                  style={{ display: `${id ? "none" : ""}` }}
+                  color="success"
+                >
+                  Agregar
+                </Button>
                 <Row>
                   <Col xs={12}>
-                <Button style={{display: `${!id ? "none" : ""}` }} color="warning">Editar</Button>
-
+                    <Button
+                      style={{ display: `${!id ? "none" : ""}` }}
+                      color="warning"
+                    >
+                      Editar
+                    </Button>
                   </Col>
-                  
                 </Row>
-                
               </Form>
-
             </Col>
           </Row>
           <Row>
-          <Col xs={12} style={{paddingTop:'10px'}}>
-                <Button style={{display: `${!id ? "none" : ""}` }} color="danger" onClick={goToInventarioDashboard}>Cancelar</Button>
-
-                  </Col>
+            <Col xs={12} style={{ paddingTop: "10px" }}>
+              <Button
+                style={{ display: `${!id ? "none" : ""}` }}
+                color="danger"
+                onClick={goToInventarioDashboard}
+              >
+                Cancelar
+              </Button>
+            </Col>
           </Row>
         </Container>
       </section>
