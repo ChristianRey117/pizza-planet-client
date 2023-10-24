@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import {
@@ -12,14 +12,97 @@ import {
   FormText,
   Button,
 } from "reactstrap";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import ModalComponent from "../../components/Modal/modal";
 
 const InventarioForm = () => {
+  const baseURL = "http://localhost:5000/invetario/add";
+  const baseId = "http://localhost:5000/inventario";
+  const baseSucursales = "http://localhost:5000/sucursales";
+
   const navigate = useNavigate();
 
   const goToInventarioDashboard = () => {
     navigate("/inventario-dashboard", { replace: true });
   };
+
+  //DATA SEND
+  const [dataInventory, setData] = useState({
+    data: new FormData(),
+  });
+
+  const handleChangeInventory = (e) => {
+    let nameInput = e.target.name;
+    let value;
+
+    value = e.target.value;
+    dataInventory.data.set(nameInput, value);
+
+    setData(dataInventory);
+  };
+
+  const handleSubmitInventory = (e) => {
+    e.preventDefault();
+    console.log(dataInventory);
+    if (id) {
+      axios
+        .put(baseId + "/update/" + id, dataInventory.data)
+        .then((response) => {
+          console.log(response);
+          optionsModal = { ...optionsModal, message: "Inventario Editado" };
+          setShow(true);
+        });
+    } else {
+      axios.post(baseURL, dataInventory.data).then((response) => {
+        console.log("Response----->", response);
+        setShow(true);
+      });
+    }
+  };
+
+  const initDataWithId = (data) => {
+    for (const property in data) {
+      dataInventory.data.set(property, data[property]);
+    }
+    setData(dataInventory);
+  };
+
+  //END DATA SEND
+
+  //MODAL
+  const [show, setShow] = useState(false);
+  let optionsModal = {
+    title: "Operacion Exitosa",
+    message: "El inventario fue agregado exitosamente",
+    redirectTo: () => {
+      navigate("/inventario-dashboard", { replace: true });
+    },
+  };
+  const handleClose = () => setShow(false);
+  //END MODAL
+
+  //ID
+  const { id } = useParams();
+  React.useEffect(() => {
+    if (id) {
+      axios.get(baseId + "/" + id).then((response) => {
+        setDataForm(response.data[0]);
+        initDataWithId(response.data[0]);
+      });
+    }
+
+    axios.get(baseSucursales).then((response) => {
+      setSucursales(response.data);
+      console.log(response.data);
+      dataInventory.data.set("id_branch", response.data[0].id_branch);
+    });
+    setData(dataInventory);
+  }, []);
+  const [dataForm, setDataForm] = React.useState([{}]);
+  const [sucursales, setSucursales] = React.useState([{}]);
+
+  //END ID
 
   return (
     <Helmet title="Inventario Formulario">
@@ -42,13 +125,22 @@ const InventarioForm = () => {
               <h3>Rellena el formulario</h3>
             </Col>
             <Col lg="12">
-              <Form>
+              <Form method="post" onSubmit={handleSubmitInventory}>
                 <FormGroup>
                   <Label for="sucursalesSelect">Sucursal</Label>
-                  <Input id="sucursalesSelect" name="select" type="select">
-                    <option>Luna</option>
-                    <option>Jupiter</option>
-                    <option>Marte</option>
+                  <Input
+                    id="id_branch"
+                    name="id_branch"
+                    type="select"
+                    onChange={handleChangeInventory}
+                  >
+                    {sucursales.map((item) => {
+                      return (
+                        <option value={item.id_branch}>
+                          {item.branch_name}
+                        </option>
+                      );
+                    })}
                   </Input>
                 </FormGroup>
 
@@ -56,9 +148,11 @@ const InventarioForm = () => {
                   <Label for="ammountQueso">Queso disponible</Label>
                   <Input
                     id="ammountQueso"
-                    name="queso"
+                    name="ammountQueso"
                     placeholder="Ingresa el queso disponible"
                     type="tel"
+                    onChange={handleChangeInventory}
+                    defaultValue={id ? dataForm?.ammountQueso : null}
                   />
                 </FormGroup>
 
@@ -66,9 +160,11 @@ const InventarioForm = () => {
                   <Label for="ammountSalsa">Salsa disponible</Label>
                   <Input
                     id="ammountSalsa"
-                    name="salsa"
+                    name="ammountSalsa"
                     placeholder="Ingresa la salsa disponible"
                     type="tel"
+                    onChange={handleChangeInventory}
+                    defaultValue={id ? dataForm?.ammountSalsa : null}
                   />
                 </FormGroup>
 
@@ -76,29 +172,35 @@ const InventarioForm = () => {
                   <Label for="ammountHarina">Harina disponible</Label>
                   <Input
                     id="ammountHarina: "
-                    name="salsa"
+                    name="ammountHarina"
                     placeholder="Ingresa la harina disponible"
                     type="tel"
+                    onChange={handleChangeInventory}
+                    defaultValue={id ? dataForm?.ammountHarina : null}
                   />
                 </FormGroup>
 
                 <FormGroup>
                   <Label for="ammountChampiñones">Champiñones disponible</Label>
                   <Input
-                    id="ammountChampiñones"
-                    name="salsa"
+                    id="ammountChampi"
+                    name="ammountChampi"
                     placeholder="Ingresa los champiñones disponibles"
                     type="tel"
+                    onChange={handleChangeInventory}
+                    defaultValue={id ? dataForm?.ammountChampi : null}
                   />
                 </FormGroup>
 
                 <FormGroup>
                   <Label for="ammountPineapple">Piña disponible</Label>
                   <Input
-                    id="ammountPineapple"
-                    name="piña"
+                    id="ammountPina"
+                    name="ammountPina"
                     placeholder="Ingresa la piña disponible"
                     type="tel"
+                    onChange={handleChangeInventory}
+                    defaultValue={id ? dataForm?.ammountPina : null}
                   />
                 </FormGroup>
 
@@ -106,14 +208,42 @@ const InventarioForm = () => {
                   <Label for="ammountChiles">Chiles disponible</Label>
                   <Input
                     id="ammountChiles"
-                    name="chiles"
+                    name="ammountChiles"
                     placeholder="Ingresa los chiles disponibles"
                     type="tel"
+                    onChange={handleChangeInventory}
+                    defaultValue={id ? dataForm?.ammountChiles : null}
                   />
                 </FormGroup>
 
-                <Button color="success">Agregar</Button>
+                <Button
+                  style={{ display: `${id ? "none" : ""}` }}
+                  color="success"
+                >
+                  Agregar
+                </Button>
+                <Row>
+                  <Col xs={12}>
+                    <Button
+                      style={{ display: `${!id ? "none" : ""}` }}
+                      color="warning"
+                    >
+                      Editar
+                    </Button>
+                  </Col>
+                </Row>
               </Form>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} style={{ paddingTop: "10px" }}>
+              <Button
+                style={{ display: `${!id ? "none" : ""}` }}
+                color="danger"
+                onClick={goToInventarioDashboard}
+              >
+                Cancelar
+              </Button>
             </Col>
           </Row>
         </Container>
