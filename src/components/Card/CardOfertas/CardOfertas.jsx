@@ -17,25 +17,17 @@ import {
   ListGroup,
   ListGroupItem,
 } from "reactstrap";
-import ModalComponent from "../../../components/Modal/modal";
+import ModalComponent from "../../Modal/modal";
 
-const CardInventory = ({
-  id_inventory,
-  branch,
-  ammountQueso,
-  ammountSalsa,
-  ammountHarina,
-  ammountChampi,
-  ammountPina,
-  ammountChiles,
-}) => {
+const CardOfert = ({ id_ofert, name_ofert, discount, description, image }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/inventario";
+  const baseURL = "http://localhost:5000/ofertas";
   const baseUrlImage = "http://localhost:5000/images";
+
   const dispatch = useDispatch();
 
-  const deleteInventory = () => askDelete();
+  const deleteOfert = () => askDelete();
 
   const _delete = (id) => {
     axios.delete(baseURL + "/delete/" + id).then((response) => {
@@ -50,17 +42,17 @@ const CardInventory = ({
   const handleClose = () => setShow(false);
 
   const optionsModal = {
-    title: "¿Esta seguro de eliminar este inventario?",
+    title: "¿Esta seguro de eliminar esta Oferta?",
     message: "No se podra recuperar la informacion",
     redirectTo: () => {
-      _delete(id_inventory);
+      _delete(id_ofert);
       setShow(false);
       window.location.reload(false);
     },
   };
 
-  const editInventory = () => {
-    navigate("/inventario-form/" + id_inventory, { replace: true });
+  const editOfert = () => {
+    navigate("/ofertas-form/" + id_ofert, { replace: true });
   };
 
   return (
@@ -69,45 +61,42 @@ const CardInventory = ({
       md="6"
       sm="6"
       className="mt-2 mb-5"
-      style={{ width: "36rem", marginLeft: "35px" }}
+      style={{ width: "36rem", marginLeft: "45px" }}
     >
       <Card
         style={{
           width: "34rem",
+          height: "16rem",
         }}
       >
         <CardBody>
           <Row>
             <Col lg="6">
-              <ListGroup>
-                <ListGroupItem>Insumos en Kg o L </ListGroupItem>
-                <ListGroupItem>Queso disponible: {ammountQueso}</ListGroupItem>
-                <ListGroupItem>Salsa disponible: {ammountSalsa},</ListGroupItem>
-                <ListGroupItem>
-                  Champiñones disponible: {ammountChampi},
-                </ListGroupItem>
-                <ListGroupItem>Piña disponible: {ammountPina}</ListGroupItem>
-                <ListGroupItem>
-                  Chiles disponibles: {ammountChiles}
-                </ListGroupItem>
-              </ListGroup>
+              <img
+                alt="Sample"
+                src={baseUrlImage + "/" + image}
+                // src="https://picsum.photos/300/200"
+                style={{ width: "180px" }}
+              />
             </Col>
 
             <Col lg="6">
-              <CardTitle tag="h5">
-                {"Inventario actual"} <br />
-                {"Sucursal:" + branch}
-              </CardTitle>
+              <ListGroup>
+                <ListGroupItem>Descuento: {discount}</ListGroupItem>
+              </ListGroup>
 
+              <CardTitle tag="h5">{name_ofert}</CardTitle>
+
+              <CardText>{description}</CardText>
               <div style={{ position: "absolute", bottom: "15px" }}>
                 <Row>
                   <Col lg="6">
-                    <Button color="warning" onClick={editInventory}>
+                    <Button color="warning" onClick={editOfert}>
                       Editar
                     </Button>
                   </Col>
                   <Col lg="6">
-                    <Button color="danger" onClick={deleteInventory}>
+                    <Button color="danger" onClick={deleteOfert}>
                       Eliminar
                     </Button>
                   </Col>
@@ -117,7 +106,6 @@ const CardInventory = ({
           </Row>
         </CardBody>
       </Card>
-
       <section>
         <ModalComponent
           show={show}
@@ -129,4 +117,4 @@ const CardInventory = ({
   );
 };
 
-export default CardInventory;
+export default CardOfert;

@@ -45,6 +45,7 @@ const Routers = () => {
       <Route path="/sucursal-form/:id" element={<SucursalForm />} />
       <Route path="/ofertas-dashboard" element={<OfertasDashboard />} />
       <Route path="/ofertas-form" element={<OfertasForm />} />
+      <Route path="/ofertas-form/:id" element={<OfertasForm />} />
       <Route path="/product-dashboard" element={<ProductDashboard />} />
       <Route path="/product-form" element={<ProductForm />} />
       <Route path="/product-form/:id" element={<ProductForm />} />
