@@ -69,6 +69,21 @@ const cardPaneles = [
     path: "/compras-dashboard",
     buttonText: "Ir a Compras",
   },
+
+  {
+    title: "Categorias",
+    describe: "En este panel usted puede ver las categorias de los productos",
+    image: imageSuc6,
+    path: "/categorias-dashboard",
+    buttonText: "Ir a Categorias",
+  },
+  {
+    title: "Vecindarios",
+    describe: "En este panel usted puede ver los vecindarios",
+    image: imageSuc6,
+    path: "/compras-dashboard",
+    buttonText: "Ir a Vecindarios",
+  },
 ];
 
 const AdminMenu = () => {
