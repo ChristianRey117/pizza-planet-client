@@ -18,59 +18,61 @@ import {
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const ofertas = [
-  {
-    name: " Noche de Banderillas",
-    describe:
-      "Añade a tu carrito dos ordenes de banderillas y disfruta de un descuento de $100 pesos en toda tu cuenta. ",
-    discount: 100,
-    path: "/sucursales-dashboard",
-    buttonText: "Añadir",
-  },
-  {
-    name: "Pizza del día",
-    describe:
-      "Hoy es el día de nuestra Pizza Margarita, y la puedes disfrutar con un increíble descuento de $40 pesos. ",
-    discount: 40,
-    path: "/ofertas-form",
-    buttonText: "Añadir",
-  },
+import axios from "axios";
+import CardOfert from "../../components/Card/CardOfertas/CardOfertas";
+const baseURL = "http://localhost:5000/ofertas";
+// const ofertas = [
+//   {
+//     name: " Noche de Banderillas",
+//     describe:
+//       "Añade a tu carrito dos ordenes de banderillas y disfruta de un descuento de $100 pesos en toda tu cuenta. ",
+//     discount: 100,
+//     path: "/sucursales-dashboard",
+//     buttonText: "Añadir",
+//   },
+//   {
+//     name: "Pizza del día",
+//     describe:
+//       "Hoy es el día de nuestra Pizza Margarita, y la puedes disfrutar con un increíble descuento de $40 pesos. ",
+//     discount: 40,
+//     path: "/ofertas-form",
+//     buttonText: "Añadir",
+//   },
 
-  {
-    name: "Doble pizza, doble diversión",
-    describe: "Ordena dos pizzas y obten un descuento de $120 pesos. ",
-    discount: 70,
-    path: "/ofertas-form",
-    buttonText: "Añadir",
-  },
+//   {
+//     name: "Doble pizza, doble diversión",
+//     describe: "Ordena dos pizzas y obten un descuento de $120 pesos. ",
+//     discount: 70,
+//     path: "/ofertas-form",
+//     buttonText: "Añadir",
+//   },
 
-  {
-    name: "Favorito de todos",
-    describe:
-      "Si tu pizza favorita es la de pepperoni, acompañala con un refresco y unas papas fritas, para obtener un descuento de $90 pesos. ",
-    discount: 90,
-    path: "/ofertas-form",
-    buttonText: "Añadir",
-  },
+//   {
+//     name: "Favorito de todos",
+//     describe:
+//       "Si tu pizza favorita es la de pepperoni, acompañala con un refresco y unas papas fritas, para obtener un descuento de $90 pesos. ",
+//     discount: 90,
+//     path: "/ofertas-form",
+//     buttonText: "Añadir",
+//   },
 
-  {
-    name: "Refrescante",
-    describe:
-      "Añade más de cuatro bebidas a tu cuenta y obten un descuento de $110. pesos. ",
-    discount: 110,
-    path: "/ofertas-form",
-    buttonText: "Añadir",
-  },
-  {
-    name: "Veganos en acción",
-    describe:
-      "Disfruta de un descuento fijo de $50 pesos en cualquier pizza vegana o vegetariana. ",
-    discount: 50,
-    path: "/ofertas-form",
-    buttonText: "Añadir",
-  },
-];
-
+//   {
+//     name: "Refrescante",
+//     describe:
+//       "Añade más de cuatro bebidas a tu cuenta y obten un descuento de $110. pesos. ",
+//     discount: 110,
+//     path: "/ofertas-form",
+//     buttonText: "Añadir",
+//   },
+//   {
+//     name: "Veganos en acción",
+//     describe:
+//       "Disfruta de un descuento fijo de $50 pesos en cualquier pizza vegana o vegetariana. ",
+//     discount: 50,
+//     path: "/ofertas-form",
+//     buttonText: "Añadir",
+//   },
+// ];
 const OfertasDashboard = () => {
   const navigate = useNavigate();
 
@@ -81,6 +83,14 @@ const OfertasDashboard = () => {
   const goToAdminDashboard = () => {
     navigate("/admin-menu", { replace: true });
   };
+
+  const [ofertas, setOfert] = React.useState([{}]);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setOfert(response.data);
+    });
+  }, []);
 
   return (
     <Helmet title="Ofertas">
@@ -126,7 +136,14 @@ const OfertasDashboard = () => {
                   className="mt-2 mb-5"
                   style={{ width: "36rem", marginLeft: "45px" }}
                 >
-                  <Card
+                  <CardOfert
+                    id_ofert={item.id_ofert}
+                    name_ofert={item.name_ofert}
+                    discount={item.discount}
+                    description={item.description}
+                    image={item.image}
+                  ></CardOfert>
+                  {/* <Card
                     style={{
                       width: "34rem",
                       height: "16rem",
@@ -173,7 +190,7 @@ const OfertasDashboard = () => {
                         </Col>
                       </Row>
                     </CardBody>
-                  </Card>
+                  </Card> */}
                 </Col>
               );
             })}
