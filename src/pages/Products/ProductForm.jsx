@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
@@ -36,6 +36,8 @@ const cardProducts = [
 
 const baseURL = "http://localhost:5000/productos/add";
 const baseId = "http://localhost:5000/productos";
+const baseOfertas = "http://localhost:5000/ofertas";
+const baseCategorias = "http://localhost:5000/tipocategoria";
 
 const ProductForm = () => {
   const navigate = useNavigate();
@@ -120,8 +122,17 @@ const ProductForm = () => {
     }
     //dataProducts.data.set("id_supplier", "1");
     setData(dataProducts);
+
+    axios.get(baseOfertas).then(response=>{
+      setDataOfertas(response.data);
+    });
+    axios.get(baseCategorias).then(responseCategorias =>{
+      setDataCategorias(responseCategorias.data);
+    });
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
+  const [dataOfertas, setDataOfertas] = React.useState([{}]);
+  const [dataCategorias, setDataCategorias] = React.useState([{}]);
 
   return (
     <Helmet title="Producto Formulario">
@@ -176,11 +187,11 @@ const ProductForm = () => {
                     name="id_ofert"
                     type="select"
                     onChange={handleChangeProduct}
-                    defaultValue={id ? dataForm?.id_ofert : 1}
+                    defaultValue={id ? dataForm?.id_ofert : dataOfertas[0].id_ofert}
                   >
-                    <option value={"1"}>Descuento 10 por ciento</option>
-                    <option value={"2"}>Descuento 20 por ciento</option>
-                    <option value={"3"}>Descuento 30 por ciento</option>
+                    {dataOfertas.map(oferta=>{
+                      return(<option value={oferta.id_ofert}  label={oferta.name_ofert}></option>)
+                    })}
                   </Input>
                 </FormGroup>
 
@@ -193,9 +204,9 @@ const ProductForm = () => {
                     onChange={handleChangeProduct}
                     defaultValue={id ? dataForm?.id_type_category : 1}
                   >
-                    <option value={"1"}>Pizza</option>
-                    <option value={"2"}>Complementos</option>
-                    <option value={"3"}>Extras</option>
+                    {dataCategorias.map(categoria=>{
+                      return(<option value={categoria.id_type_category} label={categoria.name_category}></option>)
+                    })}
                   </Input>
                 </FormGroup>
 
