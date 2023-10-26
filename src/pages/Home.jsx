@@ -20,19 +20,19 @@ import TestimonialSlider from "../components/UI/slider/TestimonialSlider.jsx";
 
 const featureData = [
   {
-    title: "Rapida Entrega",
+    title: "Entrega Cohete",
     imgUrl: featureImg01,
-    desc: "Nos preocupamos por que tus ordenes lleguen a tiempo y calientes.",
+    desc: "Nos preocupamos por que tus órdenes lleguen a tiempo.",
   },
   {
-    title: "Entrega cohete",
+    title: "Calidad Galáctica",
     imgUrl: featureImg02,
-    desc: "Los platillos se entregan lo mas rapido posible",
+    desc: "Los platillos mantienen su calor con nuestras bolsas térmicas.",
   },
   {
-    title: "Facil Entrega",
+    title: "En toda la galaxia",
     imgUrl: featureImg03,
-    desc: "Nosotros nos encargamos de la entrega, tu solo disfruta!",
+    desc: "Nos encontramos en cada rincón de Mérida.",
   },
 ];
 const Home = () => {
@@ -126,7 +126,7 @@ const Home = () => {
                   ¿Por qué <span>Pizza Planeta?</span>
                 </h2>
                 <p className="foodie-desc">
-                  "Pizza Planeta" es más que un lugar para satisfacer tu hambre.
+                 <i> Pizza Planeta </i>  es más que un lugar para satisfacer tu hambre.
                   Es un punto de encuentro donde amigos y familias pueden
                   compartir momentos especiales mientras disfrutan de nuestras
                   deliciosas creaciones. Nuestro ambiente acogedor y nuestro
@@ -165,10 +165,10 @@ const Home = () => {
               <div className="testimonial">
                 <h5 className="testimonial__subtitle mb-4">Testimonial</h5>
                 <h2 className="testimonial__title mb-40">
-                  Que estan <span>diciendo </span>los alienigenas
+                  ¿Qué están <span>diciendo </span>los alienígenas?
                 </h2>
                 <p className="testimonial__desc">
-                  Gracias por elegir "Pizza Planeta" como tu destino culinario
+                  Gracias por elegir <i> Pizza Planeta </i> como tu destino culinario
                   en Mérida. Esperamos que disfrutes explorando los sabores del
                   espacio exterior a través de nuestras pizzas únicas y
                   auténticas. Ven a visitarnos y únete a nosotros en esta
