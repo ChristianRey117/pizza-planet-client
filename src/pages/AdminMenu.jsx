@@ -81,7 +81,7 @@ const cardPaneles = [
     title: "Vecindarios",
     describe: "En este panel usted puede ver los vecindarios",
     image: imageSuc6,
-    path: "/compras-dashboard",
+    path: "/vecindarios-dashboard",
     buttonText: "Ir a Vecindarios",
   },
 ];
