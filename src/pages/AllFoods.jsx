@@ -7,15 +7,27 @@ import ProductCard from "../components/UI/product-card/ProductCard";
 import "../styles/all-foods.css";
 import ReactPaginate from "react-paginate";
 import "../styles/pagination.css";
+import axios from "axios";
+const baseUrl = "http://localhost:5000/productos";
 
 const AllFoods = () => {
+  React.useEffect(() => {
+    axios.get(baseUrl).then((response) => {
+      setProductos(response.data);
+      products.setProducts(response.data);
+    });
+  }, []);
+
+  const [productos, setProductos] = useState([{}]);
   const [searchTerm, setSearchTerm] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   // eslint-disable-next-line array-callback-return
-  const searchedProduct = products.filter((item) => {
+  const searchedProduct = productos.filter((item) => {
     if (searchTerm.value === "") {
       return item;
-    } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+    } else if (
+      item.product_name?.toLowerCase()?.includes(searchTerm.toLowerCase())
+    ) {
       return item;
     }
   });
@@ -62,7 +74,14 @@ const AllFoods = () => {
             </Col>
 
             {displayPage.map((item) => (
-              <Col lg="3" md="4" sm="6" xs="6" key={item.id} className="mb-4">
+              <Col
+                lg="3"
+                md="4"
+                sm="6"
+                xs="6"
+                key={item.id_product}
+                className="mb-4"
+              >
                 <ProductCard item={item} />
               </Col>
             ))}

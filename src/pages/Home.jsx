@@ -41,7 +41,9 @@ const Home = () => {
   const [hotPizza, setHotPizza] = useState([]);
 
   useEffect(() => {
-    const filteredPizza = products.filter((item) => item.category === "Pizza");
+    const filteredPizza = products.products.filter(
+      (item) => item.category === "Pizza"
+    );
     const slicePizza = filteredPizza.slice(0, 4);
     setHotPizza(slicePizza);
   }, []);
@@ -50,19 +52,19 @@ const Home = () => {
       setAllProducts(products);
     }
     if (category === "BURGER") {
-      const filteredProducts = products.filter(
+      const filteredProducts = products.products.filter(
         (item) => item.category === "Burger"
       );
       setAllProducts(filteredProducts);
     }
     if (category === "PIZZA") {
-      const filteredProducts = products.filter(
+      const filteredProducts = products.products.filter(
         (item) => item.category === "Pizza"
       );
       setAllProducts(filteredProducts);
     }
     if (category === "BREAD") {
-      const filteredProducts = products.filter(
+      const filteredProducts = products.products.filter(
         (item) => item.category === "Bread"
       );
       setAllProducts(filteredProducts);
@@ -82,17 +84,17 @@ const Home = () => {
         </Container>
       </section>
       <section className="pt-0">
-      <Row style={{marginBottom:'35px'}}>
-                  <Col style={{textAlign:'center'}}>
-                  <h1>PROMOCIONES</h1>
-                  </Col>
-      </Row>
+        <Row style={{ marginBottom: "35px" }}>
+          <Col style={{ textAlign: "center" }}>
+            <h1>PROMOCIONES</h1>
+          </Col>
+        </Row>
         <Category />
       </section>
 
       <section>
         <Container>
-          <Row >
+          <Row>
             {featureData.map((item, index) => {
               return (
                 <Col lg="4" md="6" sm="6" key={index} className="mt-5">

@@ -17,7 +17,6 @@ import {
 } from "reactstrap";
 import ModalComponent from "../../components/Modal/modal";
 
-
 const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
   const navigate = useNavigate();
 
@@ -27,32 +26,31 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
 
   const deleteSucursal = () => askDelete();
 
-  const _delete = (id)=>{
-    axios.delete(baseURL + '/delete/' + id).then((response) => {
+  const _delete = (id) => {
+    axios.delete(baseURL + "/delete/" + id).then((response) => {
       console.log(response);
     });
-  }
+  };
 
-  const askDelete = ()=>{
+  const askDelete = () => {
     setShow(true);
-  }
+  };
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
   const optionsModal = {
-    title:"¿Esta seguro de eleminar la sucursal?",
-    message:"No se podra recuperar la informacion",
-    redirectTo: ()=>{
+    title: "¿Esta seguro de eleminar la sucursal?",
+    message: "No se podra recuperar la informacion",
+    redirectTo: () => {
       _delete(id_branch);
       setShow(false);
       window.location.reload(false);
-    }
-  }
+    },
+  };
 
-  const editSucursal = ()=>{
-    navigate('/sucursal-form/' + id_branch , {replace: true});
-  }
-
+  const editSucursal = () => {
+    navigate("/sucursal-form/" + id_branch, { replace: true });
+  };
 
   return (
     <Col
@@ -102,7 +100,11 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
       </Card>
 
       <section>
-        <ModalComponent show={show} handleClose={handleClose} optionsModal={optionsModal}></ModalComponent>
+        <ModalComponent
+          show={show}
+          handleClose={handleClose}
+          optionsModal={optionsModal}
+        ></ModalComponent>
       </section>
     </Col>
   );
