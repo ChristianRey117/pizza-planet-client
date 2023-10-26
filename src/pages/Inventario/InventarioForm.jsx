@@ -17,7 +17,7 @@ import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
 
 const InventarioForm = () => {
-  const baseURL = "http://localhost:5000/invetario/add";
+  const baseURL = "http://localhost:5000/inventario/add";
   const baseId = "http://localhost:5000/inventario";
   const baseSucursales = "http://localhost:5000/sucursales";
 
@@ -247,6 +247,14 @@ const InventarioForm = () => {
             </Col>
           </Row>
         </Container>
+      </section>
+
+      <section>
+        <ModalComponent
+          show={show}
+          handleClose={handleClose}
+          optionsModal={optionsModal}
+        ></ModalComponent>
       </section>
     </Helmet>
   );
