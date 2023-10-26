@@ -21,6 +21,10 @@ import ProductDashboard from "../pages/Products/ProductDashboard";
 import ProductForm from "../pages/Products/ProductForm";
 import ProveedoresDashboard from "../pages/Proveedores/ProveedoresDashboard";
 import ProveedorForm from "../pages/Proveedores/ProveedoresForm";
+import CategoriasDashboard from "../pages/Categorias/CategoriasDashboard";
+import CategoriasForm from "../pages/Categorias/CategoriasForm";
+import VecindariosDashboard from "../pages/Vecindarios/VecindariosDashboard";
+import VecindariosForm from "../pages/Vecindarios/VecindariosForm";
 
 const Routers = () => {
   return (
@@ -52,6 +56,12 @@ const Routers = () => {
       <Route path="/proveedores-dashboard" element={<ProveedoresDashboard />} />
       <Route path="/proveedores-form" element={<ProveedorForm />} />
       <Route path="/proveedores-form/:id" element={<ProveedorForm />} />
+      <Route path="/categorias-dashboard" element={<CategoriasDashboard />} />
+      <Route path="/categorias-form" element={<CategoriasForm />} />
+      <Route path="/categorias-form/:id" element={<CategoriasForm />} />
+      <Route path="/vecindarios-dashboard" element={<VecindariosDashboard />} />
+      <Route path="/vecindarios-form" element={<VecindariosForm />} />
+      <Route path="/vecindarios-form/:id" element={<VecindariosForm />} />
     </Routes>
   );
 };
