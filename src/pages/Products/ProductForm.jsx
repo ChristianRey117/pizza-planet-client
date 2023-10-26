@@ -202,10 +202,10 @@ const ProductForm = () => {
                     name="id_type_category"
                     type="select"
                     onChange={handleChangeProduct}
-                    defaultValue={id ? dataForm?.id_type_category : 1}
+                    defaultValue={id ? dataForm?.id_category : dataCategorias[0].id_category}
                   >
                     {dataCategorias.map(categoria=>{
-                      return(<option value={categoria.id_type_category} label={categoria.name_category}></option>)
+                      return(<option value={categoria.id_category} label={categoria.name_category}></option>)
                     })}
                   </Input>
                 </FormGroup>
