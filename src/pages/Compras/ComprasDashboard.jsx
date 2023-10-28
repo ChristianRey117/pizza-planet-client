@@ -22,7 +22,11 @@ import imageSuc3 from "../../assets/images/product_04.jpg";
 import imageSuc4 from "../../assets/images/product_08.jpg";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
+import axios from "axios";
+import CardCompras from "../../components/Card/CardCompras/CardCompras";
 
+const baseURL = "http://localhost:5000/compras";
+const baseUrlImage = "http://localhost:5000/images";
 
 const productosCompras = [
   {
@@ -30,14 +34,14 @@ const productosCompras = [
     productName: "Pizza Galactica",
     fecha: "05/09/2023",
     price: 220,
-    imageProduct: imageSuc1
+    imageProduct: imageSuc1,
   },
   {
     userName: "Juanito",
     productName: "Pizza Galactica",
     fecha: "05/09/2023",
     price: 220,
-    imageProduct: imageSuc2
+    imageProduct: imageSuc2,
   },
 
   {
@@ -45,36 +49,39 @@ const productosCompras = [
     productName: "Pizza Galactica",
     fecha: "05/09/2023",
     price: 220,
-    imageProduct: imageSuc3
-
+    imageProduct: imageSuc3,
   },
   {
     userName: "Juanito",
     productName: "Pizza Galactica",
     fecha: "05/09/2023",
     price: 220,
-    imageProduct: imageSuc4
-
+    imageProduct: imageSuc4,
   },
   {
     userName: "Juanito",
     productName: "Pizza Galactica",
     fecha: "05/09/2023",
     price: 220,
-    imageProduct: imageSuc1
-
-  }
+    imageProduct: imageSuc1,
+  },
 ];
 
 const ComprasDashboard = () => {
-
   const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
-
 
   const goToAdminDashboard = () => {
     navigate("/admin-menu", { replace: true });
   };
+
+  const [ventas, setVentas] = React.useState([{}]);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setVentas(response.data);
+    });
+  }, []);
 
   return (
     <Helmet title="Inventario">
@@ -99,7 +106,7 @@ const ComprasDashboard = () => {
               </Button>
             </Col>
             <Col lg="2">
-              <Input size ='lg' type="date" placeholder="Filtro"></Input>
+              <Input size="lg" type="date" placeholder="Filtro"></Input>
             </Col>
           </Row>
         </Container>
@@ -108,53 +115,15 @@ const ComprasDashboard = () => {
       <section>
         <Container>
           <Row>
-            {productosCompras.map((item, index) => {
+            {ventas.map((item, index) => {
               return (
-                <Col
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  key={index}
-                  className="mt-2 mb-5"
-                  style={{ width: "36rem", marginLeft: "45px" }}
-                >
-                  <Card
-                    style={{
-                      width: "34rem",
-                    }}
-                  >
-                    <CardBody>
-                      <Row>
-                        <Col lg="6">
-                          <img src={item.imageProduct} alt=""  style={{width:'180px'}}/>
-                        </Col>
-
-                        <Col lg="6">
-                          <CardTitle tag="h5">Compra</CardTitle>
-
-                          <CardText>
-                          <ListGroup>
-                            <ListGroupItem>
-                              Cliente: {item.userName}
-                            </ListGroupItem>
-                            <ListGroupItem>
-                              Producto Comprado: {item.productName}
-                            </ListGroupItem>
-                            <ListGroupItem>
-                            Fecha: {item.fecha},
-                            </ListGroupItem>
-                            <ListGroupItem>
-                               Precio: {item.price},
-                            </ListGroupItem>
-                            
-                          </ListGroup>
-                          </CardText>
-                      
-                        </Col>
-                      </Row>
-                    </CardBody>
-                  </Card>
-                </Col>
+                <CardCompras
+                  user={item.user}
+                  ammount={item.ammount}
+                  date={item.date}
+                  id_buy={item.id_buy}
+                  product={item.product}
+                ></CardCompras>
               );
             })}
           </Row>
