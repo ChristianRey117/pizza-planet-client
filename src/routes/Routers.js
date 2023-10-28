@@ -25,6 +25,7 @@ import CategoriasDashboard from "../pages/Categorias/CategoriasDashboard";
 import CategoriasForm from "../pages/Categorias/CategoriasForm";
 import VecindariosDashboard from "../pages/Vecindarios/VecindariosDashboard";
 import VecindariosForm from "../pages/Vecindarios/VecindariosForm";
+import UsuariosForm from "../pages/Usuarios/UsuariosForm";
 
 const Routers = () => {
   return (
@@ -62,6 +63,12 @@ const Routers = () => {
       <Route path="/vecindarios-dashboard" element={<VecindariosDashboard />} />
       <Route path="/vecindarios-form" element={<VecindariosForm />} />
       <Route path="/vecindarios-form/:id" element={<VecindariosForm />} />
+      <Route path="/usuarios-form" element={<UsuariosForm/>} />
+      
+      
+
+
+
     </Routes>
   );
 };
