@@ -6,6 +6,9 @@ import "../styles/cart-page.css";
 import { Link } from "react-router-dom";
 import { Container, Col, Row } from "reactstrap";
 import { cartActions } from "../store/shopping-cart/cartSlice";
+
+const baseImage = "http://localhost:5000/images";
+
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
@@ -60,17 +63,25 @@ const Cart = () => {
 };
 
 const Tr = (props) => {
-  const { id, image01, title, price, quantity } = props.item;
+  const {
+    id_product,
+    product_name,
+    product_price,
+    ofert,
+    category,
+    image,
+    quantity,
+  } = props.item;
   const dispatch = useDispatch();
 
-  const deleteItem = () => dispatch(cartActions.deleteItem(id));
+  const deleteItem = () => dispatch(cartActions.deleteItem(id_product));
   return (
     <tr>
       <td className="text-center cart__img-box">
-        <img src={image01} alt="food"></img>
+        <img src={baseImage + "/" + image} alt="food"></img>
       </td>
-      <td className="text-center">{title}</td>
-      <td className="text-center">${price}</td>
+      <td className="text-center">{product_name}</td>
+      <td className="text-center">${product_price}</td>
       <td className="text-center">{quantity} pcs</td>
       <td onClick={deleteItem} className="text-center cart__item-del">
         <i className="ri-delete-bin-line"></i>
