@@ -120,8 +120,8 @@ const SucursalForm = () => {
   const [proveedores, setProveedores] = React.useState([{}]);
 
   return (
-    <Helmet title="Inventario Formulario">
-      <CommonSection title="Inventario Formulario " />
+    <Helmet title="Sucursales Formulario">
+      <CommonSection title="Sucursales Formulario " />
       <section style={{ padding: "30px 0px" }}>
         <Container>
           <Row>
