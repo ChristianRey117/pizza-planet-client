@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import { Container, Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams, Link } from "react-router-dom";
 import { useRef } from "react";
+import axios from "axios";
+import ModalComponent from "../components/Modal/modal";
+
+const baseURL = "http://localhost:5000/usuario/add";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const registerNameRef = useRef();
   const registerLastNameRef = useRef();
   const registerPhoneRef = useRef();
@@ -15,7 +21,32 @@ const Register = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    var userData = {
+      user_name:
+        registerNameRef.current.value + " " + registerLastNameRef.current.value,
+      phone: registerPhoneRef.current.value,
+      user_email: registerEmailRef.current.value,
+      user_password: registerPasswordRef.current.value,
+      direction: registerAddressRef.current.value,
+      id_type_users: 1,
+    };
+
+    axios.post(baseURL, userData).then((response) => {
+      setShow(true);
+    });
   };
+
+  //MODAL
+  const [show, setShow] = useState(false);
+  let optionsModal = {
+    title: "Usuario Registrado",
+    message: "El usuario fue registrado exitosamente",
+    redirectTo: () => {
+      navigate("/login", { replace: true });
+    },
+  };
+  const handleClose = () => setShow(false);
+  //END MODAL
   return (
     <Helmet title="Registro">
       <CommonSection title="Registro" />
@@ -76,6 +107,14 @@ const Register = () => {
               </form>
               <Link to="/login">Ya tienes una cuenta? Inicia sesion</Link>
             </Col>
+
+            <section>
+              <ModalComponent
+                show={show}
+                handleClose={handleClose}
+                optionsModal={optionsModal}
+              ></ModalComponent>
+            </section>
           </Row>
         </Container>
       </section>

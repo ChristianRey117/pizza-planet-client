@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { Routes, Route, useNavigate } from "react-router-dom";
+import axios from "axios";
+import ModalComponent from "../components/Modal/modal";
 
+const baseURL = "http://localhost:5000/login";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,11 +18,66 @@ const Login = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    var userData = {
+      user_email: loginNameRef.current.value,
+      user_password: loginPasswordRef.current.value,
+    };
+    console.log(userData);
+
+    axios.post(baseURL, userData).then((response) => {
+      if (response.data.err) {
+        setOptionModal({
+          ...optionModal,
+          message: response.data.err,
+          title: "Error",
+          redirectTo: () => {
+            setShow(false);
+          },
+        });
+
+        console.log(response.data);
+      } else {
+        //localStorage.setItem("token", response.data.accessToken);
+        if (response.data.info.tipo_usuario === 1) {
+          setOptionModal({
+            ...optionsModal,
+            redirectTo: () => {
+              navigate("/usuarios-form", { replace: true });
+            },
+          });
+        } else {
+          setOptionModal({
+            ...optionsModal,
+            redirectTo: () => {
+              navigate("/admin-menu", { replace: true });
+            },
+          });
+        }
+      }
+      setShow(true);
+    });
   };
 
- const loginUser =()=>{
-  navigate('/admin-menu',{replace:true})
- }
+  const loginUser = () => {
+    navigate("/admin-menu", { replace: true });
+  };
+
+  //MODAL
+  const [show, setShow] = useState(false);
+  const [optionModal, setOptionModal] = useState({});
+  const optionsModal = {
+    title: "Inicio de sesion",
+    message: "Inicio de sesion exitoso",
+    redirectTo: () => {
+      navigate("/admin-menu", { replace: true });
+    },
+  };
+  const handleClose = () => setShow(false);
+  //END MODAL
+
+  React.useEffect(() => {
+    setOptionModal(optionModal);
+  }, []);
 
   return (
     <Helmet title="Inicio de sesion">
@@ -43,12 +101,20 @@ const Login = () => {
                     ref={loginPasswordRef}
                   ></input>
                 </div>
-                <button type="submit" className="addToCart__btn" onClick={loginUser}>
+                <button type="submit" className="addToCart__btn">
                   Iniciar sesion
                 </button>
               </form>
               <Link to="/register">Primera vez aqui? Crear cuenta</Link>
             </Col>
+
+            <section>
+              <ModalComponent
+                show={show}
+                handleClose={handleClose}
+                optionsModal={optionModal}
+              ></ModalComponent>
+            </section>
           </Row>
         </Container>
       </section>
