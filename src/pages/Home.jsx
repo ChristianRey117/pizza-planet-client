@@ -123,7 +123,7 @@ const Home = () => {
             <Col lg="6" md="6">
               <div className="why__foodie">
                 <h2 className="foodie-title mb-4">
-                  Porque <span>Pizza Planeta?</span>
+                  ¿Por qué <span>Pizza Planeta?</span>
                 </h2>
                 <p className="foodie-desc">
                   "Pizza Planeta" es más que un lugar para satisfacer tu hambre.
