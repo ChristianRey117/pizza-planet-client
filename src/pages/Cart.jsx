@@ -25,13 +25,13 @@ const Cart = () => {
 
   return (
     <Helmet title="Carrito">
-      <CommonSection title="Tu carrito" />
+      <CommonSection title="Carrito" />
       <section>
         <Container>
           <Row>
             <Col lg="12">
               {cartItems.length === 0 ? (
-                <h5 className="text-center">Tu carrito esta vacio</h5>
+                <h5 className="text-center">Tu carrito está vacío</h5>
               ) : (
                 <table className="table table-bordered">
                   <thead>
@@ -55,7 +55,7 @@ const Cart = () => {
                   Subtotal:
                   <span className="cart__subtotal"> ${totalAmount}</span>
                 </h6>
-                <p>Impuestos y envio seran calculados al pago</p>
+                <p>Impuestos y envío serán calculados al momento del pago</p>
                 <div className="cart__page-btn">
                   <button className="addToCart__btn me-4">
                     <Link to="/foods">Continuar Comprando</Link>
