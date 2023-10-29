@@ -26,6 +26,7 @@ import CategoriasForm from "../pages/Categorias/CategoriasForm";
 import VecindariosDashboard from "../pages/Vecindarios/VecindariosDashboard";
 import VecindariosForm from "../pages/Vecindarios/VecindariosForm";
 import UsuariosForm from "../pages/Usuarios/UsuariosForm";
+import ProtectedRoutes from "../utils/ProtectedRoutes";
 
 const Routers = () => {
   return (
@@ -40,6 +41,8 @@ const Routers = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/sucursales" element={<Sucursales />} />
+     
+    <Route element={<ProtectedRoutes></ProtectedRoutes>}>
       <Route path="/admin-menu" element={<AdminMenu />} />
       <Route path="/sucursales-dashboard" element={<SucursalDashboard />} />
       <Route path="/inventario-dashboard" element={<InventarioDashboard />} />
@@ -63,7 +66,9 @@ const Routers = () => {
       <Route path="/vecindarios-dashboard" element={<VecindariosDashboard />} />
       <Route path="/vecindarios-form" element={<VecindariosForm />} />
       <Route path="/vecindarios-form/:id" element={<VecindariosForm />} />
-      <Route path="/usuarios-form" element={<UsuariosForm/>} />
+      <Route path="/usuarios-form/:id" element={<UsuariosForm/>} />
+    </Route>
+     
       
       
 

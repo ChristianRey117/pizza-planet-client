@@ -91,14 +91,28 @@ const cardPaneles = [
 const AdminMenu = () => {
   const navigate = useNavigate();
 
+  const logOut = () => {
+    localStorage.removeItem("datosUser");
+    window.location.reload(false);
+  };
+
   return (
     <Helmet title="Menu del Administrador">
       <CommonSection title="Menu del Administrador" />
 
-      <section>
+      <section style={{ padding: "25px" }}>
         <Row>
           <Col lg="12" style={{ textAlign: "center" }}>
             <h1>Dashboard</h1>
+          </Col>
+          <Col>
+            <Button
+              color="danger"
+              style={{ position: "absolute", right: "10%" }}
+              onClick={logOut}
+            >
+              Salir
+            </Button>
           </Col>
         </Row>
       </section>

@@ -50,6 +50,23 @@ const Header = () => {
     });
     return () => document.removeEventListener("scroll", headerRef);
   }, []);
+
+  React.useEffect(() => {
+    const logUser = JSON.parse(localStorage.getItem("datosUser"));
+    console.log(logUser);
+    if (logUser !== null) {
+      if (logUser?.tipo_usuario === 1) {
+        setUser({ path: "/usuarios-form/" + logUser.id_usuario });
+      } else {
+        setUser({ path: "/admin-menu" });
+      }
+    } else {
+      setUser({ path: "/login" });
+    }
+  }, []);
+
+  const [user, setUser] = React.useState({});
+
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -85,7 +102,7 @@ const Header = () => {
             </span>
 
             <span className="user">
-              <Link to="/login">
+              <Link to={user.path}>
                 <i className="ri-user-line" />
               </Link>
             </span>

@@ -22,7 +22,6 @@ const Login = () => {
       user_email: loginNameRef.current.value,
       user_password: loginPasswordRef.current.value,
     };
-    console.log(userData);
 
     axios.post(baseURL, userData).then((response) => {
       if (response.data.err) {
@@ -34,15 +33,22 @@ const Login = () => {
             setShow(false);
           },
         });
-
-        console.log(response.data);
       } else {
         //localStorage.setItem("token", response.data.accessToken);
+        var datosStorage = {
+          token: response.data.info.token,
+          tipo_usuario: response.data.info.tipo_usuario,
+          id_usuario: response.data.info.id_usuario,
+        };
+        localStorage.setItem("datosUser", JSON.stringify(datosStorage));
+
         if (response.data.info.tipo_usuario === 1) {
           setOptionModal({
             ...optionsModal,
             redirectTo: () => {
-              navigate("/usuarios-form", { replace: true });
+              navigate("/usuarios-form/" + response.data.info.id_usuario, {
+                replace: true,
+              });
             },
           });
         } else {
