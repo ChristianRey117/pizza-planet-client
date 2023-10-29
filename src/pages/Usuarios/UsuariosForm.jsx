@@ -18,12 +18,14 @@ import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
 
 const UsuariosForm = () => {
-  const baseURL = "http://localhost:5000/tipousuario/add";
-  const baseId = "http://localhost:5000/tipousuario";
+  const baseId = "http://localhost:5000/usuario";
+  const baseVecindarios = "http://localhost:5000/vecindarios";
+  const baseSucursales = "http://localhost:5000/sucursales";
 
   const navigate = useNavigate();
-  const goToUsuariosDashboard = () => {
-    navigate("/usuarios-form", { replace: true });
+  const logOut = () => {
+    localStorage.removeItem("datosUser");
+    window.location.reload(false);
   };
 
   //DATA SEND
@@ -35,6 +37,18 @@ const UsuariosForm = () => {
     let nameInput = e.target.name;
     let value;
     value = e.target.value;
+    if (nameInput === "id_neighborhood") {
+      let vecinda = vecindarios.find((element) => {
+        return element ? element.id_neighborhood.toString() === value : null;
+      });
+
+      let sucursal = sucursales.find((suc) => {
+        return vecinda.branch === suc.branch_name;
+      });
+
+      dataUsuario.data.set("id_branch", sucursal.id_branch);
+      setSelectedSuc(sucursal);
+    }
     dataUsuario.data.set(nameInput, value);
 
     setData(dataUsuario);
@@ -42,16 +56,9 @@ const UsuariosForm = () => {
 
   const handleSubmitCategoria = (e) => {
     e.preventDefault();
-    console.log(dataUsuario);
     if (id) {
       axios.put(baseId + "/update/" + id, dataUsuario.data).then((response) => {
-        console.log(response);
         optionsModal = { ...optionsModal, message: "Usuario Editado" };
-        setShow(true);
-      });
-    } else {
-      axios.post(baseURL, dataUsuario.data).then((response) => {
-        console.log("Response----->", response);
         setShow(true);
       });
     }
@@ -59,7 +66,9 @@ const UsuariosForm = () => {
 
   const initDataWithId = (data) => {
     for (const property in data) {
-      dataUsuario.data.set(property, data[property]);
+      if (property !== "user_password") {
+        dataUsuario.data.set(property, data[property]);
+      }
     }
     setData(dataUsuario);
   };
@@ -71,7 +80,7 @@ const UsuariosForm = () => {
     title: "Operacion Exitosa",
     message: "La información fue agregada exitosamente",
     redirectTo: () => {
-      navigate("/login", { replace: true });
+      window.location.reload(false);
     },
   };
   const handleClose = () => setShow(false);
@@ -86,19 +95,34 @@ const UsuariosForm = () => {
         initDataWithId(response.data[0]);
       });
     }
+
+    axios.get(baseVecindarios).then((response) => {
+      setVecindarios(response.data);
+    });
+
+    axios.get(baseSucursales).then((response) => {
+      setSucursales(response.data);
+    });
   }, []);
-  const [dataForm, setDataForm] = React.useState([{}]);
+  const [dataForm, setDataForm] = React.useState({});
+  const [vecindarios, setVecindarios] = React.useState([{}]);
+  const [sucursales, setSucursales] = React.useState([{}]);
+  const [selectedSuc, setSelectedSuc] = React.useState([{}]);
 
   //END ID
   return (
-    <Helmet title="Formulario Usuarios">
-      <CommonSection title="Formulario Usuario" />
+    <Helmet title="Informacion Cliente">
+      <CommonSection title="Informacion del Cliente" />
       <section style={{ padding: "30px 0px" }}>
         <Container>
           <Row>
             <Col lg="12">
-              <Button color="secondary" onClick={goToUsuariosDashboard}>
-                Regresar
+              <Button
+                color="danger"
+                style={{ position: "right" }}
+                onClick={logOut}
+              >
+                Salir
               </Button>
             </Col>
           </Row>
@@ -144,7 +168,6 @@ const UsuariosForm = () => {
                     placeholder="Ingresa tu Contraseña"
                     type="password"
                     onChange={handleChangeUsuario}
-                    defaultValue={id ? dataForm?.user_password : null}
                   />
                 </FormGroup>
 
@@ -154,15 +177,19 @@ const UsuariosForm = () => {
                     id="id_neighborhood"
                     name="id_neighborhood"
                     type="select"
-                    // onChange={handleChangeSucursal}
+                    onChange={handleChangeUsuario}
                   >
-                    {/* {proveedores.map((item, index) => {
+                    {vecindarios.map((item, index) => {
                       return (
-                        <option value={item.id_supplier}>
-                          {item.supplier_name}
-                        </option>
+                        <option
+                          value={item.id_neighborhood}
+                          label={item.neighborhood_name}
+                          selected={
+                            dataForm.id_neighborhood === item.id_neighborhood
+                          }
+                        ></option>
                       );
-                    })} */}
+                    })}
                   </Input>
                 </FormGroup>
 
@@ -172,15 +199,20 @@ const UsuariosForm = () => {
                     id="id_branch"
                     name="id_branch"
                     type="select"
-                    // onChange={handleChangeSucursal}
+                    onChange={handleChangeUsuario}
+                    disabled={true}
                   >
-                    {/* {proveedores.map((item, index) => {
-                      return (
-                        <option value={item.id_supplier}>
-                          {item.supplier_name}
-                        </option>
-                      );
-                    })} */}
+                    {!selectedSuc.id_branch ? (
+                      <option
+                        value={dataForm.id_branch}
+                        label={dataForm.branch}
+                      ></option>
+                    ) : (
+                      <option
+                        value={selectedSuc.id_branch}
+                        label={selectedSuc.branch_name}
+                      ></option>
+                    )}
                   </Input>
                 </FormGroup>
 
@@ -225,17 +257,6 @@ const UsuariosForm = () => {
                   </Col>
                 </Row>
               </Form>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} style={{ paddingTop: "10px" }}>
-              <Button
-                style={{ display: `${!id ? "none" : ""}` }}
-                color="danger"
-                onClick={goToUsuariosDashboard}
-              >
-                Cancelar
-              </Button>
             </Col>
           </Row>
         </Container>
