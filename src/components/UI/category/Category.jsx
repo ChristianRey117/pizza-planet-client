@@ -2,25 +2,25 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import categoryImg01 from "../../../assets/images/promo1.1.png";
 import categoryImg02 from "../../../assets/images/promo2.1.png";
-import categoryImg03 from "../../../assets/images/promo3.1.png";
+import categoryImg03 from "../../../assets/images/promo3.2.png";
 import "../../../styles/category.css";
 
 const categoryData = [
   {
-    display: "Combo Alienigena",
+    display: "Combo Alienígena",
     imgUrl: categoryImg01,
     describe:'Pizza Mediana + Papas Fritas'
   },
   {
     display: "Combo Astronauta",
     imgUrl: categoryImg02,
-    describe:'Pizza Individual + Refresco de 1.25L'
+    describe:'Pizza Individual + Refresco 1.25ml'
 
   },
   {
-    display: "Promoción Galactica",
+    display: "Combo Galáctico",
     imgUrl: categoryImg03,
-    describe:'2 Pizzas grandes'
+    describe:'2 Pizzas Grandes'
 
   },
 ];
