@@ -10,7 +10,7 @@ import featureImg01 from "../assets/images/service-01.png";
 import featureImg02 from "../assets/images/service-02.png";
 import featureImg03 from "../assets/images/service-03.png";
 import products from "../assets/fake-data/products.js";
-import foodCategoryImg01 from "../assets/images/hamburger.png";
+import rocket from "../assets/images/network.gif";
 import foodCategoryImg02 from "../assets/images/pizza.png";
 import foodCategoryImg03 from "../assets/images/bread.png";
 import ProductCard from "../components/UI/product-card/ProductCard.jsx";
@@ -126,11 +126,11 @@ const Home = () => {
                   ¿Por qué <span>Pizza Planeta?</span>
                 </h2>
                 <p className="foodie-desc">
-                 <i> Pizza Planeta </i>  es más que un lugar para satisfacer tu hambre.
-                  Es un punto de encuentro donde amigos y familias pueden
-                  compartir momentos especiales mientras disfrutan de nuestras
-                  deliciosas creaciones. Nuestro ambiente acogedor y nuestro
-                  personal amable te hacen sentir como en casa.
+                  <i> Pizza Planeta </i> es más que un lugar para satisfacer tu
+                  hambre. Es un punto de encuentro donde amigos y familias
+                  pueden compartir momentos especiales mientras disfrutan de
+                  nuestras deliciosas creaciones. Nuestro ambiente acogedor y
+                  nuestro personal amable te hacen sentir como en casa.
                 </p>
                 <ListGroup className="mt-4">
                   <ListGroupItem className="border-0 ps-0">
@@ -168,17 +168,25 @@ const Home = () => {
                   ¿Qué están <span>diciendo </span>los alienígenas?
                 </h2>
                 <p className="testimonial__desc">
-                  Gracias por elegir <i> Pizza Planeta </i> como tu destino culinario
-                  en Mérida. Esperamos que disfrutes explorando los sabores del
-                  espacio exterior a través de nuestras pizzas únicas y
-                  auténticas. Ven a visitarnos y únete a nosotros en esta
-                  emocionante aventura gastronómica.
+                  Gracias por elegir <i> Pizza Planeta </i> como tu destino
+                  culinario en Mérida. Esperamos que disfrutes explorando los
+                  sabores del espacio exterior a través de nuestras pizzas
+                  únicas y auténticas. Ven a visitarnos y únete a nosotros en
+                  esta emocionante aventura gastronómica.
                 </p>
                 <TestimonialSlider />
               </div>
             </Col>
             <Col lg="6" md="6">
-              <img src={networkImg} alt="testimonial-img" className="w-100" />
+              {/* <img src={networkImg} alt="testimonial-img" className="w-100" /> */}
+              <div className="gif-container">
+                <img
+                  className="w-100"
+                  src={rocket}
+                  alt="gif-img"
+                  style={{ width: "661px", height: "661px" }}
+                />
+              </div>
             </Col>
           </Row>
         </Container>

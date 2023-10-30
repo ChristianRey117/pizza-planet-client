@@ -3,15 +3,26 @@ import CommonSection from "../components/UI/common-section/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/cart-page.css";
-import { Link } from "react-router-dom";
+import { Routes, Route, useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import { Container, Col, Row } from "reactstrap";
 import { cartActions } from "../store/shopping-cart/cartSlice";
 
 const baseImage = "http://localhost:5000/images";
 
 const Cart = () => {
+  const navigate = useNavigate();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+
+  const isLogin = () => {
+    const token = JSON.parse(localStorage.getItem("datosUser"));
+    let path;
+    token === null ? (path = "/login") : (path = "/checkout");
+    navigate(path, { replace: true });
+  };
+
   return (
     <Helmet title="Carrito">
       <CommonSection title="Tu carrito" />
@@ -49,8 +60,8 @@ const Cart = () => {
                   <button className="addToCart__btn me-4">
                     <Link to="/foods">Continuar Comprando</Link>
                   </button>
-                  <button className="addToCart__btn">
-                    <Link to="/checkout">Proceder al Pago</Link>
+                  <button className="addToCart__btn" onClick={isLogin}>
+                    Proceder al Pago
                   </button>
                 </div>
               </div>
