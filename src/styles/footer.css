@@ -4,48 +4,61 @@
   padding-top: 50px;
   padding-bottom: 30px;
   background: var(--third-color);
+  color: #fff;
 }
 
 .footer__logo img {
   width: calc(100% - 80%);
   margin-bottom: 5px;
+  color: #fff;
 }
 
 .footer__logo h5 {
   font-weight: 600;
   font-size: 1rem;
   margin-bottom: 15px;
+  color: #fff;
 }
 
 .footer__logo p {
   font-size: 0.9rem;
-  color: #333;
+  color: #fff;
   line-height: 28px;
 }
 
 .footer__title {
   font-size: 1.1rem;
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
   font-weight: 600;
+  color: #fff;
+
 }
 
 .delivery__time-item {
   background: transparent !important;
+  color: #fff;
+
 }
 
 .delivery__time-item span {
   font-weight: 600;
   font-size: 1rem;
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
+  color: #fff;
+
 }
 
 .delivery__time-item p {
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
+  color: #fff;
+
 }
 
 .newsletter {
   padding: 5px;
   border: 1px solid var(--primary-color);
+  color: #fff;
+
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -56,10 +69,14 @@
   background: transparent;
   border: none;
   outline: none;
+  color: #fff;
+
 }
 
 .newsletter input:focus {
   outline: none;
+  color: #fff;
+
 }
 
 .newsletter span {
@@ -67,6 +84,8 @@
   padding: 5px 30px;
   border-radius: 5px;
   cursor: pointer;
+  color: #fff;
+
 }
 
 .newsletter span i {
@@ -74,55 +93,77 @@
 }
 
 .newsletter input::placeholder {
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
+  color: #fff;
+
 }
 
 .social__links span i {
   padding: 5px;
   color: var(--secondary-color);
   font-size: 1.5rem;
+  color: #fff;
+
 }
 
 .copyright__text {
   font-size: 0.8rem;
   color: var(--secondary-color);
+  color: #fff;
+
 }
 
 @media only screen and (max-width: 992px) {
   .newsletter input {
     padding: 7px;
     font-size: 0.7rem;
+  color: #fff;
+    
   }
   .newsletter span {
     padding: 4px 20px;
     font-size: 0.7rem;
+  color: #fff;
+
   }
 }
 
 @media only screen and (max-width: 768px) {
   .footer__title {
     font-size: 0.8rem;
+  color: #fff;
+
   }
   .delivery__time-item span {
     font-size: 0.8rem;
+  color: #fff;
+
   }
   .delivery__time-item p {
     font-size: 0.7rem;
     margin-bottom: 0;
+  color: #fff;
+
   }
   .newsletter input {
     padding: 7px;
     font-size: 0.7rem;
+  color: #fff;
+
   }
   .newsletter span {
     padding: 4px 20px;
     font-size: 0.7rem;
+  color: #fff;
+
   }
 }
 
 @media only screen and (max-width: 576px) {
   .social__links {
     justify-content: center;
+  color: #fff;
+
   }
   .social__links p {
     font-size: 0.8rem;

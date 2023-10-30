@@ -15,7 +15,7 @@ const Footer = () => {
               <h5>Pizza Planeta</h5>
               <p>
                 Servicio de entrega de comida rápido y sencillo para mimar al
-                alienigena que llevas dentro. que llevas dentro.
+                alienigena que llevas dentro.
               </p>
             </div>
           </Col>
@@ -23,7 +23,7 @@ const Footer = () => {
             <h5 className="footer__title">Horario de Entrega</h5>
             <ListGroup className="delivery__time-list">
               <ListGroupItem className="delivery__time-item border-0 ps-0">
-                <span>Lunes - Sabado</span>
+                <span>Lunes - Sábado</span>
                 <p>13:00pm - 21:00pm</p>
               </ListGroupItem>
 
@@ -37,7 +37,7 @@ const Footer = () => {
             <h5 className="footer__title">Contácto</h5>
             <ListGroup className="delivery__time-list">
               <ListGroupItem className="delivery__time-item border-0 ps-0">
-                <span>Direccion: 973000 Centro Merida Yuc</span>
+                <span>Direccion: 973000 Centro Mérida-Yuc</span>
               </ListGroupItem>
 
               <ListGroupItem className="delivery__time-item border-0 ps-0">
@@ -45,7 +45,7 @@ const Footer = () => {
               </ListGroupItem>
 
               <ListGroupItem className="delivery__time-item border-0 ps-0">
-                <span>Correo: pizzaplanete@gmail.com</span>
+                <span>Correo: pizzaplaneta@gmail.com</span>
               </ListGroupItem>
             </ListGroup>
           </Col>
