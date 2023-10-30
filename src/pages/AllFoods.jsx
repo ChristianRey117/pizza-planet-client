@@ -1,47 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col } from "reactstrap";
-import products from "../assets/fake-data/products";
 import ProductCard from "../components/UI/product-card/ProductCard";
-import "../styles/all-foods.css";
 import ReactPaginate from "react-paginate";
-import "../styles/pagination.css";
 import axios from "axios";
+import "../styles/all-foods.css";
+import "../styles/pagination.css";
+import products from "../assets/fake-data/products";
+
 const baseUrl = "http://localhost:5000/productos";
 
 const AllFoods = () => {
-  React.useEffect(() => {
+  const [productos, setProductos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [pageNumber, setPageNumber] = useState(0);
+  const [orderBy, setOrderBy] = useState(""); // Tipo de orden (nombre o precio)
+
+  useEffect(() => {
     axios.get(baseUrl).then((response) => {
       setProductos(response.data);
       products.setProducts(response.data);
     });
   }, []);
 
-  const [productos, setProductos] = useState([{}]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [pageNumber, setPageNumber] = useState(0);
-  // eslint-disable-next-line array-callback-return
-  const searchedProduct = productos.filter((item) => {
-    if (searchTerm.value === "") {
-      return item;
-    } else if (
-      item.product_name?.toLowerCase()?.includes(searchTerm.toLowerCase())
-    ) {
-      return item;
+  const sortProducts = (items) => {
+    if (orderBy === "ascending") {
+      return [...items].sort((a, b) =>
+        a.product_name.localeCompare(b.product_name)
+      );
+    } else if (orderBy === "descending") {
+      return [...items].sort((a, b) =>
+        b.product_name.localeCompare(a.product_name)
+      );
+    } else if (orderBy === "high-price") {
+      return [...items].sort((a, b) => a.product_price - b.product_price);
+    } else if (orderBy === "low-price") {
+      return [...items].sort((a, b) => b.product_price - a.product_price);
+    } else {
+      return items;
     }
-  });
+  };
+
+  const searchedProduct = productos.filter((item) =>
+    item.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const sortedProducts = sortProducts(searchedProduct);
+
   const productPerPage = 8;
   const visitedPage = pageNumber * productPerPage;
-  const displayPage = searchedProduct.slice(
+  const displayPage = sortedProducts.slice(
     visitedPage,
     visitedPage + productPerPage
   );
 
-  const pageCount = Math.ceil(searchedProduct.length / productPerPage);
+  const pageCount = Math.ceil(sortedProducts.length / productPerPage);
+
+  const handleFilterChange = (e) => {
+    setOrderBy(e.target.value);
+  };
+
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
   return (
     <Helmet title="Menú">
       <CommonSection title="Menú" />
@@ -63,10 +86,14 @@ const AllFoods = () => {
             </Col>
             <Col lg="6" md="6" sm="6" xs="12" className="mb-4">
               <div className="sorting__widget text-end">
-                <select className="w-50">
-                  <option>Filtro</option>
-                  <option value="ascending">Alfabeticamente, A-Z</option>
-                  <option value="descending">Alfabeticamente, Z-A</option>
+                <select
+                  className="w-50"
+                  value={orderBy}
+                  onChange={handleFilterChange}
+                >
+                  <option value="">Filtro</option>
+                  <option value="ascending">Alfabéticamente, A-Z</option>
+                  <option value="descending">Alfabéticamente, Z-A</option>
                   <option value="high-price">Precio más alto</option>
                   <option value="low-price">Precio más bajo</option>
                 </select>
