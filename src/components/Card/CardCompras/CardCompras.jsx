@@ -62,7 +62,7 @@ const CardCompras = ({ id_buy, user, product, ammount, date }) => {
       <Card
         style={{
           width: "28rem",
-          height: "16rem",
+          height: "18rem",
         }}
       >
         <CardBody>
