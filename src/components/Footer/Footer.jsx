@@ -12,7 +12,7 @@ const Footer = () => {
           <Col lg="3" md="4" sm="6">
             <div className="footer__logo text-start">
               <img src={logo} alt="logo" />
-              <h5>Pizza Planeta</h5>
+              <h5 className="footer__title">Pizza Planeta </h5>
               <p>
                 Servicio de entrega de comida rápido y sencillo para mimar al
                 alienigena que llevas dentro.

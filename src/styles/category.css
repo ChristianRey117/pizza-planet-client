@@ -12,12 +12,27 @@
   transform: translateY(-15px);
 }
 
-@media only screen and (max-width: 2768px) {
+/* @media only screen and (max-width: 2768px) {
   .category__item {
     padding: 20px 15px;
   }
   .category__img img {
     width: 300px;
+    height: 300px;
+  }
+  .category__item h6 {
+    font-size: 0.8rem;
+  }
+} */
+
+@media only screen and (max-width: 2768px) {
+  .category__item {
+    padding: 2rem 1.5rem; /* Utiliza unidades rem para el relleno */
+  }
+  .category__img img {
+    max-width: 100%; /* Hace que la imagen se ajuste al ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    width: 300px; /* Tamaño máximo de 300px para tamaños mayores */
     height: 300px;
   }
   .category__item h6 {
