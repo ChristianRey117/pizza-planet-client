@@ -21,7 +21,10 @@ td {
   cursor: pointer;
 }
 
-.cart__page-btn a,
+.cart__page-btn a
+{
+  color: black;
+}
 .cart__page-btn a:hover {
   color: #fff;
 }

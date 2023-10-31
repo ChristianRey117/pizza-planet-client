@@ -59,12 +59,12 @@ const VecindariosDashboard = () => {
       >
         <Container>
           <Row>
-            <Col lg="1">
+            <Col className="col-2 col-md-2 col-sm-2 mb-2">
               <Button size="lg" color="secondary" onClick={goToAdminDashboard}>
                 Regresar
               </Button>
             </Col>
-            <Col lg="1">
+            <Col className="col-2 col-md-2 col-sm-2 mb-2">
               <Button size="lg" color="success" onClick={goTo}>
                 Agregar
               </Button>

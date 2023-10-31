@@ -94,8 +94,8 @@ const AllFoods = () => {
                   <option value="">Filtro</option>
                   <option value="ascending">Alfabéticamente, A-Z</option>
                   <option value="descending">Alfabéticamente, Z-A</option>
-                  <option value="high-price">Precio más alto</option>
-                  <option value="low-price">Precio más bajo</option>
+                  <option value="high-price">Precio más bajo</option>
+                  <option value="low-price">Precio más alto</option>
                 </select>
               </div>
             </Col>
