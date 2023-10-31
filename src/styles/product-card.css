@@ -35,14 +35,15 @@
   border: none;
   padding: 7px 25px;
   background: var(--secondary-color);
-  color: #fff;
+  color: black; /* Texto blanco por defecto */
   border-radius: 5px;
   font-size: 0.9rem;
   transition: 0.4s;
 }
 
 .addToCart__btn:hover {
-  background: var(--primary-color);
+  background: var(--fourth-color); /* Fondo blanco en hover */
+  color: #ffff;
 }
 
 @media only screen and (max-width: 1199px) {

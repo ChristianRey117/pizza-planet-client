@@ -12,7 +12,7 @@ const nav__links = [
     path: "/home",
   },
   {
-    display: "Menu",
+    display: "Menú",
     path: "/foods",
   },
   {
@@ -24,7 +24,7 @@ const nav__links = [
     path: "/sucursales",
   },
   {
-    display: "Sobre nosotros",
+    display: "Sobre Nosotros",
     path: "/contact",
   },
 ];

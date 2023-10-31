@@ -86,12 +86,12 @@ const SucursalDashboard = () => {
       >
         <Container>
           <Row>
-            <Col lg="1">
+            <Col className="col-2 col-md-2 col-sm-2 mb-2">
               <Button size="lg" color="secondary" onClick={goToAdminDashboard}>
                 Regresar
               </Button>
             </Col>
-            <Col lg="1">
+            <Col className="col-2 col-md-2 col-sm-2 mb-2">
               <Button size="lg" color="success" onClick={goTo}>
                 Agregar
               </Button>
@@ -162,12 +162,14 @@ const SucursalDashboard = () => {
               //   </Col>
               // );
 
-              return (<CardComponent
-                branch_name={item.branch_name}
-                branch_direction={item.branch_direction}
-                id_branch={item.id_branch}
-                image={item.image}
-              ></CardComponent>);
+              return (
+                <CardComponent
+                  branch_name={item.branch_name}
+                  branch_direction={item.branch_direction}
+                  id_branch={item.id_branch}
+                  image={item.image}
+                ></CardComponent>
+              );
             })}
           </Row>
         </Container>

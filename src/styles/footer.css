@@ -57,7 +57,8 @@ text-decoration: #fff;
 
 .newsletter {
   padding: 5px;
-  border: 1px solid var(--primary-color);
+  border:1px solid #fff ;
+  /* border: 1px solid var(--primary-color); */
   color: #fff;
 
   border-radius: 5px;
