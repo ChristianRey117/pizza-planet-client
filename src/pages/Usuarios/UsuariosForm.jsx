@@ -23,6 +23,11 @@ const UsuariosForm = () => {
   const baseSucursales = "http://localhost:5000/sucursales";
 
   const navigate = useNavigate();
+
+  const ComprasUsuario = () => {
+    const user = JSON.parse(localStorage.getItem("datosUser"));
+    navigate("/compras/usuario/" + user.id_usuario);
+  };
   const logOut = () => {
     localStorage.removeItem("datosUser");
     window.location.reload(false);
@@ -116,7 +121,13 @@ const UsuariosForm = () => {
       <section style={{ padding: "30px 0px" }}>
         <Container>
           <Row>
-            <Col lg="12">
+            <Col className="col-6 col-md-2 col-sm-2 mb-2">
+              {/* <Button size="lg" color="secondary" onClick={goToAdminDashboard}> */}
+              <Button color="secondary" onClick={ComprasUsuario}>
+                Mis Compras
+              </Button>
+            </Col>
+            <Col className="col-6 col-md-2 col-sm-2 mb-2">
               <Button
                 color="danger"
                 style={{ position: "right" }}

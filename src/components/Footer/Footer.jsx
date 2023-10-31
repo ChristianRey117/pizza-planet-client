@@ -14,7 +14,8 @@ const Footer = () => {
               <img src={logo} alt="logo" />
               <h5 className="footer__title">Pizza Planeta </h5>
               <p>
-              ¡Deja que nuestras pizzas te lleven a un planeta de delicias que jamás imaginaste!
+                ¡Deja que nuestras pizzas te lleven a un planeta de delicias que
+                jamás imaginaste!
               </p>
             </div>
           </Col>
@@ -49,14 +50,14 @@ const Footer = () => {
             </ListGroup>
           </Col>
           <Col lg="3" md="4" sm="6">
-            <h5 className="footer__title">Suscríbete</h5>
-            <p>¡Para estár al tanto de nuestros nuevos combos y ofertas mensuales!</p>
-            <div className="newsletter">
+            <h5 className="footer__title">Sucursales</h5>
+            <p>¡Visita nuestras sucursales!</p>
+            {/* <div className="newsletter">
               <input type="email" placeholder="Ingresa tu correo"></input>
               <span>
                 <i class="ri-send-plane-line"></i>
               </span>
-            </div>
+            </div> */}
           </Col>
         </Row>
       </Container>

@@ -19,7 +19,7 @@ import {
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
 
-const CardCompras = ({ id_buy, user, product, ammount, date }) => {
+const CardCompras = ({ id_buy, user, product, ammount, date, image }) => {
   const navigate = useNavigate();
 
   const baseURL = "http://localhost:5000/compras";
@@ -70,7 +70,7 @@ const CardCompras = ({ id_buy, user, product, ammount, date }) => {
             <Col lg="6">
               <img
                 alt="Sample"
-                src={baseUrlImage + "/"}
+                src={baseUrlImage + "/" + image}
                 // src="https://picsum.photos/300/200"
                 style={{ width: "180px" }}
               />
