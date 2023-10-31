@@ -133,7 +133,8 @@ const Checkout = () => {
   let optionsModal = {
     title: "Compra Exitosa",
     redirectTo: () => {
-      navigate("/home", { replace: true });
+      const user = JSON.parse(localStorage.getItem("datosUser"));
+      navigate("/compras/usuario/" + user.id_usuario);
     },
   };
   const handleClose = () => setShow(false);

@@ -160,6 +160,7 @@ const ComprasDashboard = () => {
                     date={item.date}
                     id_buy={item.id_buy}
                     product={item.product}
+                    image={item.image}
                   ></CardCompras>
                 ))}
             </Row>

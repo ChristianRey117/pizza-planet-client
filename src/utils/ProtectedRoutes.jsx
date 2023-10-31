@@ -55,6 +55,20 @@ const ProtectedRoutes = () => {
     );
   }
 
+  if (
+    currentPath.split("/")[1] === "compras" &&
+    currentPath.split("/")[2] === "usuario"
+  ) {
+    routesUserOne.push(
+      "/" +
+        currentPath.split("/")[1] +
+        "/" +
+        currentPath.split("/")[2] +
+        "/" +
+        dataUser?.id_usuario
+    );
+  }
+
   if (dataUser?.tipo_usuario === 1) {
     if (routesUserOne.indexOf(currentPath) < 0) {
       return <Navigate to={"/home"} replace></Navigate>;
