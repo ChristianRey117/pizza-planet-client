@@ -83,6 +83,7 @@ const Home = () => {
           </Row>
         </Container>
       </section>
+      {/* <Row style={{ marginBottom: "35px" }}> */}
       <section className="pt-0">
         <Row style={{ marginBottom: "35px" }}>
           <Col style={{ textAlign: "center" }}>
@@ -184,7 +185,8 @@ const Home = () => {
                   className="w-100"
                   src={rocket}
                   alt="gif-img"
-                  style={{ width: "661px", height: "661px" }}
+                  // style={{ width: "661px", height: "661px" }}
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
             </Col>
