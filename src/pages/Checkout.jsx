@@ -23,6 +23,23 @@ import ModalCompra from "../components/Modal/ModalCompra";
 const baseCompra = "http://localhost:5000/compras/add";
 const baseCheckout = "http://localhost:5000/usuario";
 
+const meses = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
+
+const years = ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"];
+
 const Checkout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -183,12 +200,93 @@ const Checkout = () => {
                 <div className="form__group">
                   <input
                     required
-                    type="select"
+                    type="text"
                     placeholder="Vecindario"
                     disabled={true}
                     defaultValue={enteredVecindario}
                     onChange={(e) => setEnteredVecindario(e.target.value)}
                   />
+                </div>
+
+                <div>
+                  <h6>Datos de la tarjeta</h6>
+
+                  <Row>
+                    <Col xs={6}>
+                      <div className="form__group">
+                        <input
+                          required
+                          type="text"
+                          placeholder="Nombre del Titular"
+                        />
+                      </div>
+                    </Col>
+                    <Col xs={6}>
+                      <div className="form__group">
+                        <input
+                          required
+                          type="tel"
+                          placeholder="Numeros de la tarjeta"
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col xs={3}>
+                      <div
+                        className="form__group"
+                        style={{
+                          position: "relative",
+                          bottom: "-63px",
+                          left: "0px",
+                        }}
+                      >
+                        <input required type="text" placeholder="CVV" />
+                      </div>
+                    </Col>
+                    <Col xs={9}>
+                      <Label
+                        style={{
+                          display: "block",
+                          marginLeft: "auto",
+                          marginRight: "auto",
+                          textAlign: "center",
+                        }}
+                      >
+                        <b>Vigencia</b>
+                      </Label>
+
+                      <Row>
+                        <Col xs={6}>
+                          <div className="form__group select-container">
+                            <Label>Año</Label>
+
+                            <Input type="select">
+                              {years.map((year) => {
+                                return (
+                                  <option label={year} value={year}></option>
+                                );
+                              })}
+                            </Input>
+                          </div>
+                        </Col>
+
+                        <Col xs={6}>
+                          <div className="form__group select-container">
+                            <Label>Mes</Label>
+                            <Input type="select">
+                              {meses.map((mes) => {
+                                return (
+                                  <option label={mes} value={mes}></option>
+                                );
+                              })}
+                            </Input>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
                 </div>
 
                 <button className="addToCart__btn">Pagar por su orden</button>
