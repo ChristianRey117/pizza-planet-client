@@ -28,6 +28,7 @@ import VecindariosForm from "../pages/Vecindarios/VecindariosForm";
 import UsuariosForm from "../pages/Usuarios/UsuariosForm";
 import ProtectedRoutes from "../utils/ProtectedRoutes";
 import ComprasUsuario from "../pages/ComprasUsuario";
+import RolesDashboard from "../pages/Roles/RolesDashboard";
 
 const Routers = () => {
   return (
@@ -48,6 +49,7 @@ const Routers = () => {
       <Route path="/sucursales-dashboard" element={<SucursalDashboard />} />
       <Route path="/inventario-dashboard" element={<InventarioDashboard />} />
       <Route path="/compras-dashboard" element={<ComprasDashboard />} />
+      <Route path="/roles-dashboard" element={<RolesDashboard />} />
       <Route path="/inventario-form" element={<InventarioForm />} />
       <Route path="/inventario-form/:id" element={<InventarioForm />} />
       <Route path="/sucursal-form" element={<SucursalForm />} />
