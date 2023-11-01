@@ -9,11 +9,9 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText,
   Button,
-  Modal,
 } from "reactstrap";
-import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
 
@@ -23,13 +21,13 @@ const baseProveedores = "http://localhost:5000/proveedores";
 
 const SucursalForm = () => {
   const navigate = useNavigate();
+  const [dataForm, setDataForm] = useState({}); // Agrega esta línea para dataForm
 
   const goToInventarioDashboard = () => {
     navigate("/sucursales-dashboard", { replace: true });
   };
 
-  // DATA TO SEND
-
+  // Datos para enviar
   const [dataSucursal, setData] = useState({
     data: new FormData(),
   });
@@ -37,23 +35,15 @@ const SucursalForm = () => {
   const handleChangeSucursal = (e) => {
     let nameInput = e.target.name;
     let value;
-    if (nameInput == "branch_image") {
+    if (nameInput === "branch_image") {
       nameInput = "file";
       value = e.target.files[0];
-      // const formData = new FormData();
-      // formData.append("file", value);
-      // value = formData;
       dataSucursal.data.set("image", value);
     } else {
       value = e.target.value;
-      // const formData = new FormData();
-      // formData.append(nameInput, value);
-      // value = formData;
-      if (nameInput == "id_supplier") {
+      if (nameInput === "id_supplier") {
         value = Number(value);
-        console.log("id_supplier", value);
       }
-
       dataSucursal.data.set(nameInput, value);
     }
     setData(dataSucursal);
@@ -61,20 +51,40 @@ const SucursalForm = () => {
 
   const handleSubmitSucursal = (e) => {
     e.preventDefault();
-    console.log(dataSucursal);
     if (id) {
       axios
-        .put(baseId + "/update/" + id, dataSucursal.data)
+        .put(`${baseId}/update/${id}`, dataSucursal.data)
         .then((response) => {
-          console.log(response);
-          optionsModal = { ...optionsModal, message: "Sucursal Editada" };
-          setShow(true);
+          optionsEditModal = {
+            title: "Operación Exitosa",
+            message: "La sucursal fue editada exitosamente",
+            redirectTo: () => {
+              navigate("/sucursales-dashboard", { replace: true });
+            },
+          };
+          setShowEditModal(true);
+        })
+        .catch((error) => {
+          console.error("Error al editar la sucursal:", error);
+          // Manejar el error, por ejemplo, mostrar un modal de error
         });
     } else {
-      axios.post(baseURL, dataSucursal.data).then((response) => {
-        console.log("Response----->", response);
-        setShow(true);
-      });
+      axios
+        .post(baseURL, dataSucursal.data)
+        .then((response) => {
+          optionsAddModal = {
+            title: "Operación Exitosa",
+            message: "La sucursal fue agregada exitosamente",
+            redirectTo: () => {
+              navigate("/sucursales-dashboard", { replace: true });
+            },
+          };
+          setShowAddModal(true);
+        })
+        .catch((error) => {
+          console.error("Error al agregar la sucursal:", error);
+          // Manejar el error, por ejemplo, mostrar un modal de error
+        });
     }
   };
 
@@ -84,47 +94,59 @@ const SucursalForm = () => {
     }
     setData(dataSucursal);
   };
-  //END SEND DATA
 
-  //MODAL
-  const [show, setShow] = useState(false);
-  let optionsModal = {
+  // Estados y funciones para los modales
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  let optionsEditModal = {
+    title: "Operacion Exitosa",
+    message: "La sucursal fue editada exitosamente",
+    redirectTo: () => {
+      navigate("/sucursales-dashboard", { replace: true });
+    },
+  };
+
+  let optionsAddModal = {
     title: "Operacion Exitosa",
     message: "La sucursal fue agregada exitosamente",
     redirectTo: () => {
       navigate("/sucursales-dashboard", { replace: true });
     },
   };
-  const handleClose = () => setShow(false);
-  //END MODAL
 
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+  };
+
+  // Obtener el ID de los parámetros
   const { id } = useParams();
+
   React.useEffect(() => {
     if (id) {
-      axios.get(baseId + "/" + id).then((response) => {
+      axios.get(`${baseId}/${id}`).then((response) => {
         setDataForm(response.data[0]);
-
         initDataWithId(response.data[0]);
       });
     }
 
     axios.get(baseProveedores).then((response) => {
       setProveedores(response.data);
-      if(!id){
+      if (!id) {
         initDataWithId(response.data[0]);
       }
     });
-    console.log("PROVEEDORES--->", proveedores);
-
-    // dataSucursal.data.set("id_supplier", proveedores[0].id_supplier);
-    // setData(dataSucursal);
   }, []);
-  const [dataForm, setDataForm] = React.useState([{}]);
-  const [proveedores, setProveedores] = React.useState([{}]);
+
+  const [proveedores, setProveedores] = React.useState([]);
 
   return (
     <Helmet title="Sucursales Formulario">
-      <CommonSection title="Sucursales Formulario " />
+      <CommonSection title="Sucursales Formulario" />
       <section style={{ padding: "30px 0px" }}>
         <Container>
           <Row>
@@ -150,8 +172,8 @@ const SucursalForm = () => {
                     id="branch_name"
                     name="branch_name"
                     placeholder="Ingresa el nombre de la sucursal"
-                    type="tel"
-                    defaultValue={id ? dataForm?.branch_name : null}
+                    type="text"
+                    defaultValue={id ? dataForm?.branch_name : ""}
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
@@ -163,7 +185,7 @@ const SucursalForm = () => {
                     name="branch_direction"
                     placeholder="Ingresa la dirección"
                     type="text"
-                    defaultValue={id ? dataForm?.branch_direction : null}
+                    defaultValue={id ? dataForm?.branch_direction : ""}
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
@@ -175,25 +197,25 @@ const SucursalForm = () => {
                     type="select"
                     onChange={handleChangeSucursal}
                   >
-                    {proveedores.map((item, index) => {
-                      return (
-                        <option value={item.id_supplier} label={item.supplier_name} selected={
-                          dataForm.id_supplier === item.id_supplier
-                        }>
-                        </option>
-                      );
-                    })}
+                    {proveedores.map((item, index) => (
+                      <option
+                        key={index}
+                        value={item.id_supplier}
+                        label={item.supplier_name}
+                        selected={dataForm.id_supplier === item.id_supplier}
+                      ></option>
+                    ))}
                   </Input>
                 </FormGroup>
 
                 <FormGroup>
                   <Label for="work_personnel">Trabajadores disponibles</Label>
                   <Input
-                    id="work_personnel: "
+                    id="work_personnel"
                     name="work_personnel"
                     placeholder="Ingresa el numero de trabajadores"
-                    type="tel"
-                    defaultValue={id ? dataForm?.work_personnel : null}
+                    type="number"
+                    defaultValue={id ? dataForm?.work_personnel : ""}
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
@@ -201,7 +223,7 @@ const SucursalForm = () => {
                 <FormGroup>
                   <Label for="branch_image">Imagen proveedores</Label>
                   <Input
-                    id="branch_image: "
+                    id="branch_image"
                     name="branch_image"
                     placeholder="Selecciona la imagen del proveedor"
                     type="file"
@@ -209,16 +231,16 @@ const SucursalForm = () => {
                   />
                 </FormGroup>
 
-                <Button
-                  style={{ display: `${id ? "none" : ""}` }}
-                  color="success"
-                >
-                  Agregar
-                </Button>
                 <Row>
                   <Col xs={12}>
                     <Button
-                      style={{ display: `${!id ? "none" : ""}` }}
+                      style={{ display: id ? "none" : "" }}
+                      color="success"
+                    >
+                      Agregar
+                    </Button>
+                    <Button
+                      style={{ display: !id ? "none" : "" }}
                       color="warning"
                     >
                       Editar
@@ -231,7 +253,7 @@ const SucursalForm = () => {
           <Row>
             <Col xs={12} style={{ paddingTop: "10px" }}>
               <Button
-                style={{ display: `${!id ? "none" : ""}` }}
+                style={{ display: !id ? "none" : "" }}
                 color="danger"
                 onClick={goToInventarioDashboard}
               >
@@ -241,11 +263,20 @@ const SucursalForm = () => {
           </Row>
         </Container>
       </section>
+      {/* Modal de edición */}
       <section>
         <ModalComponent
-          show={show}
-          handleClose={handleClose}
-          optionsModal={optionsModal}
+          show={showEditModal}
+          handleClose={handleCloseEditModal}
+          optionsModal={optionsEditModal}
+        ></ModalComponent>
+      </section>
+      {/* Modal de agregar */}
+      <section>
+        <ModalComponent
+          show={showAddModal}
+          handleClose={handleCloseAddModal}
+          optionsModal={optionsAddModal}
         ></ModalComponent>
       </section>
     </Helmet>
