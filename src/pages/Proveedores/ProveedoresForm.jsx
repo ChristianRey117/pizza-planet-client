@@ -134,11 +134,11 @@ const ProveedorForm = () => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="proveedorProduct">Producto</Label>
+                  <Label for="proveedorProduct">Productos</Label>
                   <Input
                     id="supplier_product"
                     name="supplier_product"
-                    placeholder="Ingresa el nombre del producto"
+                    placeholder="Ingresa los nombres de los productos"
                     type="text"
                     defaultValue={id ? dataForm?.supplier_product : null}
                     onChange={handleChangeProveedores}
@@ -156,8 +156,35 @@ const ProveedorForm = () => {
                   <FormText>Selecciona la imagen del proveedor.</FormText>
                 </FormGroup>
 
-                <Button color="success">Agregar</Button>
+                <Button
+                  style={{ display: `${id ? "none" : ""}` }}
+                  color="success"
+                >
+                  Agregar
+                </Button>
+                <Row>
+                  <Col xs={12}>
+                    <Button
+                      style={{ display: `${!id ? "none" : ""}` }}
+                      color="warning"
+                    >
+                      Editar
+                    </Button>
+                  </Col>
+                </Row>
               </Form>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={12} style={{ paddingTop: "10px" }}>
+              <Button
+                style={{ display: `${!id ? "none" : ""}` }}
+                color="danger"
+                onClick={goToProveedoresDashboard}
+              >
+                Cancelar
+              </Button>
             </Col>
           </Row>
         </Container>
