@@ -110,11 +110,14 @@ const SucursalForm = () => {
 
     axios.get(baseProveedores).then((response) => {
       setProveedores(response.data);
+      if(!id){
+        initDataWithId(response.data[0]);
+      }
     });
     console.log("PROVEEDORES--->", proveedores);
 
-    dataSucursal.data.set("id_supplier", proveedores[0].id_supplier);
-    setData(dataSucursal);
+    // dataSucursal.data.set("id_supplier", proveedores[0].id_supplier);
+    // setData(dataSucursal);
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
   const [proveedores, setProveedores] = React.useState([{}]);
@@ -174,8 +177,9 @@ const SucursalForm = () => {
                   >
                     {proveedores.map((item, index) => {
                       return (
-                        <option value={item.id_supplier}>
-                          {item.supplier_name}
+                        <option value={item.id_supplier} label={item.supplier_name} selected={
+                          dataForm.id_supplier === item.id_supplier
+                        }>
                         </option>
                       );
                     })}
