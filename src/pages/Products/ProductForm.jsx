@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
@@ -94,7 +94,13 @@ const ProductForm = () => {
 
   const initDataWithId = (data) => {
     for (const property in data) {
-      dataProducts.data.set(property, data[property]);
+      if (property === "id_category") {
+        console.log(property, data[property]);
+
+        dataProducts.data.set("id_type_category", data[property]);
+      } else {
+        dataProducts.data.set(property, data[property]);
+      }
     }
     setData(dataProducts);
   };
@@ -123,11 +129,17 @@ const ProductForm = () => {
     //dataProducts.data.set("id_supplier", "1");
     setData(dataProducts);
 
-    axios.get(baseOfertas).then(response=>{
+    axios.get(baseOfertas).then((response) => {
       setDataOfertas(response.data);
+      if (!id) {
+        initDataWithId(response.data[0]);
+      }
     });
-    axios.get(baseCategorias).then(responseCategorias =>{
+    axios.get(baseCategorias).then((responseCategorias) => {
       setDataCategorias(responseCategorias.data);
+      if (!id) {
+        initDataWithId(responseCategorias.data[0]);
+      }
     });
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
@@ -187,10 +199,18 @@ const ProductForm = () => {
                     name="id_ofert"
                     type="select"
                     onChange={handleChangeProduct}
-                    defaultValue={id ? dataForm?.id_ofert : dataOfertas[0].id_ofert}
+                    defaultValue={
+                      id ? dataForm?.id_ofert : dataOfertas[0].id_ofert
+                    }
                   >
-                    {dataOfertas.map(oferta=>{
-                      return(<option value={oferta.id_ofert}  label={oferta.name_ofert}></option>)
+                    {dataOfertas.map((oferta) => {
+                      return (
+                        <option
+                          value={oferta.id_ofert}
+                          label={oferta.name_ofert}
+                          selected={dataForm.id_ofert === oferta.id_ofert}
+                        ></option>
+                      );
                     })}
                   </Input>
                 </FormGroup>
@@ -202,10 +222,22 @@ const ProductForm = () => {
                     name="id_type_category"
                     type="select"
                     onChange={handleChangeProduct}
-                    defaultValue={id ? dataForm?.id_category : dataCategorias[0].id_category}
+                    defaultValue={
+                      id
+                        ? dataForm?.id_type_category
+                        : dataCategorias[0].id_category
+                    }
                   >
-                    {dataCategorias.map(categoria=>{
-                      return(<option value={categoria.id_category} label={categoria.name_category}></option>)
+                    {dataCategorias.map((categoria) => {
+                      return (
+                        <option
+                          value={categoria.id_category}
+                          label={categoria.name_category}
+                          selected={
+                            dataForm?.id_type_category === categoria.id_category
+                          }
+                        ></option>
+                      );
                     })}
                   </Input>
                 </FormGroup>

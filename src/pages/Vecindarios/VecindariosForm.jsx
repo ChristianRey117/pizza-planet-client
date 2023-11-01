@@ -62,6 +62,8 @@ const VecindariosForm = () => {
 
   const initDataWithId = (data) => {
     for (const property in data) {
+    console.log(property);
+
       dataVecindarios.data.set(property, data[property]);
     }
     setData(dataVecindarios);
@@ -92,6 +94,9 @@ const VecindariosForm = () => {
 
     axios.get(baseSucursales).then((response) => {
         setSucursales(response.data);
+        if(!id){
+          initDataWithId(response.data[0]);
+        }
       });
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
@@ -143,8 +148,7 @@ const VecindariosForm = () => {
                   >
                     {sucursales.map((item, index) => {
                       return (
-                        <option value={item.id_branch}>
-                          {item.branch_name}
+                        <option value={item.id_branch} label={item.branch_name} selected={dataForm.id_branch === item.id_branch}>
                         </option>
                       );
                     })}

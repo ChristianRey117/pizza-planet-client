@@ -136,8 +136,7 @@ const InventarioForm = () => {
                   >
                     {sucursales.map((item) => {
                       return (
-                        <option value={item.id_branch}>
-                          {item.branch_name}
+                        <option value={item.id_branch} label={item.branch_name} selected={dataForm.id_branch === item.id_branch}>
                         </option>
                       );
                     })}
