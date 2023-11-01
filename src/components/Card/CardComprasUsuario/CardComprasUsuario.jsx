@@ -51,7 +51,7 @@ const CardComprasUsuario = ({ compras }) => {
       md="6"
       sm="8"
       xs="8"
-      className="mt-2 mb-2"
+      className="mt-2 mb-5"
       style={{ width: "auto", height: "auto" }}
     >
       <Card
@@ -61,7 +61,7 @@ const CardComprasUsuario = ({ compras }) => {
       >
         <CardBody>
           <CardTitle tag="h4" style={{ textAlign: "center" }}>
-            Tu compra
+            Ticket de Compra
             {compras.length > 0 && (
               <h6 tag="h5" style={{ textAlign: "center" }}>
                 {"Fecha y Hora: " + compras[0].date}
@@ -125,7 +125,7 @@ const CardComprasUsuario = ({ compras }) => {
             </Col>
 
             <Col xs={12}>
-              <h6>{"Total: " + total}</h6>
+              <h6>{"Total: $ " + total}</h6>
             </Col>
           </Row>
         </CardBody>

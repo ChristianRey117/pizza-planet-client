@@ -220,8 +220,35 @@ const ProductForm = () => {
                   />
                   <FormText>Selecciona la imagen del producto.</FormText>
                 </FormGroup>
-                <Button color="success">Agregar</Button>
+                <Button
+                  style={{ display: `${id ? "none" : ""}` }}
+                  color="success"
+                >
+                  Agregar
+                </Button>
+                <Row>
+                  <Col xs={12}>
+                    <Button
+                      style={{ display: `${!id ? "none" : ""}` }}
+                      color="warning"
+                    >
+                      Editar
+                    </Button>
+                  </Col>
+                </Row>
               </Form>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={12} style={{ paddingTop: "10px" }}>
+              <Button
+                style={{ display: `${!id ? "none" : ""}` }}
+                color="danger"
+                onClick={inventarioP}
+              >
+                Cancelar
+              </Button>
             </Col>
           </Row>
         </Container>
