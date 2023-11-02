@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 const routesWithOutUser = [
   "/",
@@ -40,6 +40,7 @@ const routesUserTwo = [
 ];
 
 const ProtectedRoutes = () => {
+  const navigate = useNavigate();
   const dataUser = JSON.parse(localStorage.getItem("datosUser"));
   const currentPath = window.location.pathname;
 
@@ -71,6 +72,10 @@ const ProtectedRoutes = () => {
 
   if (dataUser?.tipo_usuario === 1) {
     if (routesUserOne.indexOf(currentPath) < 0) {
+      return <Navigate to={"/home"} replace></Navigate>;
+    }
+  } else if (dataUser?.tipo_usuario === 2) {
+    if (currentPath === "/roles-dashboard") {
       return <Navigate to={"/home"} replace></Navigate>;
     }
   }
