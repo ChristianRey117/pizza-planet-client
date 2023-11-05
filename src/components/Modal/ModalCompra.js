@@ -11,6 +11,24 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container,
     ListGroupItem, } from "reactstrap";
 
 const ModalCompra = ({ show, handleClose, optionsModal }) => {
+
+  const caseOfert = (item) => {
+    switch (item.ofert) {
+      
+      case "Porcentaje":
+        return (item.product_price - ((item.product_price / 100) * item.discount).toFixed(2)) * item.quantity;
+        break;
+      case "Cantidad":
+        return (item.product_price - item.discount) * item.quantity;
+        break;
+
+      default:
+      case "NINGUNA":
+        return item.product_price * item.quantity;
+        break;
+    }
+  };
+
   return (
     <div>
       <Modal isOpen={show} toggle={handleClose} backdrop="static">
@@ -25,7 +43,7 @@ const ModalCompra = ({ show, handleClose, optionsModal }) => {
                 <ListGroupItem>{<div>
                     <h5>Detalles de la compra</h5>
                     {optionsModal?.products?.map(product =>{
-                        return(<p>{product?.product_name + ' ' + '$' + ' ' +product?.product_price}</p>)
+                        return(<p>{product?.product_name + ' ' + '$' + ' ' +caseOfert(product)}</p>)
                     })}
                     <p>Envío: $10</p>
                     </div>}</ListGroupItem>

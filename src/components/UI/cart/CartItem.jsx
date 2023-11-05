@@ -15,6 +15,7 @@ const CartItem = ({ item }) => {
     category,
     image,
     quantity,
+    discount,
   } = item;
   const dispatch = useDispatch();
   const increaseItem = () => {
@@ -26,6 +27,7 @@ const CartItem = ({ item }) => {
         ofert,
         category,
         image,
+        discount,
       })
     );
   };
@@ -35,6 +37,22 @@ const CartItem = ({ item }) => {
   const deleteItem = () => {
     dispatch(cartActions.deleteItem(id_product));
   };
+
+  const caseOfert = (ofertas) => {
+    switch (ofertas) {
+      case "Porcentaje":
+        return product_price - ((product_price / 100) * discount).toFixed(2);
+        break;
+      case "Cantidad":
+        return product_price - discount;
+        break;
+      default:
+      case "NINGUNA":
+        return product_price;
+        break;
+    }
+  };
+
   return (
     <ListGroupItem className="border-0 cart__item" key={id_product}>
       <div className="cart__item-info d-flex gap-2">
@@ -43,8 +61,9 @@ const CartItem = ({ item }) => {
           <div>
             <h6 className="cart__product-title">{product_name}</h6>
             <p className="d-flex align-items-center gap-5 cart__product-price">
-              x {quantity} = <span>${product_price}</span>
+              x {quantity} = <span>${caseOfert(ofert)}</span>
             </p>
+
             <div className="d-flex align-items-center justify-content-between increase__decrease-btn">
               <span onClick={increaseItem} className="increase__btn">
                 <i className="ri-add-line" />
