@@ -15,6 +15,7 @@ import Select from "react-select";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
+import { current } from "@reduxjs/toolkit";
 
 const baseURL = "http://localhost:5000/sucursales/add";
 const baseId = "http://localhost:5000/sucursales";
@@ -34,30 +35,20 @@ const SucursalForm = () => {
   });
 
   const handleChangeSucursal = (e) => {
-    if (Array.isArray(e)) {
-      console.log(e);
-      const respuestaId = e.map((response) => {
-        return (data = {
-          id_supplier: response.value,
-        });
-      });
+    let nameInput = e.target.name;
+    let value;
+
+    if (nameInput === "branch_image") {
+      nameInput = "file";
+      value = e.target.files[0];
+      dataSucursal.data.set("image", value);
     } else {
-      let nameInput = e.target.name;
-      console.log(e.target.value);
-
-      let value;
-      if (nameInput === "branch_image") {
-        nameInput = "file";
-        value = e.target.files[0];
-        dataSucursal.data.set("image", value);
-      } else {
-        value = e.target.value;
-        if (nameInput === "id_supplier") {
-          value = Number(value);
-        }
-
-        dataSucursal.data.set(nameInput, value);
+      value = e.target.value;
+      if (nameInput === "id_supplier") {
+        value = Number(value);
       }
+
+      dataSucursal.data.set(nameInput, value);
     }
 
     setData(dataSucursal);
@@ -65,6 +56,10 @@ const SucursalForm = () => {
 
   const handleSubmitSucursal = (e) => {
     e.preventDefault();
+    dataSucursal.data.append(
+      "ids_supliers",
+      JSON.stringify(selectedProveedores)
+    );
     if (id) {
       axios
         .put(`${baseId}/update/${id}`, dataSucursal.data)
@@ -104,7 +99,15 @@ const SucursalForm = () => {
 
   const initDataWithId = (data) => {
     for (const property in data) {
-      dataSucursal.data.set(property, data[property]);
+      if (property == "ids_suppliers") {
+        let ids = data[property].split(",");
+        ids = ids.map((_id) => {
+          return (_id = Number(_id));
+        });
+        setSelectedProveedores(ids);
+      } else {
+        dataSucursal.data.set(property, data[property]);
+      }
     }
     setData(dataSucursal);
   };
@@ -161,10 +164,26 @@ const SucursalForm = () => {
         initDataWithId(response.data[0]);
       }
     });
+    const select = document.getElementById("id_supplier");
+    select.defaultValue = { label: "Hola", value: 1 };
   }, []);
 
-  const [proveedores, setProveedores] = React.useState([]);
+  const [proveedores, setProveedores] = React.useState([{}]);
+  const [selectedProveedores, setSelectedProveedores] = React.useState([]);
+  const [clickSelect, setClickSelect] = useState(true);
 
+  const onSelected = () => {
+    const obj = [];
+    selectedProveedores.map((select) => {
+      return proveedores.map((prop) => {
+        if (prop.value === select) {
+          obj.push(prop);
+        }
+      });
+    });
+
+    return obj;
+  };
   return (
     <Helmet title="Sucursales Formulario">
       <CommonSection title="Sucursales Formulario" />
@@ -210,38 +229,38 @@ const SucursalForm = () => {
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
-                {/* <FormGroup>
-                  <Label for="id_supplier">Proveedores</Label>
-                  <Input
-                    id="id_supplier"
-                    name="id_supplier"
-                    multiple
-                    type="select"
-                    onChange={handleChangeSucursal}
-                  >
-                    {proveedores.map((item, index) => (
-                      <option
-                        key={index}
-                        value={item.id_supplier}
-                        label={item.supplier_name}
-                        selected={dataForm.id_supplier === item.id_supplier}
-                      ></option>
-                    ))}
-                  </Input>
-                </FormGroup> */}
 
                 <FormGroup>
                   <Label for="id_supplier">Proveedores</Label>
-
+                  <Row style={{ display: !id | !clickSelect ? "none" : "" }}>
+                    <Col xs={12}>
+                      <Label>Proveedores Actuales:</Label>
+                    </Col>
+                    {onSelected().map((current) => {
+                      return (
+                        <Col xs={3}>
+                          <p style={{ backgroundColor: "grey" }}>
+                            {current.label}
+                          </p>
+                        </Col>
+                      );
+                    })}
+                  </Row>
                   <Select
+                    id="id_supplier"
                     isMulti
-                    name="id_suplier"
                     className="basic-multi-select"
                     classNamePrefix="select"
                     options={proveedores}
-                    onChange={handleChangeSucursal}
+                    onChange={(e) => {
+                      setClickSelect(false);
+                      let responseArray = [];
+                      e.map((response) => {
+                        responseArray.push(response.value);
+                      });
+                      setSelectedProveedores(responseArray);
+                    }}
                     closeMenuOnSelect={false}
-                    instanceId={"id_suplier"}
                   />
                 </FormGroup>
 
