@@ -207,7 +207,7 @@ const ProductForm = () => {
                       return (
                         <option
                           value={oferta.id_ofert}
-                          label={oferta.name_ofert}
+                          label={oferta.name_ofert + ' - ' +  oferta.discount }
                           selected={dataForm.id_ofert === oferta.id_ofert}
                         ></option>
                       );

@@ -34,6 +34,7 @@ const ProductCard = (props) => {
   const caseOfert = (ofertas) => {
     switch (ofertas) {
       case "Porcentaje":
+        console.log(product_price - ((product_price / 100) * discount).toFixed(2) )
         return product_price - ((product_price / 100) * discount).toFixed(2);
         break;
       case "Cantidad":
