@@ -11,6 +11,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import Select from "react-select";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
@@ -33,19 +34,32 @@ const SucursalForm = () => {
   });
 
   const handleChangeSucursal = (e) => {
-    let nameInput = e.target.name;
-    let value;
-    if (nameInput === "branch_image") {
-      nameInput = "file";
-      value = e.target.files[0];
-      dataSucursal.data.set("image", value);
+    if (Array.isArray(e)) {
+      console.log(e);
+      const respuestaId = e.map((response) => {
+        return (data = {
+          id_supplier: response.value,
+        });
+      });
     } else {
-      value = e.target.value;
-      if (nameInput === "id_supplier") {
-        value = Number(value);
+      let nameInput = e.target.name;
+      console.log(e.target.value);
+
+      let value;
+      if (nameInput === "branch_image") {
+        nameInput = "file";
+        value = e.target.files[0];
+        dataSucursal.data.set("image", value);
+      } else {
+        value = e.target.value;
+        if (nameInput === "id_supplier") {
+          value = Number(value);
+        }
+
+        dataSucursal.data.set(nameInput, value);
       }
-      dataSucursal.data.set(nameInput, value);
     }
+
     setData(dataSucursal);
   };
 
@@ -135,7 +149,14 @@ const SucursalForm = () => {
     }
 
     axios.get(baseProveedores).then((response) => {
-      setProveedores(response.data);
+      var options = response.data.map((option) => {
+        return {
+          value: option.id_supplier,
+          label: option.supplier_name,
+          name: "id_suplier",
+        };
+      });
+      setProveedores(options);
       if (!id) {
         initDataWithId(response.data[0]);
       }
@@ -189,11 +210,12 @@ const SucursalForm = () => {
                     onChange={handleChangeSucursal}
                   />
                 </FormGroup>
-                <FormGroup>
+                {/* <FormGroup>
                   <Label for="id_supplier">Proveedores</Label>
                   <Input
                     id="id_supplier"
                     name="id_supplier"
+                    multiple
                     type="select"
                     onChange={handleChangeSucursal}
                   >
@@ -206,6 +228,21 @@ const SucursalForm = () => {
                       ></option>
                     ))}
                   </Input>
+                </FormGroup> */}
+
+                <FormGroup>
+                  <Label for="id_supplier">Proveedores</Label>
+
+                  <Select
+                    isMulti
+                    name="id_suplier"
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    options={proveedores}
+                    onChange={handleChangeSucursal}
+                    closeMenuOnSelect={false}
+                    instanceId={"id_suplier"}
+                  />
                 </FormGroup>
 
                 <FormGroup>
