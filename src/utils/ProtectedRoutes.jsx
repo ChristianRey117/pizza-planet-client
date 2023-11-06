@@ -44,8 +44,6 @@ const ProtectedRoutes = () => {
   const dataUser = JSON.parse(localStorage.getItem("datosUser"));
   const currentPath = window.location.pathname;
 
-  console.log(dataUser);
-
   if (dataUser === null) {
     return <Navigate to={"/home"} replace></Navigate>;
   }

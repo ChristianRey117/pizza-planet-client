@@ -20,7 +20,7 @@ import ModalComponent from "../../components/Modal/modal";
 const VecindariosForm = () => {
   const baseURL = "http://localhost:5000/vecindarios/add";
   const baseId = "http://localhost:5000/vecindarios";
-  const baseSucursales = 'http://localhost:5000/sucursales'
+  const baseSucursales = "http://localhost:5000/sucursales";
 
   const navigate = useNavigate();
   const goToVecindariosDashboard = () => {
@@ -43,18 +43,16 @@ const VecindariosForm = () => {
 
   const handleSubmitVecindarios = (e) => {
     e.preventDefault();
-    console.log(dataVecindarios);
+
     if (id) {
       axios
         .put(baseId + "/update/" + id, dataVecindarios.data)
         .then((response) => {
-          console.log(response);
           optionsModal = { ...optionsModal, message: "Vecindario Editado" };
           setShow(true);
         });
     } else {
       axios.post(baseURL, dataVecindarios.data).then((response) => {
-        console.log("Response----->", response);
         setShow(true);
       });
     }
@@ -62,8 +60,6 @@ const VecindariosForm = () => {
 
   const initDataWithId = (data) => {
     for (const property in data) {
-    console.log(property);
-
       dataVecindarios.data.set(property, data[property]);
     }
     setData(dataVecindarios);
@@ -93,11 +89,11 @@ const VecindariosForm = () => {
     }
 
     axios.get(baseSucursales).then((response) => {
-        setSucursales(response.data);
-        if(!id){
-          initDataWithId(response.data[0]);
-        }
-      });
+      setSucursales(response.data);
+      if (!id) {
+        initDataWithId(response.data[0]);
+      }
+    });
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
   const [sucursales, setSucursales] = React.useState([{}]);
@@ -126,7 +122,10 @@ const VecindariosForm = () => {
             <Col lg="12">
               <Form method="post" onSubmit={handleSubmitVecindarios}>
                 <FormGroup>
-                  <Label for="neighborhood_name"> Nombre del Vecindario: </Label>
+                  <Label for="neighborhood_name">
+                    {" "}
+                    Nombre del Vecindario:{" "}
+                  </Label>
                   <Input
                     id="neighborhood_name"
                     name="neighborhood_name"
@@ -138,7 +137,9 @@ const VecindariosForm = () => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="id_branch">Selecciona la sucursal a la que corresponde</Label>
+                  <Label for="id_branch">
+                    Selecciona la sucursal a la que corresponde
+                  </Label>
                   <Input
                     id="id_branch"
                     name="id_branch"
@@ -148,8 +149,11 @@ const VecindariosForm = () => {
                   >
                     {sucursales.map((item, index) => {
                       return (
-                        <option value={item.id_branch} label={item.branch_name} selected={dataForm.id_branch === item.id_branch}>
-                        </option>
+                        <option
+                          value={item.id_branch}
+                          label={item.branch_name}
+                          selected={dataForm.id_branch === item.id_branch}
+                        ></option>
                       );
                     })}
                   </Input>

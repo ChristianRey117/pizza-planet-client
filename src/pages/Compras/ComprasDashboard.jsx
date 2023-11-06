@@ -86,14 +86,14 @@ const ComprasDashboard = () => {
   // const handleDateChange = (e) => {
   //   const selectedDate = e.target.value; // Formato de fecha: "YYYY-MM-DD"
   //   const formattedDate = selectedDate.split("-").reverse().join("/"); // Convertir a "DD/MM/YYYY"
-  //   console.log("Fecha seleccionada", selectedDate);
+
   //   setStartDate(selectedDate);
   // };
   const handleDateChange = (e) => {
     const selectedDate = e.target.value; // Formato de fecha: "YYYY-MM-DD"
     const [year, month, day] = selectedDate.split("-");
     const formattedDate = `${day}-${month}-${year.slice(2)}`; // Convertir a "DD-MM-YY"
-    console.log("Fecha seleccionada", selectedDate);
+
     setStartDate(formattedDate);
   };
 
@@ -149,7 +149,7 @@ const ComprasDashboard = () => {
                     return true;
                   } else {
                     let dateItem = item.date.split(" ")[0];
-                    console.log("fecha con input--->", dateItem);
+
                     return dateItem === startDate;
                   }
                 })

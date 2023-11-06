@@ -35,7 +35,6 @@ const SucursalForm = () => {
 
   const handleChangeSucursal = (e) => {
     if (Array.isArray(e)) {
-      console.log(e);
       const respuestaId = e.map((response) => {
         return (data = {
           id_supplier: response.value,
@@ -43,7 +42,6 @@ const SucursalForm = () => {
       });
     } else {
       let nameInput = e.target.name;
-      console.log(e.target.value);
 
       let value;
       if (nameInput === "branch_image") {

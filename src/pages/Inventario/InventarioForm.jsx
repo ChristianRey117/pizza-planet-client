@@ -44,18 +44,16 @@ const InventarioForm = () => {
 
   const handleSubmitInventory = (e) => {
     e.preventDefault();
-    console.log(dataInventory);
+
     if (id) {
       axios
         .put(baseId + "/update/" + id, dataInventory.data)
         .then((response) => {
-          console.log(response);
           optionsModal = { ...optionsModal, message: "Inventario Editado" };
           setShow(true);
         });
     } else {
       axios.post(baseURL, dataInventory.data).then((response) => {
-        console.log("Response----->", response);
         setShow(true);
       });
     }
@@ -94,7 +92,7 @@ const InventarioForm = () => {
 
     axios.get(baseSucursales).then((response) => {
       setSucursales(response.data);
-      console.log(response.data);
+
       dataInventory.data.set("id_branch", response.data[0].id_branch);
     });
     setData(dataInventory);
@@ -136,8 +134,11 @@ const InventarioForm = () => {
                   >
                     {sucursales.map((item) => {
                       return (
-                        <option value={item.id_branch} label={item.branch_name} selected={dataForm.id_branch === item.id_branch}>
-                        </option>
+                        <option
+                          value={item.id_branch}
+                          label={item.branch_name}
+                          selected={dataForm.id_branch === item.id_branch}
+                        ></option>
                       );
                     })}
                   </Input>

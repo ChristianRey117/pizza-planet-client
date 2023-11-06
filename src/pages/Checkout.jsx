@@ -116,7 +116,6 @@ const Checkout = () => {
     const user = JSON.parse(localStorage.getItem("datosUser"));
 
     axios.get(baseCheckout + "/" + user.id_usuario).then((response) => {
-      console.log(response.data[0]);
       const datosUsuario = response.data[0];
       setUserDatos(datosUsuario);
 

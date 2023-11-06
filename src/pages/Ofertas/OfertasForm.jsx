@@ -48,7 +48,6 @@ const OfertasForm = () => {
       // value = formData;
       if (nameInput == "id_ofert") {
         value = Number(value);
-        console.log("id_ofert", value);
       }
 
       dataOfert.data.set(nameInput, value);
@@ -58,16 +57,14 @@ const OfertasForm = () => {
 
   const handleSubmitOfert = (e) => {
     e.preventDefault();
-    console.log(dataOfert);
+
     if (id) {
       axios.put(baseId + "/update/" + id, dataOfert.data).then((response) => {
-        console.log(response);
         optionsModal = { ...optionsModal, message: "Oferta Editada" };
         setShow(true);
       });
     } else {
       axios.post(baseURL, dataOfert.data).then((response) => {
-        console.log("Response----->", response);
         setShow(true);
       });
     }
@@ -105,7 +102,7 @@ const OfertasForm = () => {
 
     // axios.get(baseSucursales).then((response) => {
     //   setSucursales(response.data);
-    //   console.log(response.data);
+
     //   dataOfert.data.set("id_ofert", response.data[0].id_branch);
     // });
     // setData(dataOfert);

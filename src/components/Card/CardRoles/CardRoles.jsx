@@ -33,9 +33,7 @@ const CardCompras = ({ id_users, user_name, user_email, typeU, typeUsers }) => {
   const deleteRol = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
-      console.log(response);
-    });
+    axios.delete(baseURL + "/delete/" + id).then((response) => {});
   };
 
   const askDelete = () => {
@@ -56,7 +54,6 @@ const CardCompras = ({ id_users, user_name, user_email, typeU, typeUsers }) => {
 
   const [typeUserSelect, setTypeUserSelect] = useState(1);
   const onEdit = () => {
-    console.log("tipo de usuario seleccionado--->", typeUserSelect);
     var user = {
       id_type_users: typeUserSelect,
     };

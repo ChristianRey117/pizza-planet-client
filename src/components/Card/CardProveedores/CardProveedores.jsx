@@ -32,9 +32,7 @@ const CardProveedores = ({
   const deleteProveedores = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
-      console.log(response);
-    });
+    axios.delete(baseURL + "/delete/" + id).then((response) => {});
   };
 
   const askDelete = () => {

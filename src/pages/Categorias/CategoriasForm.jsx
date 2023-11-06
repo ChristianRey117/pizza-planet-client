@@ -42,18 +42,16 @@ const CategoriasForm = () => {
 
   const handleSubmitCategoria = (e) => {
     e.preventDefault();
-    console.log(dataCategoria);
+
     if (id) {
       axios
         .put(baseId + "/update/" + id, dataCategoria.data)
         .then((response) => {
-          console.log(response);
           optionsModal = { ...optionsModal, message: "Categoria Editada" };
           setShow(true);
         });
     } else {
       axios.post(baseURL, dataCategoria.data).then((response) => {
-        console.log("Response----->", response);
         setShow(true);
       });
     }

@@ -65,7 +65,6 @@ const ProductForm = () => {
       value = e.target.value;
       if (nameInput == "id_ofert" || nameInput == "id_type_category") {
         value = Number(value);
-        console.log(nameInput, value);
       }
 
       dataProducts.data.set(nameInput, value);
@@ -75,18 +74,16 @@ const ProductForm = () => {
 
   const handleSubmitProduct = (e) => {
     e.preventDefault();
-    console.log(dataProducts);
+
     if (id) {
       axios
         .put(baseId + "/update/" + id, dataProducts.data)
         .then((response) => {
-          console.log(response);
           optionsModal = { ...optionsModal, message: "Sucursal Editada" };
           setShow(true);
         });
     } else {
       axios.post(baseURL, dataProducts.data).then((response) => {
-        console.log("Response----->", response);
         setShow(true);
       });
     }
@@ -95,8 +92,6 @@ const ProductForm = () => {
   const initDataWithId = (data) => {
     for (const property in data) {
       if (property === "id_category") {
-        console.log(property, data[property]);
-
         dataProducts.data.set("id_type_category", data[property]);
       } else {
         dataProducts.data.set(property, data[property]);

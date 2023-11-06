@@ -20,7 +20,12 @@ import {
 import ModalComponent from "../../Modal/modal";
 import SucursalForm from "../../../pages/Sucursal/SucursalForm";
 
-const CardVecindarios = ({ id_neighborhood, id_branch, neighborhood_name, branch }) => {
+const CardVecindarios = ({
+  id_neighborhood,
+  id_branch,
+  neighborhood_name,
+  branch,
+}) => {
   const navigate = useNavigate();
 
   const baseURL = "http://localhost:5000/vecindarios";
@@ -30,9 +35,7 @@ const CardVecindarios = ({ id_neighborhood, id_branch, neighborhood_name, branch
   const deleteVecindario = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
-      console.log(response);
-    });
+    axios.delete(baseURL + "/delete/" + id).then((response) => {});
   };
 
   const askDelete = () => {
@@ -76,7 +79,7 @@ const CardVecindarios = ({ id_neighborhood, id_branch, neighborhood_name, branch
                 {"Vecindario: " + neighborhood_name}
               </CardTitle>
 
-              <CardText>{'Sucursal: ' + branch}</CardText>
+              <CardText>{"Sucursal: " + branch}</CardText>
               <div style={{ position: "absolute", bottom: "15px" }}>
                 <Row>
                   <Col lg="6">

@@ -36,7 +36,6 @@ const ProveedorForm = () => {
     if (nameInput == "productImage") {
       value = e.target.files[0];
       dataProveedores.data.set("image", value);
-      console.log("Value--->", value);
     } else {
       value = e.target.value;
       dataProveedores.data.set(nameInput, value);
@@ -46,18 +45,16 @@ const ProveedorForm = () => {
 
   const handleSubmitProveedores = (e) => {
     e.preventDefault();
-    console.log(dataProveedores);
+
     if (id) {
       axios
         .put(baseId + "/update/" + id, dataProveedores.data)
         .then((response) => {
-          console.log(response);
           optionsModal = { ...optionsModal, message: "Proveedor Editado" };
           setShow(true);
         });
     } else {
       axios.post(baseURL, dataProveedores.data).then((response) => {
-        console.log("Response----->", response);
         setShow(true);
       });
     }

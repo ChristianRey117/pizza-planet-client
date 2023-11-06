@@ -53,7 +53,7 @@ const Header = () => {
 
   React.useEffect(() => {
     const logUser = JSON.parse(localStorage.getItem("datosUser"));
-    console.log(logUser);
+
     if (logUser !== null) {
       if (logUser?.tipo_usuario === 1) {
         setUser({ path: "/usuarios-form/" + logUser.id_usuario });
