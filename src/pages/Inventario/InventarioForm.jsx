@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import {
@@ -27,7 +28,7 @@ const InventarioForm = () => {
     navigate("/inventario-dashboard", { replace: true });
   };
 
-  //DATA SEND
+  // DATA TO SEND
   const [dataInventory, setData] = useState({
     data: new FormData(),
   });
@@ -49,14 +50,25 @@ const InventarioForm = () => {
       axios
         .put(baseId + "/update/" + id, dataInventory.data)
         .then((response) => {
-          console.log(response);
-          optionsModal = { ...optionsModal, message: "Inventario Editado" };
-          setShow(true);
+          optionsEditModal = {
+            title: "Operación Exitosa",
+            message: "Inventario editado exitosamente",
+            redirectTo: () => {
+              navigate("/inventario-dashboard", { replace: true });
+            },
+          };
+          setShowEditModal(true);
         });
     } else {
       axios.post(baseURL, dataInventory.data).then((response) => {
-        console.log("Response----->", response);
-        setShow(true);
+        optionsAddModal = {
+          title: "Operación Exitosa",
+          message: "Inventario Agregado",
+          redirectTo: () => {
+            navigate("/inventario-dashboard", { replace: true });
+          },
+        };
+        setShowAddModal(true);
       });
     }
   };
@@ -67,22 +79,38 @@ const InventarioForm = () => {
     }
     setData(dataInventory);
   };
+  // END DATA TO SEND
 
-  //END DATA SEND
+  // MODAL
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
-  //MODAL
-  const [show, setShow] = useState(false);
-  let optionsModal = {
-    title: "Operacion Exitosa",
-    message: "El inventario fue agregado exitosamente",
+  let optionsEditModal = {
+    title: "Operación Exitosa",
+    message: "Inventario editado exitosamente",
     redirectTo: () => {
       navigate("/inventario-dashboard", { replace: true });
     },
   };
-  const handleClose = () => setShow(false);
-  //END MODAL
 
-  //ID
+  let optionsAddModal = {
+    title: "Operación Exitosa",
+    message: "Inventario Agregado",
+    redirectTo: () => {
+      navigate("/inventario-dashboard", { replace: true });
+    },
+  };
+
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+  };
+  // END MODAL
+
+  // ID
   const { id } = useParams();
   React.useEffect(() => {
     if (id) {
@@ -101,8 +129,7 @@ const InventarioForm = () => {
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
   const [sucursales, setSucursales] = React.useState([{}]);
-
-  //END ID
+  // END ID
 
   return (
     <Helmet title="Inventario Formulario">
@@ -134,12 +161,13 @@ const InventarioForm = () => {
                     type="select"
                     onChange={handleChangeInventory}
                   >
-                    {sucursales.map((item) => {
-                      return (
-                        <option value={item.id_branch} label={item.branch_name} selected={dataForm.id_branch === item.id_branch}>
-                        </option>
-                      );
-                    })}
+                    {sucursales.map((item) => (
+                      <option
+                        value={item.id_branch}
+                        label={item.branch_name}
+                        selected={dataForm.id_branch === item.id_branch}
+                      ></option>
+                    ))}
                   </Input>
                 </FormGroup>
 
@@ -170,7 +198,7 @@ const InventarioForm = () => {
                 <FormGroup>
                   <Label for="ammountHarina">Harina disponible</Label>
                   <Input
-                    id="ammountHarina: "
+                    id="ammountHarina"
                     name="ammountHarina"
                     placeholder="Ingresa la harina disponible"
                     type="tel"
@@ -215,29 +243,19 @@ const InventarioForm = () => {
                   />
                 </FormGroup>
 
-                <Button
-                  style={{ display: `${id ? "none" : ""}` }}
-                  color="success"
-                >
+                <Button style={{ display: id ? "none" : "" }} color="success">
                   Agregar
                 </Button>
-                <Row>
-                  <Col xs={12}>
-                    <Button
-                      style={{ display: `${!id ? "none" : ""}` }}
-                      color="warning"
-                    >
-                      Editar
-                    </Button>
-                  </Col>
-                </Row>
+                <Button style={{ display: !id ? "none" : "" }} color="warning">
+                  Editar
+                </Button>
               </Form>
             </Col>
           </Row>
           <Row>
             <Col xs={12} style={{ paddingTop: "10px" }}>
               <Button
-                style={{ display: `${!id ? "none" : ""}` }}
+                style={{ display: !id ? "none" : "" }}
                 color="danger"
                 onClick={goToInventarioDashboard}
               >
@@ -250,9 +268,14 @@ const InventarioForm = () => {
 
       <section>
         <ModalComponent
-          show={show}
-          handleClose={handleClose}
-          optionsModal={optionsModal}
+          show={showEditModal}
+          handleClose={handleCloseEditModal}
+          optionsModal={optionsEditModal}
+        ></ModalComponent>
+        <ModalComponent
+          show={showAddModal}
+          handleClose={handleCloseAddModal}
+          optionsModal={optionsAddModal}
         ></ModalComponent>
       </section>
     </Helmet>
