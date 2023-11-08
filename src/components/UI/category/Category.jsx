@@ -14,12 +14,12 @@ const categoryData = [
   {
     display: "Combo Astronauta",
     imgUrl: categoryImg02,
-    describe: "Pizza Individual + Refresco de 1.25L",
+    describe: "Pizza Individual + Refresco 1.25L",
   },
   {
     display: "Combo Galáctico",
     imgUrl: categoryImg03,
-    describe: "2 Pizzas grandes",
+    describe: "2 Pizzas Grandes",
   },
 ];
 

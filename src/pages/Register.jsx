@@ -105,7 +105,7 @@ const Register = () => {
                   Registrar
                 </button>
               </form>
-              <Link to="/login">Ya tienes una cuenta? Inicia sesion</Link>
+              <Link to="/login">Inicia sesion</Link>
             </Col>
 
             <section>
