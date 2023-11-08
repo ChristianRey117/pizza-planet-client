@@ -29,7 +29,7 @@ const CardComprasUsuario = ({ compras }) => {
     compras.map((compra) => {
       let subTotal;
 
-      subTotal = compra.price * compra.ammount;
+      subTotal = compra.total_buy;
       Total += subTotal;
     });
 
@@ -44,6 +44,25 @@ const CardComprasUsuario = ({ compras }) => {
   const baseUrlImage = "http://localhost:5000/images";
 
   const dispatch = useDispatch();
+
+  const caseOfert = (item) => {
+    switch (item.ofert) {
+      case "Porcentaje":
+        return (
+          item.product_price -
+          ((item.product_price / 100) * item.discount).toFixed(2)
+        );
+        break;
+      case "Cantidad":
+        return item.product_price - item.discount;
+        break;
+
+      default:
+      case "NINGUNA":
+        return item.product_price;
+        break;
+    }
+  };
 
   return (
     <Col
@@ -95,7 +114,6 @@ const CardComprasUsuario = ({ compras }) => {
                 >
                   <h6>{compra.product}</h6>
                 </Col>
-
                 <Col
                   lg="2"
                   md="2"
@@ -103,7 +121,7 @@ const CardComprasUsuario = ({ compras }) => {
                   xs="12"
                   className="d-flex align-items-center justify-content-center"
                 >
-                  <h6 tag="h5">{compra.ammount}</h6>
+                  <h6 tag="h5">{"Cantidad: " + compra.ammount}</h6>
                 </Col>
 
                 <Col
@@ -113,7 +131,17 @@ const CardComprasUsuario = ({ compras }) => {
                   xs="12"
                   className="d-flex align-items-center justify-content-center"
                 >
-                  <h6 tag="h5">{"$" + compra.price * compra.ammount}</h6>
+                  <h6 tag="h5">{caseOfert(compra)}</h6>
+                </Col>
+
+                <Col
+                  lg="2"
+                  md="2"
+                  sm="12"
+                  xs="12"
+                  className="d-flex align-items-center justify-content-center"
+                >
+                  <h6 tag="h5">{"$" + compra.total_buy}</h6>
                 </Col>
               </Row>
             );

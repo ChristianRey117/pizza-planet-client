@@ -1,5 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const caseOfert = (item) => {
+
+  switch (item.ofert) {
+    
+    case "Porcentaje":
+      return item.product_price - ((item.product_price / 100) * item.discount).toFixed(2);
+      break;
+    case "Cantidad":
+      return item.product_price - item.discount;
+      break;
+    default:
+    case "NINGUNA":
+      return item.product_price;
+      break;
+  }
+};
+
 const initialState = {
   cartItems: [],
   totalQuantity: 0,
@@ -28,7 +45,8 @@ const cartSlice = createSlice({
           ofert: newItem.ofert,
           quantity: 1,
           image: newItem.image,
-          category: newItem.category
+          category: newItem.category,
+          discount: newItem.discount
         });
       }
       // If there is new item, this will increase the quantity of its as well as the total price
@@ -39,7 +57,7 @@ const cartSlice = createSlice({
           Number(existingItem.totalPrice) + Number(newItem.product_price);
       }
       state.totalAmount = state.cartItems.reduce(
-        (total, item) => total + Number(item.product_price) * Number(item.quantity),
+        (total, item) => total + caseOfert(item) * Number(item.quantity),
         0
       );
     },
@@ -55,7 +73,7 @@ const cartSlice = createSlice({
           Number(existingItem.totalPrice) - Number(existingItem.product_price);
       }
       state.totalAmount = state.cartItems.reduce(
-        (total, item) => total + Number(item.product_price) * Number(item.quantity),
+        (total, item) => total + caseOfert(item) * Number(item.quantity),
         0
       );
     },
@@ -68,7 +86,7 @@ const cartSlice = createSlice({
         state.totalQuantity = state.totalQuantity - existingItem.quantity;
       }
       state.totalAmount = state.cartItems.reduce(
-        (total, item) => total + Number(item.product_price) * Number(item.quantity),
+        (total, item) => total + caseOfert(item) * Number(item.quantity),
         0
       );
     },

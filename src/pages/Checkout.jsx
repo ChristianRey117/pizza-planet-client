@@ -58,6 +58,38 @@ const Checkout = () => {
     data: new FormData(),
   });
 
+  const caseOfert = (products) => {
+    const newProducts = products?.map((item) => {
+      switch (item.ofert) {
+        case "Porcentaje":
+          return (item = {
+            ...item,
+            product_price:
+              (item.product_price -
+                ((item.product_price / 100) * item.discount).toFixed(2)) *
+              item.quantity,
+          });
+
+          break;
+        case "Cantidad":
+          return (item = {
+            ...item,
+            product_price: (item.product_price - item.discount) * item.quantity,
+          });
+          break;
+
+        default:
+        case "NINGUNA":
+          return (item = {
+            ...item,
+            product_price: item.product_price * item.quantity,
+          });
+          break;
+      }
+    });
+    return newProducts;
+  };
+
   const shippingCost = 10;
   const totalAmount = cartTotalAmount + shippingCost;
   const submitHandler = (e) => {
@@ -67,7 +99,7 @@ const Checkout = () => {
 
     var compra = {
       id_user: id_usuario,
-      products: cartProducts,
+      products: caseOfert(cartProducts),
     };
 
     dataCompra.data.set("id_user", id_usuario);
@@ -113,6 +145,7 @@ const Checkout = () => {
       products: [],
       Total: totalAmount,
     });
+
     const user = JSON.parse(localStorage.getItem("datosUser"));
 
     axios.get(baseCheckout + "/" + user.id_usuario).then((response) => {

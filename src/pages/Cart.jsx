@@ -82,6 +82,7 @@ const Tr = (props) => {
     category,
     image,
     quantity,
+    discount,
   } = props.item;
   const dispatch = useDispatch();
 
@@ -92,13 +93,32 @@ const Tr = (props) => {
         <img src={baseImage + "/" + image} alt="food"></img>
       </td>
       <td className="text-center">{product_name}</td>
-      <td className="text-center">${product_price}</td>
+      <td className="text-center">${caseOfert(props.item)}</td>
       <td className="text-center">{quantity} pcs</td>
       <td onClick={deleteItem} className="text-center cart__item-del">
         <i className="ri-delete-bin-line"></i>
       </td>
     </tr>
   );
+};
+
+const caseOfert = (item) => {
+  switch (item.ofert) {
+    case "Porcentaje":
+      return (
+        item.product_price -
+        ((item.product_price / 100) * item.discount).toFixed(2)
+      );
+      break;
+    case "Cantidad":
+      return item.product_price - item.discount;
+      break;
+
+    default:
+    case "NINGUNA":
+      return item.product_price;
+      break;
+  }
 };
 
 export default Cart;
