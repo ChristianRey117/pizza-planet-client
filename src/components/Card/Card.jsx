@@ -82,7 +82,7 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
                 <Row>
                   <Col lg="6">
                     <Button color="warning" onClick={editSucursal}>
-                      <Link style={{ color: "white" }}>Editar</Link>
+                      <Link style={{ color: "black" }}>Editar</Link>
                     </Button>
                   </Col>
                   <Col lg="6">
