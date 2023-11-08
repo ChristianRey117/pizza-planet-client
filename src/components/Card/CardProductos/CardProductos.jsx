@@ -91,7 +91,7 @@ const CardProductos = ({
                 <Row>
                   <Col lg="6">
                     <Button color="warning" onClick={editProduct}>
-                      <Link style={{ color: "white" }}>Editar</Link>
+                      <Link style={{ color: "black" }}>Editar</Link>
                     </Button>
                   </Col>
                   <Col lg="6">
