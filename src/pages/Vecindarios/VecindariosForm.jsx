@@ -12,6 +12,9 @@ import {
   FormText,
   Button,
   Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -20,14 +23,14 @@ import ModalComponent from "../../components/Modal/modal";
 const VecindariosForm = () => {
   const baseURL = "http://localhost:5000/vecindarios/add";
   const baseId = "http://localhost:5000/vecindarios";
-  const baseSucursales = 'http://localhost:5000/sucursales'
+  const baseSucursales = "http://localhost:5000/sucursales";
 
   const navigate = useNavigate();
   const goToVecindariosDashboard = () => {
     navigate("/vecindarios-dashboard", { replace: true });
   };
 
-  //DATA SEND
+  // DATA SEND
   const [dataVecindarios, setData] = useState({
     data: new FormData(),
   });
@@ -37,52 +40,56 @@ const VecindariosForm = () => {
     let value;
     value = e.target.value;
     dataVecindarios.data.set(nameInput, value);
-
-    setData(dataVecindarios);
   };
 
   const handleSubmitVecindarios = (e) => {
     e.preventDefault();
-    console.log(dataVecindarios);
     if (id) {
       axios
         .put(baseId + "/update/" + id, dataVecindarios.data)
         .then((response) => {
           console.log(response);
-          optionsModal = { ...optionsModal, message: "Vecindario Editado" };
-          setShow(true);
+          const optionsModal = {
+            title: "Operación Exitosa",
+            message: "Vecindario editado exitosamente",
+            redirectTo: () => {
+              navigate("/vecindarios-dashboard", { replace: true });
+            },
+          };
+          setShowEditModal(true, optionsModal);
         });
     } else {
       axios.post(baseURL, dataVecindarios.data).then((response) => {
         console.log("Response----->", response);
-        setShow(true);
+        const optionsModal = {
+          title: "Operación Exitosa",
+          message: "Vecindario Agregado",
+          redirectTo: () => {
+            navigate("/vecindarios-dashboard", { replace: true });
+          },
+        };
+        setShowAddModal(true, optionsModal);
       });
     }
   };
 
   const initDataWithId = (data) => {
     for (const property in data) {
-    console.log(property);
-
       dataVecindarios.data.set(property, data[property]);
     }
     setData(dataVecindarios);
   };
 
-  //END DATA SEND
-  //MODAL
-  const [show, setShow] = useState(false);
-  let optionsModal = {
-    title: "Operacion Exitosa",
-    message: "El vecindario fue agregada exitosamente",
-    redirectTo: () => {
-      navigate("/vecindarios-dashboard", { replace: true });
-    },
-  };
-  const handleClose = () => setShow(false);
-  //END MODAL
+  // END DATA SEND
+  // MODALS
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
-  //ID
+  const handleCloseEditModal = () => setShowEditModal(false);
+  const handleCloseAddModal = () => setShowAddModal(false);
+  // END MODALS
+
+  // ID
   const { id } = useParams();
   React.useEffect(() => {
     if (id) {
@@ -93,19 +100,18 @@ const VecindariosForm = () => {
     }
 
     axios.get(baseSucursales).then((response) => {
-        setSucursales(response.data);
-        if(!id){
-          initDataWithId(response.data[0]);
-        }
-      });
+      setSucursales(response.data);
+      if (!id) {
+        initDataWithId(response.data[0]);
+      }
+    });
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
   const [sucursales, setSucursales] = React.useState([{}]);
 
-  //END ID
   return (
-    <Helmet title="Formulario Categorias">
-      <CommonSection title="Formulario Categorias" />
+    <Helmet title="Formulario Vecindarios">
+      <CommonSection title="Formulario Vecindarios" />
       <section style={{ padding: "30px 0px" }}>
         <Container>
           <Row>
@@ -126,7 +132,10 @@ const VecindariosForm = () => {
             <Col lg="12">
               <Form method="post" onSubmit={handleSubmitVecindarios}>
                 <FormGroup>
-                  <Label for="neighborhood_name"> Nombre del Vecindario: </Label>
+                  <Label for="neighborhood_name">
+                    {" "}
+                    Nombre del Vecindario:{" "}
+                  </Label>
                   <Input
                     id="neighborhood_name"
                     name="neighborhood_name"
@@ -138,7 +147,9 @@ const VecindariosForm = () => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="id_branch">Selecciona la sucursal a la que corresponde</Label>
+                  <Label for="id_branch">
+                    Selecciona la sucursal a la que corresponde
+                  </Label>
                   <Input
                     id="id_branch"
                     name="id_branch"
@@ -146,12 +157,15 @@ const VecindariosForm = () => {
                     onChange={handleChangeVecindario}
                     defaultValue={sucursales[0]?.id_branch}
                   >
-                    {sucursales.map((item, index) => {
-                      return (
-                        <option value={item.id_branch} label={item.branch_name} selected={dataForm.id_branch === item.id_branch}>
-                        </option>
-                      );
-                    })}
+                    {sucursales.map((item, index) => (
+                      <option
+                        key={item.id_branch}
+                        value={item.id_branch}
+                        selected={dataForm.id_branch === item.id_branch}
+                      >
+                        {item.branch_name}
+                      </option>
+                    ))}
                   </Input>
                 </FormGroup>
 
@@ -188,11 +202,36 @@ const VecindariosForm = () => {
         </Container>
       </section>
       <section>
-        <ModalComponent
-          show={show}
-          handleClose={handleClose}
-          optionsModal={optionsModal}
-        ></ModalComponent>
+        <Modal isOpen={showAddModal} toggle={handleCloseAddModal}>
+          <ModalHeader>Operación Exitosa</ModalHeader>
+          <ModalBody>Vecindario Agregado</ModalBody>
+          <ModalFooter>
+            <Button
+              color="secondary"
+              onClick={() => {
+                goToVecindariosDashboard();
+                handleCloseAddModal();
+              }}
+            >
+              Continuar
+            </Button>
+          </ModalFooter>
+        </Modal>
+        <Modal isOpen={showEditModal} toggle={handleCloseEditModal}>
+          <ModalHeader>Operación Exitosa</ModalHeader>
+          <ModalBody>Vecindario Editado</ModalBody>
+          <ModalFooter>
+            <Button
+              color="secondary"
+              onClick={() => {
+                goToVecindariosDashboard();
+                handleCloseEditModal();
+              }}
+            >
+              Continuar
+            </Button>
+          </ModalFooter>
+        </Modal>
       </section>
     </Helmet>
   );

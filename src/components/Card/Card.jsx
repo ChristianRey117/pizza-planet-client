@@ -27,9 +27,7 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
   const deleteSucursal = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
-      console.log(response);
-    });
+    axios.delete(baseURL + "/delete/" + id).then((response) => {});
   };
 
   const askDelete = () => {

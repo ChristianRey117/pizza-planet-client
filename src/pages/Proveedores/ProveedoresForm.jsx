@@ -9,8 +9,8 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText,
   Button,
+  FormText,
 } from "reactstrap";
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -25,23 +25,22 @@ const ProveedorForm = () => {
     navigate("/proveedores-dashboard", { replace: true });
   };
 
-  //DATA SEND
-  const [dataProveedores, setData] = useState({
+  // DATA SEND
+  const [dataProveedores, setDataProveedores] = useState({
     data: new FormData(),
   });
 
   const handleChangeProveedores = (e) => {
     let nameInput = e.target.name;
     let value;
-    if (nameInput == "productImage") {
+    if (nameInput === "productImage") {
       value = e.target.files[0];
       dataProveedores.data.set("image", value);
-      console.log("Value--->", value);
     } else {
       value = e.target.value;
       dataProveedores.data.set(nameInput, value);
     }
-    setData(dataProveedores);
+    setDataProveedores(dataProveedores);
   };
 
   const handleSubmitProveedores = (e) => {
@@ -49,16 +48,27 @@ const ProveedorForm = () => {
     console.log(dataProveedores);
     if (id) {
       axios
-        .put(baseId + "/update/" + id, dataProveedores.data)
+        .put(`${baseId}/update/${id}`, dataProveedores.data)
         .then((response) => {
-          console.log(response);
-          optionsModal = { ...optionsModal, message: "Proveedor Editado" };
-          setShow(true);
+          optionsEditModal = {
+            title: "Operación Exitosa",
+            message: "Proveedor editado exitosamente",
+            redirectTo: () => {
+              navigate("/proveedores-dashboard", { replace: true });
+            },
+          };
+          setShowEditModal(true);
         });
     } else {
       axios.post(baseURL, dataProveedores.data).then((response) => {
-        console.log("Response----->", response);
-        setShow(true);
+        optionsAddModal = {
+          title: "Operación Exitosa",
+          message: "Proveedor Agregado",
+          redirectTo: () => {
+            navigate("/proveedores-dashboard", { replace: true });
+          },
+        };
+        setShowAddModal(true);
       });
     }
   };
@@ -67,37 +77,55 @@ const ProveedorForm = () => {
     for (const property in data) {
       dataProveedores.data.set(property, data[property]);
     }
-    setData(dataProveedores);
+    setDataProveedores(dataProveedores);
   };
 
-  //END DATA SEND
+  // END DATA SEND
 
-  //MODAL
-  const [show, setShow] = useState(false);
-  let optionsModal = {
-    title: "Operacion Exitosa",
-    message: "El proveedor fue agregado exitosamente",
+  // MODAL
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  let optionsEditModal = {
+    title: "Operación Exitosa",
+    message: "Proveedor editado exitosamente",
     redirectTo: () => {
       navigate("/proveedores-dashboard", { replace: true });
     },
   };
-  const handleClose = () => setShow(false);
-  //END MODAL
 
-  //ID
+  let optionsAddModal = {
+    title: "Operación Exitosa",
+    message: "Proveedor Agregado",
+    redirectTo: () => {
+      navigate("/proveedores-dashboard", { replace: true });
+    },
+  };
+
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+  };
+
+  // ID
   const { id } = useParams();
   React.useEffect(() => {
     if (id) {
-      axios.get(baseId + "/" + id).then((response) => {
+      axios.get(`${baseId}/${id}`).then((response) => {
         setDataForm(response.data[0]);
         initDataWithId(response.data[0]);
       });
     }
     dataProveedores.data.set("id_supplier", "1");
-    setData(dataProveedores);
+    setDataProveedores(dataProveedores);
   }, []);
+
   const [dataForm, setDataForm] = React.useState([{}]);
-  //END ID
+
+  // END ID
 
   return (
     <Helmet title="Proveedores Formulario">
@@ -122,7 +150,7 @@ const ProveedorForm = () => {
             <Col lg="12">
               <Form method="post" onSubmit={handleSubmitProveedores}>
                 <FormGroup>
-                  <Label for="proveedorName">Proveedor</Label>
+                  <Label for="supplier_name">Proveedor</Label>
                   <Input
                     id="supplier_name"
                     name="supplier_name"
@@ -134,7 +162,7 @@ const ProveedorForm = () => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="proveedorProduct">Productos</Label>
+                  <Label for="supplier_product">Productos</Label>
                   <Input
                     id="supplier_product"
                     name="supplier_product"
@@ -156,22 +184,12 @@ const ProveedorForm = () => {
                   <FormText>Selecciona la imagen del proveedor.</FormText>
                 </FormGroup>
 
-                <Button
-                  style={{ display: `${id ? "none" : ""}` }}
-                  color="success"
-                >
+                <Button style={{ display: id ? "none" : "" }} color="success">
                   Agregar
                 </Button>
-                <Row>
-                  <Col xs={12}>
-                    <Button
-                      style={{ display: `${!id ? "none" : ""}` }}
-                      color="warning"
-                    >
-                      Editar
-                    </Button>
-                  </Col>
-                </Row>
+                <Button style={{ display: !id ? "none" : "" }} color="warning">
+                  Editar
+                </Button>
               </Form>
             </Col>
           </Row>
@@ -179,7 +197,7 @@ const ProveedorForm = () => {
           <Row>
             <Col xs={12} style={{ paddingTop: "10px" }}>
               <Button
-                style={{ display: `${!id ? "none" : ""}` }}
+                style={{ display: !id ? "none" : "" }}
                 color="danger"
                 onClick={goToProveedoresDashboard}
               >
@@ -191,9 +209,14 @@ const ProveedorForm = () => {
       </section>
       <section>
         <ModalComponent
-          show={show}
-          handleClose={handleClose}
-          optionsModal={optionsModal}
+          show={showEditModal}
+          handleClose={handleCloseEditModal}
+          optionsModal={optionsEditModal}
+        ></ModalComponent>
+        <ModalComponent
+          show={showAddModal}
+          handleClose={handleCloseAddModal}
+          optionsModal={optionsAddModal}
         ></ModalComponent>
       </section>
     </Helmet>

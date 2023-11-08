@@ -63,7 +63,10 @@ const UsuariosForm = () => {
     e.preventDefault();
     if (id) {
       axios.put(baseId + "/update/" + id, dataUsuario.data).then((response) => {
-        optionsModal = { ...optionsModal, message: "Usuario Editado" };
+        optionsModal = {
+          ...optionsModal,
+          message: "Usuario editado exitosamente",
+        };
         setShow(true);
       });
     }

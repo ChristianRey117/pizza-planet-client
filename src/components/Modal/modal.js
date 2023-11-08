@@ -7,7 +7,7 @@ const ModalComponent = ({ show, handleClose, optionsModal }) => {
         <ModalHeader toggle={handleClose}>{optionsModal?.title}</ModalHeader>
         <ModalBody>{optionsModal?.message}</ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={optionsModal.redirectTo}>
+          <Button color="secondary" onClick={optionsModal.redirectTo}>
             Continuar
           </Button>{" "}
         </ModalFooter>
