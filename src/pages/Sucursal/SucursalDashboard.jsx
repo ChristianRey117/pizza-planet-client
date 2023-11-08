@@ -71,7 +71,7 @@ const SucursalDashboard = () => {
 
   return (
     <Helmet title="Sucursal">
-      <CommonSection title="Sucursal Adimistrador" />
+      <CommonSection title="Sucursal Administrador" />
 
       <section>
         <Row>

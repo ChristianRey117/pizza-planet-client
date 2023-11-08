@@ -48,7 +48,7 @@ const ProductDashboard = () => {
 
   return (
     <Helmet title="Productos">
-      <CommonSection title="Productos Adimistrador" />
+      <CommonSection title="Productos Administrador" />
 
       <section>
         <Row>

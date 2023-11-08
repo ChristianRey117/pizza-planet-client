@@ -111,7 +111,7 @@ const Login = () => {
                   Iniciar sesion
                 </button>
               </form>
-              <Link to="/register">Primera vez aqui? Crear cuenta</Link>
+              <Link to="/register">Crear cuenta</Link>
             </Col>
 
             <section>
