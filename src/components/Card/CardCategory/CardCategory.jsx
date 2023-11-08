@@ -41,7 +41,7 @@ const CardCategory = ({ id_category, name_category, description }) => {
 
   const optionsModal = {
     title: "¿Esta seguro de eliminar esta Categoria?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_category);
       setShow(false);

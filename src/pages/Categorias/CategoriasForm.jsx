@@ -9,13 +9,14 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText,
   Button,
   Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import ModalComponent from "../../components/Modal/modal";
 
 const CategoriasForm = () => {
   const baseURL = "http://localhost:5000/tipocategoria/add";
@@ -26,60 +27,42 @@ const CategoriasForm = () => {
     navigate("/categorias-dashboard", { replace: true });
   };
 
-  //DATA SEND
-  const [dataCategoria, setData] = useState({
+  // DATA SEND
+  const [dataCategoria, setDataCategoria] = useState({
     data: new FormData(),
   });
 
   const handleChangeCategoria = (e) => {
     let nameInput = e.target.name;
-    let value;
-    value = e.target.value;
+    let value = e.target.value;
     dataCategoria.data.set(nameInput, value);
-
-    setData(dataCategoria);
+    setDataCategoria(dataCategoria);
   };
 
-  const handleSubmitCategoria = (e) => {
-    e.preventDefault();
-    console.log(dataCategoria);
-    if (id) {
-      axios
-        .put(baseId + "/update/" + id, dataCategoria.data)
-        .then((response) => {
-          console.log(response);
-          optionsModal = { ...optionsModal, message: "Categoria Editada" };
-          setShow(true);
-        });
-    } else {
-      axios.post(baseURL, dataCategoria.data).then((response) => {
-        console.log("Response----->", response);
-        setShow(true);
-      });
-    }
-  };
+  // MODAL
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
-  const initDataWithId = (data) => {
-    for (const property in data) {
-      dataCategoria.data.set(property, data[property]);
-    }
-    setData(dataCategoria);
-  };
-
-  //END DATA SEND
-  //MODAL
-  const [show, setShow] = useState(false);
-  let optionsModal = {
+  const [optionsAddModal, setOptionsAddModal] = useState({
     title: "Operacion Exitosa",
-    message: "La categoria fue agregada exitosamente",
+    message: "La categoría fue agregada exitosamente",
     redirectTo: () => {
       navigate("/categorias-dashboard", { replace: true });
     },
-  };
-  const handleClose = () => setShow(false);
-  //END MODAL
+  });
 
-  //ID
+  const [optionsEditModal, setOptionsEditModal] = useState({
+    title: "Operacion Exitosa",
+    message: "La categoría fue editada exitosamente",
+    redirectTo: () => {
+      navigate("/categorias-dashboard", { replace: true });
+    },
+  });
+
+  const handleCloseAddModal = () => setShowAddModal(false);
+  const handleCloseEditModal = () => setShowEditModal(false);
+
+  // ID
   const { id } = useParams();
   React.useEffect(() => {
     if (id) {
@@ -91,7 +74,39 @@ const CategoriasForm = () => {
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
 
-  //END ID
+  const initDataWithId = (data) => {
+    for (const property in data) {
+      dataCategoria.data.set(property, data[property]);
+    }
+    setDataCategoria(dataCategoria);
+  };
+
+  const handleSubmitCategoria = (e) => {
+    e.preventDefault();
+    console.log(dataCategoria);
+    if (id) {
+      axios
+        .put(baseId + "/update/" + id, dataCategoria.data)
+        .then((response) => {
+          console.log(response);
+          setOptionsEditModal({
+            ...optionsEditModal,
+            message: "Categoría Editada",
+          });
+          setShowEditModal(true);
+        });
+    } else {
+      axios.post(baseURL, dataCategoria.data).then((response) => {
+        console.log("Response----->", response);
+        setOptionsAddModal({
+          ...optionsAddModal,
+          message: "Categoría Agregada",
+        });
+        setShowAddModal(true);
+      });
+    }
+  };
+
   return (
     <Helmet title="Formulario Categorias">
       <CommonSection title="Formulario Categorias" />
@@ -119,7 +134,7 @@ const CategoriasForm = () => {
                   <Input
                     id="name_category"
                     name="name_category"
-                    placeholder="Ingresa el nombre de la categoria"
+                    placeholder="Ingresa el nombre de la categoría"
                     type="text"
                     onChange={handleChangeCategoria}
                     defaultValue={id ? dataForm?.name_category : null}
@@ -171,11 +186,25 @@ const CategoriasForm = () => {
         </Container>
       </section>
       <section>
-        <ModalComponent
-          show={show}
-          handleClose={handleClose}
-          optionsModal={optionsModal}
-        ></ModalComponent>
+        <Modal isOpen={showAddModal} toggle={goToCategoriasDashboard}>
+          <ModalHeader>{optionsAddModal.title}</ModalHeader>
+          <ModalBody>{optionsAddModal.message}</ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={goToCategoriasDashboard}>
+              Continuar
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal isOpen={showEditModal} toggle={goToCategoriasDashboard}>
+          <ModalHeader>{optionsEditModal.title}</ModalHeader>
+          <ModalBody>{optionsEditModal.message}</ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={goToCategoriasDashboard}>
+              Continuar
+            </Button>
+          </ModalFooter>
+        </Modal>
       </section>
     </Helmet>
   );

@@ -43,7 +43,7 @@ const CardCompras = ({ id_buy, user, product, ammount, date, image }) => {
 
   const optionsModal = {
     title: "¿Esta seguro de eliminar esta Venta?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_buy);
       setShow(false);

@@ -32,7 +32,7 @@ const Carts = () => {
         <div className="cart__item-list">
           {cartProducts.length === 0 ? (
             <h6 className="text-center mt-5">
-              No se a seleccionado ningun producto
+              No se ha seleccionado ningun producto
             </h6>
           ) : (
             cartProducts.map((item, index) => (

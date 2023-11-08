@@ -43,7 +43,7 @@ const CardOfert = ({ id_ofert, name_ofert, discount, description, image }) => {
 
   const optionsModal = {
     title: "¿Esta seguro de eliminar esta Oferta?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_ofert);
       setShow(false);

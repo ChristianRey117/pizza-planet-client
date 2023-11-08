@@ -51,7 +51,7 @@ const CardInventory = ({
 
   const optionsModal = {
     title: "¿Esta seguro de eliminar este inventario?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_inventory);
       setShow(false);
