@@ -45,7 +45,7 @@ const CardProveedores = ({
 
   const optionsModal = {
     title: "¿Esta seguro de eleminar este proveedor?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_supplier);
       setShow(false);

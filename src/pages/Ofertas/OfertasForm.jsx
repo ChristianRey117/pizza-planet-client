@@ -9,9 +9,11 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText,
   Button,
   Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -26,7 +28,7 @@ const OfertasForm = () => {
     navigate("/ofertas-dashboard", { replace: true });
   };
 
-  //DATA SEND
+  // DATA SEND
   const [dataOfert, setData] = useState({
     data: new FormData(),
   });
@@ -34,23 +36,15 @@ const OfertasForm = () => {
   const handleChangeOfert = (e) => {
     let nameInput = e.target.name;
     let value;
-    if (nameInput == "name_image") {
+    if (nameInput === "name_image") {
       nameInput = "image";
       value = e.target.files[0];
-      // const formData = new FormData();
-      // formData.append("file", value);
-      // value = formData;
       dataOfert.data.set(nameInput, value);
     } else {
       value = e.target.value;
-      // const formData = new FormData();
-      // formData.append(nameInput, value);
-      // value = formData;
-      if (nameInput == "id_ofert") {
+      if (nameInput === "id_ofert") {
         value = Number(value);
-        console.log("id_ofert", value);
       }
-
       dataOfert.data.set(nameInput, value);
     }
     setData(dataOfert);
@@ -62,13 +56,13 @@ const OfertasForm = () => {
     if (id) {
       axios.put(baseId + "/update/" + id, dataOfert.data).then((response) => {
         console.log(response);
-        optionsModal = { ...optionsModal, message: "Oferta Editada" };
-        setShow(true);
+        setOptionsEditModal({ ...optionsEditModal, message: "Oferta Editada" });
+        setShowEditModal(true);
       });
     } else {
       axios.post(baseURL, dataOfert.data).then((response) => {
         console.log("Response----->", response);
-        setShow(true);
+        setShowAddModal(true);
       });
     }
   };
@@ -80,20 +74,33 @@ const OfertasForm = () => {
     setData(dataOfert);
   };
 
-  //END DATA SEND
-  //MODAL
-  const [show, setShow] = useState(false);
-  let optionsModal = {
+  // END DATA SEND
+  // MODAL
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const [optionsAddModal, setOptionsAddModal] = useState({
     title: "Operacion Exitosa",
     message: "La oferta fue agregada exitosamente",
     redirectTo: () => {
       navigate("/ofertas-dashboard", { replace: true });
     },
-  };
-  const handleClose = () => setShow(false);
-  //END MODAL
+  });
 
-  //ID
+  const [optionsEditModal, setOptionsEditModal] = useState({
+    title: "Operacion Exitosa",
+    message: "La oferta fue editada exitosamente",
+    redirectTo: () => {
+      navigate("/ofertas-dashboard", { replace: true });
+    },
+  });
+
+  const handleCloseAddModal = () => setShowAddModal(false);
+  const handleCloseEditModal = () => setShowEditModal(false);
+
+  // END MODAL
+
+  // ID
   const { id } = useParams();
   React.useEffect(() => {
     if (id) {
@@ -102,18 +109,9 @@ const OfertasForm = () => {
         initDataWithId(response.data[0]);
       });
     }
-
-    // axios.get(baseSucursales).then((response) => {
-    //   setSucursales(response.data);
-    //   console.log(response.data);
-    //   dataOfert.data.set("id_ofert", response.data[0].id_branch);
-    // });
-    // setData(dataOfert);
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
-  // const [sucursales, setSucursales] = React.useState([{}]);
 
-  //END ID
   return (
     <Helmet title="Formulario Ofertas">
       <CommonSection title="Formulario Ofertas" />
@@ -216,11 +214,25 @@ const OfertasForm = () => {
         </Container>
       </section>
       <section>
-        <ModalComponent
-          show={show}
-          handleClose={handleClose}
-          optionsModal={optionsModal}
-        ></ModalComponent>
+        <Modal isOpen={showAddModal} toggle={goToOfertasDashboard}>
+          <ModalHeader>{optionsAddModal.title}</ModalHeader>
+          <ModalBody>{optionsAddModal.message}</ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={goToOfertasDashboard}>
+              Continuar
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal isOpen={showEditModal} toggle={goToOfertasDashboard}>
+          <ModalHeader>{optionsEditModal.title}</ModalHeader>
+          <ModalBody>{optionsEditModal.message}</ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={goToOfertasDashboard}>
+              Continuar
+            </Button>
+          </ModalFooter>
+        </Modal>
       </section>
     </Helmet>
   );

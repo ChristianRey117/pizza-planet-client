@@ -38,7 +38,7 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
 
   const optionsModal = {
     title: "¿Esta seguro de eleminar la sucursal?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_branch);
       setShow(false);

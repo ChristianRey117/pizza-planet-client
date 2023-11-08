@@ -85,11 +85,6 @@ const Home = () => {
       </section>
       {/* <Row style={{ marginBottom: "35px" }}> */}
       <section className="pt-0">
-        <Row style={{ marginBottom: "35px" }}>
-          <Col style={{ textAlign: "center" }}>
-            <h1>PROMOCIONES</h1>
-          </Col>
-        </Row>
         <Category />
       </section>
 

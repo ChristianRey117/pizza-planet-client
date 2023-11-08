@@ -46,7 +46,7 @@ const CardCompras = ({ id_users, user_name, user_email, typeU, typeUsers }) => {
 
   const optionsModal = {
     title: "¿Esta seguro de eliminar este Rol?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_users);
       setShow(false);

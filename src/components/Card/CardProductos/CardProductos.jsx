@@ -47,7 +47,7 @@ const CardProductos = ({
 
   const optionsModal = {
     title: "¿Esta seguro de eleminar este producto?",
-    message: "No se podra recuperar la informacion",
+    message: "No se podrá recuperar la informacion",
     redirectTo: () => {
       _delete(id_product);
       setShow(false);
