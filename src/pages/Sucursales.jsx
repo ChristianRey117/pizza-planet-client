@@ -30,12 +30,15 @@ const sucursalesData = [
 ];
 
 const Sucursales = () => {
-  const [post, setPost] = React.useState(null);
-
-  React.useEffect(() => {
+  const dataAsync = async () => {
     axios.get(baseURL).then((response) => {
       setPost(response.data);
     });
+  };
+  const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    dataAsync();
   }, []);
 
   if (!post) return null;
