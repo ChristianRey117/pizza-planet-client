@@ -17,6 +17,7 @@ import ProductCard from "../components/UI/product-card/ProductCard.jsx";
 import whyImg from "../assets/images/location.png";
 import networkImg from "../assets/images/network.png";
 import TestimonialSlider from "../components/UI/slider/TestimonialSlider.jsx";
+import { DefaultDataProvider, Dashboard } from "superset-dashboard-sdk";
 
 const featureData = [
   {
@@ -35,6 +36,11 @@ const featureData = [
     desc: "Nos encontramos en cada rincón de Mérida.",
   },
 ];
+
+const dataProvider = new DefaultDataProvider("http://20.84.102.134:8088", {
+  username: "admin",
+  password: "admin",
+});
 const Home = () => {
   const [category, setCategory] = useState("ALL");
   const [allProducts, setAllProducts] = useState(products);
@@ -79,6 +85,11 @@ const Home = () => {
               <div className="hero__img">
                 <img src={heroImg} alt="hero-img" className="w-100" />
               </div>
+              {/* <Dashboard
+                dataProvider={dataProvider}
+                domain="http://20.84.102.134:8088"
+                uuid={"eb08c304-8fb9-4204-a596-a2fdf464c8cf"}
+              /> */}
             </Col>
           </Row>
         </Container>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
+
 import {
   Container,
   Row,
@@ -16,12 +17,37 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
 import { current } from "@reduxjs/toolkit";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/sucursales/add";
-const baseId = "http://localhost:5000/sucursales";
-const baseProveedores = "http://localhost:5000/proveedores";
+const baseURL = ENDPOINTS.SUCURSALES_ADD;
+const baseId = ENDPOINTS.SUCURSALES;
+const baseProveedores = ENDPOINTS.PROVEEDORES;
 
 const SucursalForm = () => {
+  const dataAsync = async () => {
+    if (id) {
+      axios.get(`${baseId}/${id}`).then((response) => {
+        setDataForm(response.data[0]);
+        initDataWithId(response.data[0]);
+      });
+    }
+
+    axios.get(baseProveedores).then((response) => {
+      var options = response.data.map((option) => {
+        return {
+          value: option.id_supplier,
+          label: option.supplier_name,
+          name: "id_suplier",
+        };
+      });
+      setProveedores(options);
+      if (!id) {
+        initDataWithId(response.data[0]);
+      }
+    });
+    const select = document.getElementById("id_supplier");
+    select.defaultValue = { label: "Hola", value: 1 };
+  };
   const navigate = useNavigate();
   const [dataForm, setDataForm] = useState({}); // Agrega esta línea para dataForm
 
@@ -144,28 +170,7 @@ const SucursalForm = () => {
   const { id } = useParams();
 
   React.useEffect(() => {
-    if (id) {
-      axios.get(`${baseId}/${id}`).then((response) => {
-        setDataForm(response.data[0]);
-        initDataWithId(response.data[0]);
-      });
-    }
-
-    axios.get(baseProveedores).then((response) => {
-      var options = response.data.map((option) => {
-        return {
-          value: option.id_supplier,
-          label: option.supplier_name,
-          name: "id_suplier",
-        };
-      });
-      setProveedores(options);
-      if (!id) {
-        initDataWithId(response.data[0]);
-      }
-    });
-    const select = document.getElementById("id_supplier");
-    select.defaultValue = { label: "Hola", value: 1 };
+    dataAsync();
   }, []);
 
   const [proveedores, setProveedores] = React.useState([{}]);
