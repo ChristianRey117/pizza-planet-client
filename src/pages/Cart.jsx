@@ -7,8 +7,9 @@ import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Container, Col, Row } from "reactstrap";
 import { cartActions } from "../store/shopping-cart/cartSlice";
+import ENDPOINTS from "../utils/constants";
 
-const baseImage = "http://localhost:5000/images";
+const baseImage = ENDPOINTS.BASE_IMAGES;
 
 const Cart = () => {
   const navigate = useNavigate();

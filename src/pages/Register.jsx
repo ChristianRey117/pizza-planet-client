@@ -6,8 +6,9 @@ import { Routes, Route, useNavigate, useParams, Link } from "react-router-dom";
 import { useRef } from "react";
 import axios from "axios";
 import ModalComponent from "../components/Modal/modal";
+import ENDPOINTS from "../utils/constants";
 
-const baseURL = "http://localhost:5000/usuario/add";
+const baseURL = ENDPOINTS.USUARIOS_ADD;
 
 const Register = () => {
   const navigate = useNavigate();

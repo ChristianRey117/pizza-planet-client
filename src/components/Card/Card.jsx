@@ -16,18 +16,21 @@ import {
   CardSubtitle,
 } from "reactstrap";
 import ModalComponent from "../../components/Modal/modal";
+import ENDPOINTS from "../../utils/constants";
 
 const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/sucursales";
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseURL = ENDPOINTS.SUCURSALES;
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
   const dispatch = useDispatch();
 
   const deleteSucursal = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {});
+    axios.delete(baseURL + "/delete/" + id).then((response) => {
+      window.location.reload(false);
+    });
   };
 
   const askDelete = () => {
@@ -42,7 +45,6 @@ const CardComponent = ({ branch_name, branch_direction, id_branch, image }) => {
     redirectTo: () => {
       _delete(id_branch);
       setShow(false);
-      window.location.reload(false);
     },
   };
 

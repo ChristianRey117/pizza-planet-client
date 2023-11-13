@@ -15,10 +15,11 @@ import {
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
+import ENDPOINTS from "../../utils/constants";
 
 const ProveedorForm = () => {
-  const baseURL = "http://localhost:5000/proveedores/add";
-  const baseId = "http://localhost:5000/proveedores";
+  const baseURL = ENDPOINTS.PROVEEDORES_ADD;
+  const baseId = ENDPOINTS.PROVEEDORES;
   const navigate = useNavigate();
 
   const goToProveedoresDashboard = () => {

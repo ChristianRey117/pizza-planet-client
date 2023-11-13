@@ -4,7 +4,9 @@ import "../../../styles/product-card.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/shopping-cart/cartSlice";
 import { Row, Container, Col, Card } from "reactstrap";
-const baseImage = "http://localhost:5000/images";
+import ENDPOINTS from "../../../utils/constants";
+
+const baseImage = ENDPOINTS.BASE_IMAGES;
 
 const ProductCard = (props) => {
   const {
@@ -34,7 +36,9 @@ const ProductCard = (props) => {
   const caseOfert = (ofertas) => {
     switch (ofertas) {
       case "Porcentaje":
-        console.log(product_price - ((product_price / 100) * discount).toFixed(2) )
+        console.log(
+          product_price - ((product_price / 100) * discount).toFixed(2)
+        );
         return product_price - ((product_price / 100) * discount).toFixed(2);
         break;
       case "Cantidad":

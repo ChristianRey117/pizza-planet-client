@@ -23,9 +23,10 @@ import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import axios from "axios";
 import CardProveedores from "../../components/Card/CardProveedores/CardProveedores";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/proveedores";
-const baseUrlImage = "http://localhost:5000/images";
+const baseURL = ENDPOINTS.PROVEEDORES;
+const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 const dataProveedores = [
   {
     name: "Bola Roja",

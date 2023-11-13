@@ -19,9 +19,10 @@ import imageSuc1 from "../../assets/images/PizzaPlaneta1.jpg";
 import imageSuc2 from "../../assets/images/PizzaPlaneta2.jpg";
 import imageSuc3 from "../../assets/images/PizzaPlaneta3.jpg";
 import CardComponent from "../../components/Card/Card";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/sucursales";
-const baseUrlImage = "http://localhost:5000/images";
+const baseURL = ENDPOINTS.SUCURSALES;
+const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
 const cardPaneles = [
   {

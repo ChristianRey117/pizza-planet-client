@@ -18,12 +18,13 @@ import {
   ListGroupItem,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardCompras = ({ id_buy, user, product, ammount, date, image }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/compras";
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseURL = ENDPOINTS.COMPRAS;
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
   const dispatch = useDispatch();
 
