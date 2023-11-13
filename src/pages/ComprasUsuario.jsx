@@ -21,11 +21,21 @@ import CommonSection from "../components/UI/common-section/CommonSection";
 import axios from "axios";
 import CardCompras from "../components/Card/CardCompras/CardCompras";
 import CardComprasUsuario from "../components/Card/CardComprasUsuario/CardComprasUsuario";
+import ENDPOINTS from "../utils/constants";
 
-const baseURL = "http://localhost:5000/compras/usuario";
-const baseUrlImage = "http://localhost:5000/images";
+const baseURL = ENDPOINTS.USUARIO;
+const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
 const ComprasUsuario = () => {
+  const dataAsync = async () => {
+    const user = JSON.parse(localStorage.getItem("datosUser"));
+    setUserData(user);
+
+    axios.get(baseURL + "/" + user.id_usuario).then((response) => {
+      setVentas(response.data);
+    });
+  };
+
   const navigate = useNavigate();
 
   const goToAdminDashboard = () => {
@@ -36,12 +46,7 @@ const ComprasUsuario = () => {
   const [userData, setUserData] = useState({});
 
   React.useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("datosUser"));
-    setUserData(user);
-
-    axios.get(baseURL + "/" + user.id_usuario).then((response) => {
-      setVentas(response.data);
-    });
+    dataAsync();
   }, []);
 
   return (

@@ -18,12 +18,13 @@ import {
   ListGroupItem,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardOfert = ({ id_ofert, name_ofert, discount, description, image }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/ofertas";
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseURL = ENDPOINTS.OFERTAS;
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
   const dispatch = useDispatch();
 
@@ -32,6 +33,7 @@ const CardOfert = ({ id_ofert, name_ofert, discount, description, image }) => {
   const _delete = (id) => {
     axios.delete(baseURL + "/delete/" + id).then((response) => {
       console.log(response);
+      window.location.reload(false);
     });
   };
 
@@ -47,7 +49,6 @@ const CardOfert = ({ id_ofert, name_ofert, discount, description, image }) => {
     redirectTo: () => {
       _delete(id_ofert);
       setShow(false);
-      window.location.reload(false);
     },
   };
 

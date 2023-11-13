@@ -7,8 +7,9 @@ import { useRef } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../components/Modal/modal";
+import ENDPOINTS from "../utils/constants";
 
-const baseURL = "http://localhost:5000/login";
+const baseURL = ENDPOINTS.LOGIN;
 
 const Login = () => {
   const navigate = useNavigate();

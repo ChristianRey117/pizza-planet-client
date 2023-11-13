@@ -18,10 +18,11 @@ import {
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
+import ENDPOINTS from "../../utils/constants";
 
 const OfertasForm = () => {
-  const baseURL = "http://localhost:5000/ofertas/add";
-  const baseId = "http://localhost:5000/ofertas";
+  const baseURL = ENDPOINTS.OFERTAS_ADD;
+  const baseId = ENDPOINTS.OFERTAS;
 
   const navigate = useNavigate();
   const goToOfertasDashboard = () => {

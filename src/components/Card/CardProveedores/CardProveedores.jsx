@@ -16,6 +16,7 @@ import {
   CardSubtitle,
 } from "reactstrap";
 import ModalComponent from "../../../components/Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardProveedores = ({
   id_supplier,
@@ -25,8 +26,8 @@ const CardProveedores = ({
 }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/proveedores";
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseURL = ENDPOINTS.PROVEEDORES;
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
   const dispatch = useDispatch();
 
   const deleteProveedores = () => askDelete();

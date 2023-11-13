@@ -19,9 +19,10 @@ import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import { cartActions } from "../store/shopping-cart/cartSlice";
 import { useDispatch } from "react-redux";
 import ModalCompra from "../components/Modal/ModalCompra";
+import ENDPOINTS from "../utils/constants";
 
-const baseCompra = "http://localhost:5000/compras/add";
-const baseCheckout = "http://localhost:5000/usuario";
+const baseCompra = ENDPOINTS.COMPRAS_ADD;
+const baseCheckout = ENDPOINTS.USUARIOS;
 const baseStripe = "http://localhost:5000/stripe";
 
 const meses = [
@@ -42,6 +43,20 @@ const meses = [
 const years = ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"];
 
 const Checkout = () => {
+  const dataAsync = async () => {
+    const user = JSON.parse(localStorage.getItem("datosUser"));
+    axios.get(baseCheckout + "/" + user.id_usuario).then((response) => {
+      console.log(response.data[0]);
+      const datosUsuario = response.data[0];
+      setUserDatos(datosUsuario);
+
+      setEnteredName(datosUsuario.user_name);
+      setEnteredAddress(datosUsuario.direction);
+      setEnteredEmail(datosUsuario.user_email);
+      setEnteredNumber(datosUsuario.phone);
+      setEnteredVecindario(datosUsuario.neighborhood);
+    });
+  };
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -140,19 +155,7 @@ const Checkout = () => {
       Total: totalAmount,
     });
 
-    const user = JSON.parse(localStorage.getItem("datosUser"));
-
-    axios.get(baseCheckout + "/" + user.id_usuario).then((response) => {
-      console.log(response.data[0]);
-      const datosUsuario = response.data[0];
-      setUserDatos(datosUsuario);
-
-      setEnteredName(datosUsuario.user_name);
-      setEnteredAddress(datosUsuario.direction);
-      setEnteredEmail(datosUsuario.user_email);
-      setEnteredNumber(datosUsuario.phone);
-      setEnteredVecindario(datosUsuario.neighborhood);
-    });
+    dataAsync();
   }, []);
 
   //MODAL

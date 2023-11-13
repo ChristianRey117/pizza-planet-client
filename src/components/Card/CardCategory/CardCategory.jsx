@@ -18,19 +18,22 @@ import {
   ListGroupItem,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardCategory = ({ id_category, name_category, description }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/tipocategoria";
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseURL = ENDPOINTS.TIPOSCATEGORIAS;
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
   const dispatch = useDispatch();
 
   const deleteCategory = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {});
+    axios.delete(baseURL + "/delete/" + id).then((response) => {
+      window.location.reload(false);
+    });
   };
 
   const askDelete = () => {
@@ -45,7 +48,6 @@ const CardCategory = ({ id_category, name_category, description }) => {
     redirectTo: () => {
       _delete(id_category);
       setShow(false);
-      window.location.reload(false);
     },
   };
 

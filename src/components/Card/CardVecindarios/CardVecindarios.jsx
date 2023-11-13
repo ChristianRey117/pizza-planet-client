@@ -19,6 +19,7 @@ import {
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
 import SucursalForm from "../../../pages/Sucursal/SucursalForm";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardVecindarios = ({
   id_neighborhood,
@@ -28,7 +29,7 @@ const CardVecindarios = ({
 }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/vecindarios";
+  const baseURL = ENDPOINTS.VECINDARIOS;
 
   const dispatch = useDispatch();
 

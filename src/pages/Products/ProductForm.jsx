@@ -17,13 +17,37 @@ import { Routes, Route, useNavigate, useParams, link } from "react-router-dom";
 
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/productos/add";
-const baseId = "http://localhost:5000/productos";
-const baseOfertas = "http://localhost:5000/ofertas";
-const baseCategorias = "http://localhost:5000/tipocategoria";
+const baseURL = ENDPOINTS.PRODUCTOS_ADD;
+const baseId = ENDPOINTS.PRODUCTOS;
+const baseOfertas = ENDPOINTS.OFERTAS;
+const baseCategorias = ENDPOINTS.TIPOSCATEGORIAS;
 
 const ProductForm = () => {
+  const dataAsync = async () => {
+    if (id) {
+      axios.get(baseId + "/" + id).then((response) => {
+        setDataForm(response.data[0]);
+        initDataWithId(response.data[0]);
+      });
+    }
+    setData(dataProducts);
+
+    axios.get(baseOfertas).then((response) => {
+      setDataOfertas(response.data);
+      if (!id) {
+        initDataWithId(response.data[0]);
+      }
+    });
+    axios.get(baseCategorias).then((responseCategorias) => {
+      setDataCategorias(responseCategorias.data);
+      if (!id) {
+        initDataWithId(responseCategorias.data[0]);
+      }
+    });
+  };
+
   const navigate = useNavigate();
   const inventarioP = () => {
     navigate("/product-dashboard", { replace: true });
@@ -128,26 +152,7 @@ const ProductForm = () => {
 
   const { id } = useParams();
   React.useEffect(() => {
-    if (id) {
-      axios.get(baseId + "/" + id).then((response) => {
-        setDataForm(response.data[0]);
-        initDataWithId(response.data[0]);
-      });
-    }
-    setData(dataProducts);
-
-    axios.get(baseOfertas).then((response) => {
-      setDataOfertas(response.data);
-      if (!id) {
-        initDataWithId(response.data[0]);
-      }
-    });
-    axios.get(baseCategorias).then((responseCategorias) => {
-      setDataCategorias(responseCategorias.data);
-      if (!id) {
-        initDataWithId(responseCategorias.data[0]);
-      }
-    });
+    dataAsync();
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
   const [dataOfertas, setDataOfertas] = React.useState([{}]);

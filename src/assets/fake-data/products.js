@@ -23,8 +23,10 @@ import product_06_image_01 from "../images/bread(1).png";
 import product_06_image_02 from "../images/bread(2).png";
 import product_06_image_03 from "../images/bread(3).png";
 import axios from "axios";
+import ENDPOINTS from "../../utils/constants";
 
-const baseUrl = 'http://localhost:5000/productos'
+
+const baseUrl = ENDPOINTS.PRODUCTOS;
 
 const setProducts = (dataProducts)=>{
   products = dataProducts;

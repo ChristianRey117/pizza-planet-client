@@ -22,11 +22,12 @@ import {
   Input,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardCompras = ({ id_users, user_name, user_email, typeU, typeUsers }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/usuario";
+  const baseURL = ENDPOINTS.USUARIOS;
 
   const dispatch = useDispatch();
 

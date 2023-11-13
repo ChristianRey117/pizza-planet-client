@@ -16,11 +16,12 @@ import {
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
+import ENDPOINTS from "../../utils/constants";
 
 const UsuariosForm = () => {
-  const baseId = "http://localhost:5000/usuario";
-  const baseVecindarios = "http://localhost:5000/vecindarios";
-  const baseSucursales = "http://localhost:5000/sucursales";
+  const baseId = ENDPOINTS.USUARIOS;
+  const baseVecindarios = ENDPOINTS.VECINDARIOS;
+  const baseSucursales = ENDPOINTS.SUCURSALES;
 
   const navigate = useNavigate();
 

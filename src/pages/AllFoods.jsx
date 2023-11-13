@@ -8,20 +8,25 @@ import axios from "axios";
 import "../styles/all-foods.css";
 import "../styles/pagination.css";
 import products from "../assets/fake-data/products";
+import ENDPOINTS from "../utils/constants";
 
-const baseUrl = "http://localhost:5000/productos";
+const baseUrl = ENDPOINTS.PRODUCTOS;
 
 const AllFoods = () => {
+  const dataAsync = async () => {
+    axios.get(baseUrl).then((response) => {
+      setProductos(response.data);
+      products.setProducts(response.data);
+    });
+  };
+
   const [productos, setProductos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   const [orderBy, setOrderBy] = useState(""); // Tipo de orden (nombre o precio)
 
   useEffect(() => {
-    axios.get(baseUrl).then((response) => {
-      setProductos(response.data);
-      products.setProducts(response.data);
-    });
+    dataAsync();
   }, []);
 
   const sortProducts = (items) => {

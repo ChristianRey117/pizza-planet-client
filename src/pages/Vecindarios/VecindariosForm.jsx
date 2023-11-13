@@ -19,11 +19,12 @@ import {
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
+import ENDPOINTS from "../../utils/constants";
 
 const VecindariosForm = () => {
-  const baseURL = "http://localhost:5000/vecindarios/add";
-  const baseId = "http://localhost:5000/vecindarios";
-  const baseSucursales = "http://localhost:5000/sucursales";
+  const baseURL = ENDPOINTS.VECINDARIOS_ADD;
+  const baseId = ENDPOINTS.VECINDARIOS;
+  const baseSucursales = ENDPOINTS.SUCURSALES;
 
   const navigate = useNavigate();
   const goToVecindariosDashboard = () => {

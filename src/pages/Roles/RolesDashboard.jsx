@@ -24,9 +24,10 @@ import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import axios from "axios";
 import CardRoles from "../../components/Card/CardRoles/CardRoles";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/usuario";
-const baseTypeUsers = "http://localhost:5000/tipousuario";
+const baseURL = ENDPOINTS.USUARIOS;
+const baseTypeUsers = ENDPOINTS.TIPOSUSARIOS;
 
 const RolesDashboard = () => {
   const navigate = useNavigate();

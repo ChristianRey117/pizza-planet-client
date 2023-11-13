@@ -17,11 +17,12 @@ import {
 } from "reactstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import ENDPOINTS from "../../utils/constants";
 
 import axios from "axios";
 import CardCategory from "../../components/Card/CardCategory/CardCategory";
 import CardVecindarios from "../../components/Card/CardVecindarios/CardVecindarios";
-const baseURL = "http://localhost:5000/vecindarios";
+const baseURL = ENDPOINTS.VECINDARIOS;
 
 const VecindariosDashboard = () => {
   const navigate = useNavigate();

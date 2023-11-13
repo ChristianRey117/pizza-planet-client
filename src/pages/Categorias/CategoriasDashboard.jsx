@@ -20,9 +20,17 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 import CardCategory from "../../components/Card/CardCategory/CardCategory";
-const baseURL = "http://localhost:5000/tipocategoria";
+import ENDPOINTS from "../../utils/constants";
+
+const baseURL = ENDPOINTS.TIPOSCATEGORIAS;
 
 const CategoriasDashboard = () => {
+  const dataAsync = async () => {
+    axios.get(baseURL).then((response) => {
+      setCategorias(response.data);
+    });
+  };
+
   const navigate = useNavigate();
 
   const goTo = () => {
@@ -36,9 +44,7 @@ const CategoriasDashboard = () => {
   const [categorias, setCategorias] = React.useState([{}]);
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setCategorias(response.data);
-    });
+    dataAsync();
   }, []);
 
   return (
@@ -82,7 +88,7 @@ const CategoriasDashboard = () => {
       <section>
         <Container>
           <Row>
-            {categorias.map((item, index) => {
+            {categorias?.map((item, index) => {
               return (
                 <Col
                   lg="4"
