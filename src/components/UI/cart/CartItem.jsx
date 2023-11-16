@@ -3,8 +3,9 @@ import { ListGroupItem } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/shopping-cart/cartSlice";
 import "../../../styles/cart-item.css";
+import ENDPOINTS from "../../../utils/constants";
 
-const baseImage = "http://localhost:5000/images";
+const baseImage = ENDPOINTS.BASE_IMAGES;
 
 const CartItem = ({ item }) => {
   const {

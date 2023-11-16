@@ -18,6 +18,7 @@ import {
   ListGroupItem,
 } from "reactstrap";
 import ModalComponent from "../../../components/Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardInventory = ({
   id_inventory,
@@ -31,8 +32,8 @@ const CardInventory = ({
 }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/inventario";
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseURL = ENDPOINTS.INVENTARIO;
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
   const dispatch = useDispatch();
 
   const deleteInventory = () => askDelete();

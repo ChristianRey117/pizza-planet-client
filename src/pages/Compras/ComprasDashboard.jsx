@@ -24,48 +24,10 @@ import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import axios from "axios";
 import CardCompras from "../../components/Card/CardCompras/CardCompras";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/compras";
-const baseUrlImage = "http://localhost:5000/images";
-
-// const productosCompras = [
-//   {
-//     userName: "Juanito",
-//     productName: "Pizza Galactica",
-//     fecha: "05/09/2023",
-//     price: 220,
-//     imageProduct: imageSuc1,
-//   },
-//   {
-//     userName: "Juanito",
-//     productName: "Pizza Galactica",
-//     fecha: "05/09/2023",
-//     price: 220,
-//     imageProduct: imageSuc2,
-//   },
-
-//   {
-//     userName: "Juanito",
-//     productName: "Pizza Galactica",
-//     fecha: "05/09/2023",
-//     price: 220,
-//     imageProduct: imageSuc3,
-//   },
-//   {
-//     userName: "Juanito",
-//     productName: "Pizza Galactica",
-//     fecha: "05/09/2023",
-//     price: 220,
-//     imageProduct: imageSuc4,
-//   },
-//   {
-//     userName: "Juanito",
-//     productName: "Pizza Galactica",
-//     fecha: "05/09/2023",
-//     price: 220,
-//     imageProduct: imageSuc1,
-//   },
-// ];
+const baseURL = ENDPOINTS.COMPRAS;
+const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
 const ComprasDashboard = () => {
   const [startDate, setStartDate] = useState(""); // Estado para almacenar la fecha seleccionada

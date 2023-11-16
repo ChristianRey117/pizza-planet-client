@@ -7,9 +7,10 @@ import imageSuc3 from "../assets/images/PizzaPlaneta3.jpg";
 import "../styles/category.css";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
+import ENDPOINTS from "../utils/constants";
 
-const baseURL = "http://localhost:5000/sucursales";
-const baseUrlImage = "http://localhost:5000/images";
+const baseURL = ENDPOINTS.SUCURSALES;
+const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
 const sucursalesData = [
   {
@@ -30,12 +31,15 @@ const sucursalesData = [
 ];
 
 const Sucursales = () => {
-  const [post, setPost] = React.useState(null);
-
-  React.useEffect(() => {
+  const dataAsync = async () => {
     axios.get(baseURL).then((response) => {
       setPost(response.data);
     });
+  };
+  const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    dataAsync();
   }, []);
 
   if (!post) return null;

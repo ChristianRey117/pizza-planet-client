@@ -16,6 +16,7 @@ import {
   CardSubtitle,
 } from "reactstrap";
 import ModalComponent from "../../../components/Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardProductos = ({
   id_product,
@@ -27,8 +28,8 @@ const CardProductos = ({
 }) => {
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:5000/productos";
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseURL = ENDPOINTS.PRODUCTOS;
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
   const dispatch = useDispatch();
 
   const deleteProductos = () => askDelete();
@@ -36,6 +37,7 @@ const CardProductos = ({
   const _delete = (id) => {
     axios.delete(baseURL + "/delete/" + id).then((response) => {
       console.log(response);
+      window.location.reload(false);
     });
   };
 
@@ -51,7 +53,6 @@ const CardProductos = ({
     redirectTo: () => {
       _delete(id_product);
       setShow(false);
-      window.location.reload(false);
     },
   };
 

@@ -18,6 +18,7 @@ import {
   ListGroupItem,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
+import ENDPOINTS from "../../../utils/constants";
 
 const CardComprasUsuario = ({ compras }) => {
   React.useEffect(() => {
@@ -41,7 +42,7 @@ const CardComprasUsuario = ({ compras }) => {
 
   const navigate = useNavigate();
 
-  const baseUrlImage = "http://localhost:5000/images";
+  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
   const dispatch = useDispatch();
 

@@ -17,10 +17,19 @@ import {
 } from "reactstrap";
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import ENDPOINTS from "../../utils/constants";
 
 const CategoriasForm = () => {
-  const baseURL = "http://localhost:5000/tipocategoria/add";
-  const baseId = "http://localhost:5000/tipocategoria";
+  const dataAsync = async () => {
+    if (id) {
+      axios.get(baseId + "/" + id).then((response) => {
+        setDataForm(response.data[0]);
+        initDataWithId(response.data[0]);
+      });
+    }
+  };
+  const baseURL = ENDPOINTS.TIPOSCATEGORIAS_ADD;
+  const baseId = ENDPOINTS.TIPOSCATEGORIAS;
 
   const navigate = useNavigate();
   const goToCategoriasDashboard = () => {
@@ -65,12 +74,7 @@ const CategoriasForm = () => {
   // ID
   const { id } = useParams();
   React.useEffect(() => {
-    if (id) {
-      axios.get(baseId + "/" + id).then((response) => {
-        setDataForm(response.data[0]);
-        initDataWithId(response.data[0]);
-      });
-    }
+    dataAsync();
   }, []);
   const [dataForm, setDataForm] = React.useState([{}]);
 

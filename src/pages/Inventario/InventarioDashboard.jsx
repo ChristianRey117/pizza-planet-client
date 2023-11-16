@@ -22,8 +22,9 @@ import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import axios from "axios";
 import CardInventory from "../../components/Card/CardInventory/CardInventory";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/inventario";
+const baseURL = ENDPOINTS.INVENTARIO;
 
 const InventarioDashboard = () => {
   const navigate = useNavigate();

@@ -23,11 +23,17 @@ import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ModalComponent from "../../components/Modal/modal";
 import CardProductos from "../../components/Card/CardProductos/CardProductos";
+import ENDPOINTS from "../../utils/constants";
 
-const baseURL = "http://localhost:5000/productos";
-const baseUrlImage = "http://localhost:5000/images";
+const baseURL = ENDPOINTS.PRODUCTOS;
+const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
 const ProductDashboard = () => {
+  const dataAsync = () => {
+    axios.get(baseURL).then((response) => {
+      setProducts(response.data);
+    });
+  };
   const navigate = useNavigate();
 
   const agregarProducto = () => {
@@ -41,9 +47,7 @@ const ProductDashboard = () => {
   const [products, setProducts] = React.useState([{}]);
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setProducts(response.data);
-    });
+    dataAsync();
   }, []);
 
   return (
