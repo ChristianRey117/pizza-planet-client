@@ -35,6 +35,7 @@ const ENDPOINTS = {
   // USUARIOS RUTAS
   USUARIOS: "https://pizza-planeta-server.onrender.com/usuario",
   USUARIOS_ADD: "https://pizza-planeta-server.onrender.com/usuario/add",
+  STRIPE: "https://pizza-planeta-server.onrender.com/stripe",
 };
 
 export default ENDPOINTS;

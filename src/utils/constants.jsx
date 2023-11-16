@@ -41,6 +41,7 @@ const ENDPOINTS = {
   // USUARIOS RUTAS
   USUARIOS: "https://pizza-planeta-server.azurewebsites.net/usuario",
   USUARIOS_ADD: "https://pizza-planeta-server.azurewebsites.net/usuario/add",
+  STRIPE: "https://pizza-planeta-server.azurewebsites.net/stripe",
 };
 
 export default ENDPOINTS;

@@ -23,7 +23,7 @@ import ENDPOINTS from "../utils/constants";
 
 const baseCompra = ENDPOINTS.COMPRAS_ADD;
 const baseCheckout = ENDPOINTS.USUARIOS;
-const baseStripe = "http://localhost:5000/stripe";
+const baseStripe = ENDPOINTS.STRIPE;
 
 const meses = [
   "Enero",
