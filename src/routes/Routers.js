@@ -29,6 +29,7 @@ import UsuariosForm from "../pages/Usuarios/UsuariosForm";
 import ProtectedRoutes from "../utils/ProtectedRoutes";
 import ComprasUsuario from "../pages/ComprasUsuario";
 import RolesDashboard from "../pages/Roles/RolesDashboard";
+import EstadisticasDashboard from "../pages/Estadisticas/EstadisticasDashboard";
 
 const Routers = () => {
   return (
@@ -64,6 +65,7 @@ const Routers = () => {
       <Route path="/proveedores-form" element={<ProveedorForm />} />
       <Route path="/proveedores-form/:id" element={<ProveedorForm />} />
       <Route path="/categorias-dashboard" element={<CategoriasDashboard />} />
+      <Route path="/estadisticas-dashboard" element={<EstadisticasDashboard />} />
       <Route path="/categorias-form" element={<CategoriasForm />} />
       <Route path="/categorias-form/:id" element={<CategoriasForm />} />
       <Route path="/vecindarios-dashboard" element={<VecindariosDashboard />} />

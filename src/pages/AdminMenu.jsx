@@ -24,6 +24,7 @@ import imageSuc6 from "../assets/images/compras.jpg";
 import imageSuc7 from "../assets/images/categorias.jpg";
 import imageSuc8 from "../assets/images/vecindario.jpg";
 import imageSuc9 from "../assets/images/roles.jpg";
+import imageSuc10 from "../assets/images/estadisticas.jpg";
 
 const AdminMenu = () => {
   const navigate = useNavigate();
@@ -101,6 +102,13 @@ const AdminMenu = () => {
         image: imageSuc8,
         path: "/vecindarios-dashboard",
         buttonText: "Ir a Vecindarios",
+      },
+      {
+        title: "Estadisticas",
+        describe: "En este panel usted puede ver las estadisticas",
+        image: imageSuc10,
+        path: "/estadisticas-dashboard",
+        buttonText: "Ir a Estadisticas",
       },
     ];
 
