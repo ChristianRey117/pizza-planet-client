@@ -74,12 +74,13 @@ const VecindariosDashboard = () => {
       <section>
         <Container>
           <Row>
-            <Dashboard
-              style={{ height: "900px" }}
-              dataProvider={dataProvider}
-              domain="http://20.84.102.134:8088"
-              uuid={"3a58deb9-bc60-4f40-89d6-8dbf28f17f57"}
-            />
+            <Col style={{ height: "900px" }}>
+              <Dashboard
+                dataProvider={dataProvider}
+                domain="http://20.84.102.134:8088"
+                uuid={"3a58deb9-bc60-4f40-89d6-8dbf28f17f57"}
+              />
+            </Col>
           </Row>
         </Container>
       </section>
