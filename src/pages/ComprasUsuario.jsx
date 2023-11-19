@@ -23,7 +23,7 @@ import CardCompras from "../components/Card/CardCompras/CardCompras";
 import CardComprasUsuario from "../components/Card/CardComprasUsuario/CardComprasUsuario";
 import ENDPOINTS from "../utils/constants";
 
-const baseURL = ENDPOINTS.USUARIO;
+const baseURL = ENDPOINTS.COMPRAS_USUARIO;
 const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
 const ComprasUsuario = () => {

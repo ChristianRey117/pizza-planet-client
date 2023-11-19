@@ -38,6 +38,9 @@ const ENDPOINTS = {
   // COMPRAS RUTAS
   COMPRAS: "https://pizza-planeta-server.azurewebsites.net/compras",
   COMPRAS_ADD: "https://pizza-planeta-server.azurewebsites.net/compras/add",
+  COMPRAS_USUARIO:
+    "https://pizza-planeta-server.azurewebsites.net/compras/usuario",
+
   // USUARIOS RUTAS
   USUARIOS: "https://pizza-planeta-server.azurewebsites.net/usuario",
   USUARIOS_ADD: "https://pizza-planeta-server.azurewebsites.net/usuario/add",

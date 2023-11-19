@@ -32,6 +32,7 @@ const ENDPOINTS = {
   // COMPRAS RUTAS
   COMPRAS: "https://pizza-planeta-server.onrender.com/compras",
   COMPRAS_ADD: "https://pizza-planeta-server.onrender.com/compras/add",
+  COMPRAS_USUARIO: "https://pizza-planeta-server.onrender.com/compras/usuario",
   // USUARIOS RUTAS
   USUARIOS: "https://pizza-planeta-server.onrender.com/usuario",
   USUARIOS_ADD: "https://pizza-planeta-server.onrender.com/usuario/add",
