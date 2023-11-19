@@ -134,7 +134,10 @@ const ProveedorForm = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Button color="secondary" onClick={goToProveedoresDashboard}>
+              <Button
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={goToProveedoresDashboard}
+              >
                 Regresar
               </Button>
             </Col>
@@ -184,7 +187,7 @@ const ProveedorForm = () => {
                   <FormText>Selecciona la imagen del proveedor.</FormText>
                 </FormGroup>
 
-                <Button style={{ display: id ? "none" : "" }} color="success">
+                <Button style={{ display: id ? "none" : "" }} color="warning">
                   Agregar
                 </Button>
                 <Button style={{ display: !id ? "none" : "" }} color="warning">

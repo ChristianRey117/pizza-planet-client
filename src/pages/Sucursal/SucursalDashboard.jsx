@@ -86,13 +86,20 @@ const SucursalDashboard = () => {
       >
         <Container>
           <Row>
-            <Col className="col-2 col-md-2 col-sm-2 mb-2">
-              <Button size="lg" color="secondary" onClick={goToAdminDashboard}>
+            <Col
+              className="col-2 col-md-2 col-sm-2 mb-2"
+              style={{ marginLeft: "10px" }}
+            >
+              <Button
+                size="lg"
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={goToAdminDashboard}
+              >
                 Regresar
               </Button>
             </Col>
             <Col className="col-2 col-md-2 col-sm-2 mb-2">
-              <Button size="lg" color="success" onClick={goTo}>
+              <Button size="lg" color="warning" onClick={goTo}>
                 Agregar
               </Button>
             </Col>

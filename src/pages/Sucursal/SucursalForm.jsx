@@ -191,7 +191,10 @@ const SucursalForm = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Button color="secondary" onClick={goToInventarioDashboard}>
+              <Button
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={goToInventarioDashboard}
+              >
                 Regresar
               </Button>
             </Col>
@@ -291,7 +294,7 @@ const SucursalForm = () => {
                   <Col xs={12}>
                     <Button
                       style={{ display: id ? "none" : "" }}
-                      color="success"
+                      color="warning"
                     >
                       Agregar
                     </Button>

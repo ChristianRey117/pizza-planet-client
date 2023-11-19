@@ -119,7 +119,10 @@ const OfertasForm = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Button color="secondary" onClick={goToOfertasDashboard}>
+              <Button
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={goToOfertasDashboard}
+              >
                 Regresar
               </Button>
             </Col>
@@ -183,7 +186,7 @@ const OfertasForm = () => {
 
                 <Button
                   style={{ display: `${id ? "none" : ""}` }}
-                  color="success"
+                  color="warning"
                 >
                   Agregar
                 </Button>
