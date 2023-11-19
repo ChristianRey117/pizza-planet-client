@@ -66,10 +66,13 @@ const ComprasUsuario = () => {
         >
           <Container>
             <Row>
-              <Col className="col-2 col-md-2 col-sm-2 mb-2">
+              <Col
+                className="col-2 col-md-2 col-sm-2 mb-2"
+                style={{ marginLeft: "-30px" }}
+              >
                 <Button
                   size="lg"
-                  color="secondary"
+                  style={{ backgroundColor: "black", color: "white" }}
                   onClick={goToAdminDashboard}
                 >
                   Regresar

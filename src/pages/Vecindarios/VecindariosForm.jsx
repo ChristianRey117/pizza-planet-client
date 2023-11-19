@@ -116,7 +116,10 @@ const VecindariosForm = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Button color="secondary" onClick={goToVecindariosDashboard}>
+              <Button
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={goToVecindariosDashboard}
+              >
                 Regresar
               </Button>
             </Col>
@@ -171,7 +174,7 @@ const VecindariosForm = () => {
 
                 <Button
                   style={{ display: `${id ? "none" : ""}` }}
-                  color="success"
+                  color="warning"
                 >
                   Agregar
                 </Button>

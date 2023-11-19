@@ -114,7 +114,10 @@ const CategoriasForm = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Button color="secondary" onClick={goToCategoriasDashboard}>
+              <Button
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={goToCategoriasDashboard}
+              >
                 Regresar
               </Button>
             </Col>
@@ -155,7 +158,7 @@ const CategoriasForm = () => {
 
                 <Button
                   style={{ display: `${id ? "none" : ""}` }}
-                  color="success"
+                  color="warning"
                 >
                   Agregar
                 </Button>

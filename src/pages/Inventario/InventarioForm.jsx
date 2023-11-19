@@ -138,7 +138,10 @@ const InventarioForm = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Button color="secondary" onClick={goToInventarioDashboard}>
+              <Button
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={goToInventarioDashboard}
+              >
                 Regresar
               </Button>
             </Col>
@@ -243,7 +246,7 @@ const InventarioForm = () => {
                   />
                 </FormGroup>
 
-                <Button style={{ display: id ? "none" : "" }} color="success">
+                <Button style={{ display: id ? "none" : "" }} color="warning">
                   Agregar
                 </Button>
                 <Button style={{ display: !id ? "none" : "" }} color="warning">

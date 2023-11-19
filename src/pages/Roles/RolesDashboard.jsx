@@ -74,7 +74,7 @@ const RolesDashboard = () => {
               <Col className="col-2 col-md-2 col-sm-2 mb-2">
                 <Button
                   size="lg"
-                  color="secondary"
+                  style={{ backgroundColor: "black", color: "white" }}
                   onClick={goToAdminDashboard}
                 >
                   Regresar
