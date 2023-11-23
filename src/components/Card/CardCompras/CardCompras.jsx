@@ -19,6 +19,9 @@ import {
   FormGroup,
   Label,
   Input,
+  FormGroup,
+  Label,
+  Input,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
 import ENDPOINTS from "../../../utils/constants";
@@ -26,9 +29,9 @@ import ENDPOINTS from "../../../utils/constants";
 const CardCompras = ({ compras, estatus }) => {
   const navigate = useNavigate();
 
-  const baseURL = ENDPOINTS.COMPRAS;
+  const baseURL = "http://localhost:5000/compras";
   const baseAddStatus = "http://localhost:5000/compras/update/";
-  const baseUrlImage = ENDPOINTS.BASE_IMAGES;
+  const baseUrlImage = "http://localhost:5000/images";
 
   const dispatch = useDispatch();
 

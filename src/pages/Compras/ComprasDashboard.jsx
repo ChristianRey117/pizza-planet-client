@@ -24,12 +24,10 @@ import Helmet from "../../components/Helmet/Helmet";
 import CommonSection from "../../components/UI/common-section/CommonSection";
 import axios from "axios";
 import CardCompras from "../../components/Card/CardCompras/CardCompras";
-import ENDPOINTS from "../../utils/constants";
 
-const baseURL = ENDPOINTS.COMPRAS;
-const baseUrlImage = ENDPOINTS.BASE_IMAGES;
-
-const baseStatus = ENDPOINTS.COMPRAS_STATUS;
+const baseURL = "http://localhost:5000/compras/usuarios";
+const baseUrlImage = "http://localhost:5000/images";
+const baseStatus = "http://localhost:5000/compras/estatus";
 
 const ComprasDashboard = () => {
   const [startDate, setStartDate] = useState(""); // Estado para almacenar la fecha seleccionada
