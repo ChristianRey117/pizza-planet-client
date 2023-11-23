@@ -16,6 +16,9 @@ import {
   CardSubtitle,
   ListGroup,
   ListGroupItem,
+  FormGroup,
+  Label,
+  Input,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
 import ENDPOINTS from "../../../utils/constants";
@@ -149,12 +152,38 @@ const CardComprasUsuario = ({ compras }) => {
           })}
 
           <Row style={{ paddingTop: "3%" }}>
-            <Col xs={12}>
-              <h6>Envío: $10</h6>
+            <Col xs={6}>
+              <Row style={{ marginTop: "5%" }}>
+                <Col xs={12}>
+                  <h6>Envío: $10</h6>
+                </Col>
+
+                <Col xs={12}>
+                  <h6>{"Total: $ " + total}</h6>
+                </Col>
+              </Row>
             </Col>
 
-            <Col xs={12}>
-              <h6>{"Total: $ " + total}</h6>
+            <Col xs={6}>
+              <Row>
+                <FormGroup>
+                  <Label for="status_compra">Estado de compra</Label>
+                  <Input
+                    id="status_compra"
+                    name="status_compra"
+                    type="select"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                    }}
+                    disabled={true}
+                  >
+                    <option
+                      value={compras[0].id_status}
+                      label={compras[0].status}
+                    ></option>
+                  </Input>
+                </FormGroup>
+              </Row>
             </Col>
           </Row>
         </CardBody>

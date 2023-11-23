@@ -29,6 +29,10 @@ import ENDPOINTS from "../../utils/constants";
 const baseURL = ENDPOINTS.COMPRAS;
 const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
+const baseURL = "http://localhost:5000/compras/usuarios";
+const baseUrlImage = "http://localhost:5000/images";
+const baseStatus = "http://localhost:5000/compras/estatus";
+
 const ComprasDashboard = () => {
   const [startDate, setStartDate] = useState(""); // Estado para almacenar la fecha seleccionada
   const navigate = useNavigate();
@@ -38,19 +42,18 @@ const ComprasDashboard = () => {
   };
 
   const [ventas, setVentas] = useState([]); // Usar un array vacío en lugar de [{}]
+  const [estatus, setEstatus] = useState([{}]); // Usar un array vacío en lugar de [{}]
 
   useEffect(() => {
     axios.get(baseURL).then((response) => {
       setVentas(response.data);
     });
+
+    axios.get(baseStatus).then((response) => {
+      setEstatus(response.data);
+    });
   }, []);
 
-  // const handleDateChange = (e) => {
-  //   const selectedDate = e.target.value; // Formato de fecha: "YYYY-MM-DD"
-  //   const formattedDate = selectedDate.split("-").reverse().join("/"); // Convertir a "DD/MM/YYYY"
-  //   console.log("Fecha seleccionada", selectedDate);
-  //   setStartDate(selectedDate);
-  // };
   const handleDateChange = (e) => {
     const selectedDate = e.target.value; // Formato de fecha: "YYYY-MM-DD"
     const [year, month, day] = selectedDate.split("-");
@@ -110,20 +113,21 @@ const ComprasDashboard = () => {
                   if (!startDate) {
                     return true;
                   } else {
-                    let dateItem = item.date.split(" ")[0];
+                    let dateItem = item[0].date.split(" ")[0];
+                    dateItem = dateItem.split("/");
+                    dateItem =
+                      dateItem[0] +
+                      "-" +
+                      dateItem[1] +
+                      "-" +
+                      dateItem[2][2] +
+                      dateItem[2][3];
                     console.log("fecha con input--->", dateItem);
                     return dateItem === startDate;
                   }
                 })
                 .map((item, index) => (
-                  <CardCompras
-                    user={item.user}
-                    ammount={item.ammount}
-                    date={item.date}
-                    id_buy={item.id_buy}
-                    product={item.product}
-                    image={item.image}
-                  ></CardCompras>
+                  <CardCompras compras={item} estatus={estatus}></CardCompras>
                 ))}
             </Row>
           </Container>

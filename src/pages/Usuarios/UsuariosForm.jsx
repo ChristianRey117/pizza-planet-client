@@ -45,7 +45,7 @@ const UsuariosForm = () => {
     value = e.target.value;
     if (nameInput === "id_neighborhood") {
       let vecinda = vecindarios.find((element) => {
-        return element ? element.id_neighborhood.toString() === value : null;
+        return element ? element?.id_neighborhood.toString() === value : null;
       });
 
       let sucursal = sucursales.find((suc) => {
@@ -197,10 +197,10 @@ const UsuariosForm = () => {
                     {vecindarios.map((item, index) => {
                       return (
                         <option
-                          value={item.id_neighborhood}
+                          value={item?.id_neighborhood}
                           label={item.neighborhood_name}
                           selected={
-                            dataForm.id_neighborhood === item.id_neighborhood
+                            dataForm?.id_neighborhood === item?.id_neighborhood
                           }
                         ></option>
                       );
@@ -217,15 +217,15 @@ const UsuariosForm = () => {
                     onChange={handleChangeUsuario}
                     disabled={true}
                   >
-                    {!selectedSuc.id_branch ? (
+                    {!selectedSuc?.id_branch ? (
                       <option
-                        value={dataForm.id_branch}
-                        label={dataForm.branch}
+                        value={dataForm?.id_branch}
+                        label={dataForm?.branch}
                       ></option>
                     ) : (
                       <option
-                        value={selectedSuc.id_branch}
-                        label={selectedSuc.branch_name}
+                        value={selectedSuc?.id_branch}
+                        label={selectedSuc?.branch_name}
                       ></option>
                     )}
                   </Input>
