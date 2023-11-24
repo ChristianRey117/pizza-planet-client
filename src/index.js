@@ -17,7 +17,7 @@ root.render(
   <Router>
     <Provider store={store}>
       <div id="loader" >
-        <Spinner id='spinner'style={{width:'8rem', height:'8rem'}}></Spinner>
+        <Spinner id='spinner'style={{width:'8rem', height:'8rem', display: 'none'}}></Spinner>
       </div>
       <App />
     </Provider>
