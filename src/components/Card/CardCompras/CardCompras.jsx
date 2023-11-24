@@ -16,14 +16,18 @@ import {
   CardSubtitle,
   ListGroup,
   ListGroupItem,
+  FormGroup,
+  Label,
+  Input,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
 import ENDPOINTS from "../../../utils/constants";
 
-const CardCompras = ({ id_buy, user, product, ammount, date, image }) => {
+const CardCompras = ({ compras, estatus }) => {
   const navigate = useNavigate();
 
   const baseURL = ENDPOINTS.COMPRAS;
+  const baseAddStatus = "http://localhost:5000/compras/update/";
   const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
   const dispatch = useDispatch();
@@ -40,74 +44,153 @@ const CardCompras = ({ id_buy, user, product, ammount, date, image }) => {
     setShow(true);
   };
   const [show, setShow] = useState(false);
+  const [totalBuy, setTotalBuy] = useState(0);
   const handleClose = () => setShow(false);
 
   const optionsModal = {
     title: "¿Esta seguro de eliminar esta Venta?",
     message: "No se podrá recuperar la informacion",
     redirectTo: () => {
-      _delete(id_buy);
+      //_delete(id_buy);
       setShow(false);
       window.location.reload(false);
     },
   };
 
+  useEffect(() => {
+    let total = 0;
+    compras.map((item) => {
+      total += item.total_buy;
+    });
+    setTotalBuy(total);
+  });
+
   return (
     <Col
       lg="4"
       md="6"
-      sm="6"
-      className="mt-2 mb-2"
-      style={{ width: "28rem", marginLeft: "25px" }}
+      sm="8"
+      xs="8"
+      className="mt-2 mb-5"
+      style={{ width: "65rem", height: "auto" }}
     >
       <Card
         style={{
-          width: "28rem",
-          height: "18rem",
+          width: "auto",
         }}
       >
         <CardBody>
-          <Row>
-            <Col lg="6">
-              <img
-                alt="Sample"
-                src={baseUrlImage + "/" + image}
-                // src="https://picsum.photos/300/200"
-                style={{ width: "180px" }}
-              />
+          <CardTitle tag="h4" style={{ textAlign: "center" }}>
+            Ticket de Compra
+            {compras.length > 0 && (
+              <>
+                <h6 tag="h5" style={{ textAlign: "center" }}>
+                  {"Fecha y Hora: " + compras[0].date}
+                </h6>
+
+                <h6 tag="h5" style={{ textAlign: "center" }}>
+                  {"Cliente: " + compras[0].user}
+                </h6>
+              </>
+            )}
+          </CardTitle>
+
+          {compras.map((compra, index) => {
+            return (
+              <Row style={{ paddingTop: "2%" }} key={index}>
+                <Col
+                  lg="2"
+                  md="2"
+                  sm="2"
+                  xs="2"
+                  className="d-flex align-items-center justify-content-center"
+                >
+                  <img
+                    alt="Sample"
+                    src={baseUrlImage + "/" + compra.image}
+                    style={{ width: "35%" }}
+                  />
+                </Col>
+
+                <Col
+                  lg="4"
+                  md="4"
+                  sm="12"
+                  xs="12"
+                  className="d-flex align-items-center justify-content-center"
+                >
+                  <h6>{compra.product}</h6>
+                </Col>
+                <Col
+                  lg="2"
+                  md="2"
+                  sm="12"
+                  xs="12"
+                  className="d-flex align-items-center justify-content-center"
+                >
+                  <h6 tag="h5">{"Cantidad: " + compra.ammount}</h6>
+                </Col>
+
+                <Col
+                  lg="2"
+                  md="2"
+                  sm="12"
+                  xs="12"
+                  className="d-flex align-items-center justify-content-center"
+                >
+                  <h6 tag="h5">{"$" + compra.total_buy}</h6>
+                </Col>
+              </Row>
+            );
+          })}
+
+          <Row style={{ paddingTop: "3%" }}>
+            <Col xs={9}>
+              <h6>{"Total: $ " + totalBuy}</h6>
             </Col>
-
-            <Col lg="6">
-              <CardTitle tag="h5">{product}</CardTitle>
-
-              <CardText>
-                <ListGroup>
-                  <ListGroupItem>{"Cliente: " + user}</ListGroupItem>
-                  <ListGroupItem>{"Cantidad: " + ammount}</ListGroupItem>
-                  <ListGroupItem>{"Fecha: " + date}</ListGroupItem>
-                </ListGroup>
-              </CardText>
-
-              <div style={{ position: "absolute", bottom: "15px" }}>
-                <Row>
-                  <Col lg="12">
-                    <Button color="danger" onClick={deleteCompras}>
-                      Eliminar
-                    </Button>
-                  </Col>
-                </Row>
-              </div>
+            <Col xs={3}>
+              <FormGroup>
+                <Label for="ofert">Estado de compra</Label>
+                <Input
+                  id="id_ofert"
+                  name="id_ofert"
+                  type="select"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    let compras_ids = [];
+                    compras.map((compra) => {
+                      compras_ids.push(compra.id_buy);
+                    });
+                    var request = {
+                      ids_compras: JSON.stringify(compras_ids),
+                      status_compra: e.target.value,
+                    };
+                    axios
+                      .put(baseAddStatus + compras[0].id_user, request)
+                      .then((response) => {
+                        console.log(response.data);
+                      });
+                  }}
+                  disabled={
+                    compras[0].status ===
+                    estatus[estatus.length - 1].status_name
+                  }
+                >
+                  {estatus?.map((status) => {
+                    return (
+                      <option
+                        value={status.id_status}
+                        label={status.status_name}
+                        selected={compras[0].status === status.status_name}
+                      ></option>
+                    );
+                  })}
+                </Input>
+              </FormGroup>
             </Col>
           </Row>
         </CardBody>
       </Card>
-      <section>
-        <ModalComponent
-          show={show}
-          handleClose={handleClose}
-          optionsModal={optionsModal}
-        ></ModalComponent>
-      </section>
     </Col>
   );
 };
