@@ -5,7 +5,7 @@ export const AxiosInterceptor = () => {
     const loader = document.getElementById("loader");
     loader.classList.add("loader-section");
     const spinner = document.getElementById("spinner");
-    loader.style.display = "";
+    spinner.style.display = null;
     return request;
   });
 
