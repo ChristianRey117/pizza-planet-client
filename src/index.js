@@ -10,12 +10,15 @@ import { BrowserRouter as Router } from "react-router-dom";
 import store from "./store/store";
 import { Provider } from "react-redux";
 import { AxiosInterceptor } from "./interceptos/axios.interceptor";
-
+import {Spinner} from "reactstrap"
 AxiosInterceptor();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Provider store={store}>
+      <div id="loader" >
+        <Spinner id='spinner'style={{width:'8rem', height:'8rem'}}></Spinner>
+      </div>
       <App />
     </Provider>
   </Router>

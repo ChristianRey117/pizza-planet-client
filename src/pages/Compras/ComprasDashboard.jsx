@@ -29,9 +29,7 @@ import ENDPOINTS from "../../utils/constants";
 const baseURL = ENDPOINTS.COMPRAS;
 const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
-const baseURL = "http://localhost:5000/compras/usuarios";
-const baseUrlImage = "http://localhost:5000/images";
-const baseStatus = "http://localhost:5000/compras/estatus";
+const baseStatus = ENDPOINTS.COMPRAS_STATUS;
 
 const ComprasDashboard = () => {
   const [startDate, setStartDate] = useState(""); // Estado para almacenar la fecha seleccionada

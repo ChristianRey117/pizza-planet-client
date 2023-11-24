@@ -46,6 +46,33 @@ section {
   padding: 60px 0px;
 }
 
+.loader-section{
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  z-index:999;
+  transition: all 1s 1s ease-out;
+  opacity:1;
+
+  
+}
+
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+
 @media only screen and (max-width: 768px) {
   section {
     padding: 40px 0px;

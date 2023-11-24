@@ -36,10 +36,12 @@ const ENDPOINTS = {
   TIPOSUSARIOS_ADD:
     "https://pizza-planeta-server.azurewebsites.net/tipousuario/add",
   // COMPRAS RUTAS
-  COMPRAS: "https://pizza-planeta-server.azurewebsites.net/compras",
+  COMPRAS: "https://pizza-planeta-server.azurewebsites.net/compras/usuarios",
   COMPRAS_ADD: "https://pizza-planeta-server.azurewebsites.net/compras/add",
   COMPRAS_USUARIO:
     "https://pizza-planeta-server.azurewebsites.net/compras/usuario",
+  COMPRAS_STATUS:
+    "https://pizza-planeta-server.azurewebsites.net/compras/estatus",
 
   // USUARIOS RUTAS
   USUARIOS: "https://pizza-planeta-server.azurewebsites.net/usuario",
