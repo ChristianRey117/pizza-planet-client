@@ -19,9 +19,6 @@ import {
   FormGroup,
   Label,
   Input,
-  FormGroup,
-  Label,
-  Input,
 } from "reactstrap";
 import ModalComponent from "../../Modal/modal";
 import ENDPOINTS from "../../../utils/constants";
@@ -190,6 +187,33 @@ const CardCompras = ({ compras, estatus }) => {
                   })}
                 </Input>
               </FormGroup>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Button
+                color="danger"
+                onClick={() => {
+                  let idsCompras = [];
+                  compras.forEach((element) => {
+                    idsCompras.push(element.id_buy);
+                  });
+                  var data = new FormData();
+
+                  idsCompras = JSON.stringify(idsCompras);
+                  data.set("idsCompras", idsCompras);
+                  console.log("ids before to send---->", data);
+
+                  axios
+                    .put(baseURL + "/" + "delete", { data: idsCompras })
+                    .then((res) => {
+                      window.location.reload(false);
+                    });
+                }}
+              >
+                Eliminar
+              </Button>
             </Col>
           </Row>
         </CardBody>

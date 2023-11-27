@@ -11,7 +11,6 @@ import store from "./store/store";
 import { Provider } from "react-redux";
 import { AxiosInterceptor } from "./interceptos/axios.interceptor";
 import {Spinner} from "reactstrap"
-import {Spinner} from "reactstrap"
 AxiosInterceptor();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
