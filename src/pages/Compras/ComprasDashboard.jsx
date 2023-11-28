@@ -26,9 +26,8 @@ import axios from "axios";
 import CardCompras from "../../components/Card/CardCompras/CardCompras";
 import ENDPOINTS from "../../utils/constants";
 
-const baseURL = ENDPOINTS.COMPRAS;
+const baseURL = ENDPOINTS.COMPRAS_USUARIO;
 const baseUrlImage = ENDPOINTS.BASE_IMAGES;
-
 const baseStatus = ENDPOINTS.COMPRAS_STATUS;
 
 const ComprasDashboard = () => {
@@ -57,6 +56,7 @@ const ComprasDashboard = () => {
     const [year, month, day] = selectedDate.split("-");
     const formattedDate = `${day}-${month}-${year.slice(2)}`; // Convertir a "DD-MM-YY"
     console.log("Fecha seleccionada", selectedDate);
+    console.log("Format date", formattedDate);
     setStartDate(formattedDate);
   };
 
@@ -114,9 +114,9 @@ const ComprasDashboard = () => {
                     let dateItem = item[0].date.split(" ")[0];
                     dateItem = dateItem.split("/");
                     dateItem =
-                      dateItem[0] +
-                      "-" +
                       dateItem[1] +
+                      "-" +
+                      dateItem[0] +
                       "-" +
                       dateItem[2][2] +
                       dateItem[2][3];

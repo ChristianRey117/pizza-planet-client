@@ -127,7 +127,10 @@ const UsuariosForm = () => {
           <Row>
             <Col className="col-6 col-md-2 col-sm-2 mb-2">
               {/* <Button size="lg" color="secondary" onClick={goToAdminDashboard}> */}
-              <Button color="secondary" onClick={ComprasUsuario}>
+              <Button
+                style={{ backgroundColor: "black", color: "white" }}
+                onClick={ComprasUsuario}
+              >
                 Mis Compras
               </Button>
             </Col>

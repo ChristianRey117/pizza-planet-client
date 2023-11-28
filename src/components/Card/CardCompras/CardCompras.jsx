@@ -27,7 +27,7 @@ const CardCompras = ({ compras, estatus }) => {
   const navigate = useNavigate();
 
   const baseURL = ENDPOINTS.COMPRAS;
-  const baseAddStatus = "http://localhost:5000/compras/update/";
+  const baseAddStatus = ENDPOINTS.COMPRAS_UPDATE;
   const baseUrlImage = ENDPOINTS.BASE_IMAGES;
 
   const dispatch = useDispatch();
@@ -169,6 +169,7 @@ const CardCompras = ({ compras, estatus }) => {
                       .put(baseAddStatus + compras[0].id_user, request)
                       .then((response) => {
                         console.log(response.data);
+                        window.location.reload(false);
                       });
                   }}
                   disabled={
@@ -187,6 +188,33 @@ const CardCompras = ({ compras, estatus }) => {
                   })}
                 </Input>
               </FormGroup>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Button
+                color="danger"
+                onClick={() => {
+                  let idsCompras = [];
+                  compras.forEach((element) => {
+                    idsCompras.push(element.id_buy);
+                  });
+                  var data = new FormData();
+
+                  idsCompras = JSON.stringify(idsCompras);
+                  data.set("idsCompras", idsCompras);
+                  console.log("ids before to send---->", data);
+
+                  axios
+                    .put(baseURL + "/" + "delete", { data: idsCompras })
+                    .then((res) => {
+                      window.location.reload(false);
+                    });
+                }}
+              >
+                Eliminar
+              </Button>
             </Col>
           </Row>
         </CardBody>
