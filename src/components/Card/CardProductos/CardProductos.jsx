@@ -35,7 +35,7 @@ const CardProductos = ({
   const deleteProductos = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
+    axios.put(baseURL + "/delete/" + id).then((response) => {
       console.log(response);
       window.location.reload(false);
     });
