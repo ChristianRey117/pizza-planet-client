@@ -11,11 +11,25 @@
     />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
+    <link rel="manifest" href="manifest.json">
     <title>Pizza Planeta</title>
   </head>
   <body>
     <noscript>New Site.</noscript>
     <div id="root"></div>
   </body>
+
+  <script>
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (registration){
+        console.log('Service Worker Registered');
+        navigator.serviceWorker.ready.then(function(registration){
+        console.log('Service Worker Ready');
+      });
+      });
+
+      
+    }
+  </script>
 </html>
+
