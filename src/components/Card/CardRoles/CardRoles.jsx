@@ -43,6 +43,7 @@ const CardCompras = ({ id_users, user_name, user_email, typeU, typeUsers }) => {
     setShow(true);
   };
   const [show, setShow] = useState(false);
+  const [enableEdit, setEnableEdit] = useState(false);
   const handleClose = () => setShow(false);
 
   const optionsModal = {
@@ -108,7 +109,10 @@ const CardCompras = ({ id_users, user_name, user_email, typeU, typeUsers }) => {
                       id="id_type_users"
                       name="id_type_users"
                       type="select"
-                      onChange={(e) => setTypeUserSelect(e.target.value)}
+                      onChange={(e) => {
+                        setTypeUserSelect(e.target.value);
+                        setEnableEdit(true);
+                      }}
                     >
                       {typeUsers.map((type_user) => {
                         return (
@@ -127,7 +131,11 @@ const CardCompras = ({ id_users, user_name, user_email, typeU, typeUsers }) => {
               <div style={{ position: "absolute", bottom: "15px" }}>
                 <Row>
                   <Col xs="6" sm="6" md="6" lg="6">
-                    <Button color="warning" onClick={onEdit}>
+                    <Button
+                      color="warning"
+                      onClick={onEdit}
+                      disabled={!enableEdit}
+                    >
                       Editar
                     </Button>
                   </Col>

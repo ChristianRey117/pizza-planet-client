@@ -35,7 +35,7 @@ const CardCompras = ({ compras, estatus }) => {
   const deleteCompras = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
+    axios.put(baseURL + "/delete/" + id).then((response) => {
       console.log(response);
     });
   };

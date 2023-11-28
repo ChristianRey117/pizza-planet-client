@@ -36,7 +36,7 @@ const CardVecindarios = ({
   const deleteVecindario = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
+    axios.put(baseURL + "/delete/" + id).then((response) => {
       console.log(response);
     });
   };

@@ -31,7 +31,7 @@ const CardCategory = ({ id_category, name_category, description }) => {
   const deleteCategory = () => askDelete();
 
   const _delete = (id) => {
-    axios.delete(baseURL + "/delete/" + id).then((response) => {
+    axios.put(baseURL + "/delete/" + id).then((response) => {
       window.location.reload(false);
     });
   };
